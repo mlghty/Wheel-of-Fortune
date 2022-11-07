@@ -1,9 +1,23 @@
 # Wheel of Fortune
 ### Description 
-TEST 3
-Test 4
-test 5
-Cindy's Test for a push
+Game basics: 
+- 3 Players (we will start wth one player)
+- puzzle with a theme as a overall clue
+- when it's the players turn they will spin, buy a vowel or solve.
+- 
+Team will create 2 classes.
+Players class:
+1. Name
+2. Prize Amount for round
+3. Overall prize amount for the game
+
+Game class:
+1. Game Puzzle (up to 52 spaces)
+2. Game Theme - Java Themed
+
+Wheel with cash prizes from $500 to $900.
+We will need to include Bankrupt and Lose a Turn wedge.
+
 
 ## Table of contents
 1. Team Members
