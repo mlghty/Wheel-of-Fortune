@@ -1,4 +1,5 @@
-# blackjack
+# Wheel of Fortune
+
 
 ## Table of contents
 1. Team Members
@@ -16,4 +17,4 @@
 + Req2
 
 ### Some Image Here
-![BlackJack](https://crescent.edu/uploads/editor/images/Blackjack.png "Some BlackJack image.")
+![Wheel-Of-Fortune](https://i.imgur.com/7rujzV5.png)
