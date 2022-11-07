@@ -15,9 +15,18 @@ Game class:
 1. Game Puzzle (up to 52 spaces)
 2. Game Theme - Java Themed
 
+
+
 Wheel with cash prizes from $500 to $900.
 We will need to include Bankrupt and Lose a Turn wedge.
 
+
+Our idea is to create a Wheel of Fortune type game in Java, our game will be Terminal based and draw on the screen the game board. We initially plan on drawing the game on the terminal prompt and prompt the user to press "X" to start a game. Once the user has entered the game, they will be prompted to start and the follow the basic WOF instructions like, spinning the wheel, then choosing a letter that is not a vowel, followed by receiving whether they got the letter correct. Once they have guessed one letter, they then have an option to "Solve","Spin","Buy a Vowel" options. The player must then continue to try to accumulate as much money as possible to win the game. 
+
+## Classes 
++ Player Class
++ Game Class
++ Drawing Class?
 
 ## Table of contents
 1. Team Members
