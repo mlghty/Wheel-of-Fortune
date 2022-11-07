@@ -4,8 +4,8 @@ TEST 3
 
 ## Table of contents
 1. Team Members
-3. Requirements
-4. Some Image Here
+2. Requirements
+3. Some Image Here
 
 
 ### Team Members
