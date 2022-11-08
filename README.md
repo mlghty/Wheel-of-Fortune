@@ -1,11 +1,11 @@
 # Wheel of Fortune
-### Description 
+### Description
 Game basics: 
-- 3 Players (we will start wth one player)
-- puzzle with a theme as a overall clue
-- when it's the players turn they will spin, buy a vowel or solve.
-- 
-Team will create 2 classes.
+- Up to 3 Players (we will start wth one player)
+- Word puzzles with a theme 
+- Players turn: players will be able to interact with the game by spinning the wheel, buy a vowel, solve the puzzle or exit.
+
+At this time the team feels we will create 2 classes.
 Players class:
 1. Name
 2. Prize Amount for round
@@ -14,11 +14,9 @@ Players class:
 Game class:
 1. Game Puzzle (up to 52 spaces)
 2. Game Theme - Java Themed
+3. Chooses of spin, guess a constant, buy a vowel or exit
+4. The wheel with prizes, bankrupt, and lose a turn.
 
-
-
-Wheel with cash prizes from $500 to $900.
-We will need to include Bankrupt and Lose a Turn wedge.
 
 
 Our idea is to create a Wheel of Fortune type game in Java, our game will be Terminal based and draw on the screen the game board. We initially plan on drawing the game on the terminal prompt and prompt the user to press "X" to start a game. Once the user has entered the game, they will be prompted to start and the follow the basic WOF instructions like, spinning the wheel, then choosing a letter that is not a vowel, followed by receiving whether they got the letter correct. Once they have guessed one letter, they then have an option to "Solve","Spin","Buy a Vowel" options. The player must then continue to try to accumulate as much money as possible to win the game. 
