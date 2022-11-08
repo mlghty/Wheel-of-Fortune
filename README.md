@@ -6,6 +6,7 @@ Game basics:
 - Players turn: players will be able to interact with the game by spinning the wheel, buy a vowel, solve the puzzle or exit.
 
 At this time the team feels we will create 2 classes.
+
 Players class:
 1. Name
 2. Prize Amount for round
@@ -14,8 +15,8 @@ Players class:
 Game class:
 1. Game Puzzle (up to 52 spaces)
 2. Game Theme - Java Themed
-3. Chooses of spin, guess a constant, buy a vowel or exit
-4. The wheel with prizes, bankrupt, and lose a turn.
+3. Choices of spin, guess a constant, buy a vowel or exit
+4. The spinning wheel with prizes, bankrupt, and lose a turn.
 
 
 Wheel with cash prizes from $500 to $900.
