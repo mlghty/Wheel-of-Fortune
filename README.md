@@ -13,7 +13,7 @@ Players class:
 
 Game class:
 1. Game Puzzle (up to 52 spaces)
-2. Game Theme - Java Themed
+2. Game Theme - Java Themed 
 
 
 
