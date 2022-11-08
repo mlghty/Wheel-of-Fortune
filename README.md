@@ -5,6 +5,7 @@ Game basics:
 - puzzle with a theme as an overall clue
 - when it's the players turn they will spin, buy a vowel or solve.
 - 
+
 Team will create 2 classes.
 - Up to 3 Players (we will start wth one player)
 - Word puzzles with a theme 
