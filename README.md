@@ -1,4 +1,33 @@
 # Wheel of Fortune
+
+
+[//]: # (## Table of contents)
+
+[//]: # (1. Team Members)
+
+[//]: # (2. Requirements)
+
+[//]: # (3. Some Image Here)
+
+<!-- TABLE OF CONTENTS -->
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#team-members">Team Members</a>
+    </li>
+    <li>
+      <a href="#description">Description</a>
+    </li>
+    <li><a href="#classes">Classes</a></li>
+    <li><a href="#class-diagram">Class Diagram</a></li>
+  </ol>
+
+### Team Members
++ Cindy Pottin
++ Joe Racke
++ Joe Gonzalez
+
+
 ### Description
 Game basics: 
 - 3 Players (we will start wth one player)
@@ -60,16 +89,8 @@ Once we have incorporated the basics of the game and have a working prototype th
 + + display Current Player name and round winnings
 + + display player options
 
-## Table of contents
-1. Team Members
-2. Requirements
-3. Some Image Here
-
-
-### Team Members
-+ Cindy Pottin
-+ Joe Racke 
-+ Joe Gonzalez
+### Class Diagram
+![Class-Diagram](https://i.imgur.com/mtoSbUl.png)
 
 ### Requirements
 + Req1
