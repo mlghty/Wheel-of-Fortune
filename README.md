@@ -10,7 +10,8 @@
 [//]: # (3. Some Image Here)
 
 <!-- TABLE OF CONTENTS -->
-  <summary>Table of Contents</summary>
+## Table of Contents
+[//]: # (  <summary>Table of Contents</summary>)
   <ol>
     <li>
       <a href="#team-members">Team Members</a>
