@@ -6,8 +6,6 @@ public class Player {
     private int totalMoney;
     private int currentRoundMoney;
 
-
-
     public Player(String playerName) {
         totalMoney = 0;
         currentRoundMoney = 0;
