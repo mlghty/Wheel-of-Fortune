@@ -22,7 +22,6 @@ public class GameBoard {
         int numberOfTimesLetterAppears = 0;
         letterGuessed = Character.toUpperCase(letterGuessed);
         if(lettersAlreadyGuessed.contains(letterGuessed)) {
-            System.out.println("That letter was already guessed.");
             return 0;
         } else {
             lettersAlreadyGuessed.add(letterGuessed);
@@ -38,10 +37,8 @@ public class GameBoard {
 
     public boolean solvePuzzle(String puzzleGuess) {
         if(puzzleGuess.toUpperCase().equals(this.gamePuzzle)) {
-            System.out.println(puzzleGuess + " was correct!");
             return true;
         }
-        System.out.println(puzzleGuess + " was incorrect.");
         return false;
     }
 
