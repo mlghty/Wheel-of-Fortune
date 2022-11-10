@@ -53,8 +53,16 @@ public class Game {
         setCurrentPlayersTurn(players.get(player));
     }
 
-    public void gameLoop() {
+    public void gameTurn() {
+        boolean turnOver = false;
+        getPlayerChoice();
+        while(!turnOver) {
 
+        }
+    }
+
+    private int getPlayerChoice() {
+        return 0;
     }
     // accessors
 
