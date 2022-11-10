@@ -7,7 +7,9 @@
 
 [//]: # (2. Requirements)
 
-[//]: # (3. Some Image Here)
+[//]: # (3. User Stores)
+
+[//]: # (4. Some Image Here)
 
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
@@ -96,6 +98,13 @@ Once we have incorporated the basics of the game and have a working prototype th
 ### Requirements
 + Req1
 + Req2
+
+### User Stories
++ User wants to play single round of word guessing game
++ User wants to play a game that they can solve a puzzle
++ User wants to compete against other players for cash prize by solving word puzzles
++ User wants to compete against other players for cash prizes by solving word puzzles, would like to see ascii art and it has sounds effects
++ User wants to compete against 2 other players for cash prizes by solving word puzzles, game should have color, sound and artwork
 
 ### Some Image Here
 ![Wheel-Of-Fortune](https://i.imgur.com/7rujzV5.png)
