@@ -2,9 +2,9 @@ package com.game.wheeloffortune;
 
 public class Player {
 
-    private static String playerName;
-    private static int totalMoney;
-    private static int currentRoundMoney;
+    private String playerName;
+    private int totalMoney;
+    private int currentRoundMoney;
 
 
 
@@ -32,28 +32,28 @@ public class Player {
     }
 
     // accessors
-    public static String getName() {
+    public String getName() {
         return playerName;
     }
 
-    public static void setName(String name) {
-        Player.playerName = name;
+    public void setName(String name) {
+        playerName = name;
     }
 
-    public static int getTotalMoney() {
+    public int getTotalMoney() {
         return totalMoney;
     }
 
-    public static void setTotalMoney(int totalMoney) {
-        Player.totalMoney = totalMoney;
+    public void setTotalMoney(int totalMoney) {
+        totalMoney = totalMoney;
     }
 
-    public static int getCurrentRoundMoney() {
+    public int getCurrentRoundMoney() {
         return currentRoundMoney;
     }
 
-    public static void setCurrentRoundMoney(int currentRoundMoney) {
-        Player.currentRoundMoney = currentRoundMoney;
+    public void setCurrentRoundMoney(int currentRoundMoney) {
+        currentRoundMoney = currentRoundMoney;
     }
 
 
@@ -61,7 +61,7 @@ public class Player {
     public String toString() {
         return "Player name: " + playerName
                 + "\nTotal money: " + getTotalMoney()
-                + "\nTotal round money: " + getCurrentRoundMoney();
+                + "\nTotal round money: " + getCurrentRoundMoney() + '\n';
     }
 
 }
