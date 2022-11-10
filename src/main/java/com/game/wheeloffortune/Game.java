@@ -33,18 +33,28 @@ public class Game {
 
     // business
     public void startRound() {
-        // TODO: Have this link to the GamePuzzle class
-        Map.Entry<String,String> currentGamePuzzle = Map.entry("Puzzle", "Hint");//GamePuzzle.getRandomPuzzle();
+
+        setUpPuzzle();
+        determineStartingPlayer();
+        currentRoundNumber++;
+    }
+
+    private void setUpPuzzle() {
+        // TODO: Have this link to the Puzzle class which will return a Map.entry<K,V>
+        Map.Entry<String,String> currentGamePuzzle = Map.entry("Puzzle", "Hint");//Puzzles.getRandomPuzzle();
         String currentRoundPuzzle = currentGamePuzzle.getKey();
         String currentRoundCategory = currentGamePuzzle.getValue();
-        determineStartingPlayer();
         setCurrentGameBoard(new GameBoard(currentRoundPuzzle,currentRoundCategory));
     }
 
     private void determineStartingPlayer() {
         int numberOfPlayers = getPlayers().size();
-        int player = (int) (Math.random() * numberOfPlayers) + 1;
+        int player = (int) (Math.random() * numberOfPlayers);
         setCurrentPlayersTurn(players.get(player));
+    }
+
+    public void gameLoop() {
+
     }
     // accessors
 
