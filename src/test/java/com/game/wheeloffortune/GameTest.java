@@ -11,8 +11,8 @@ import static org.junit.Assert.*;
 public class GameTest {
 
     private Game newGame;
-    private Player player1 = new Player();
-    private Player player2 = new Player();
+    private Player player1 = new Player("Joe");
+    private Player player2 = new Player("Cindy");
     @Before
     public void setUp() throws Exception {
         newGame = new Game(player1);
