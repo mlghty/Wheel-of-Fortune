@@ -5,8 +5,9 @@ import java.util.List;
 
 public class GameBoard {
     private String gamePuzzle;
-    private boolean[] isLetterRevealed;
     private String gameHint;
+    private boolean[] isLetterRevealed;
+
     List<Character> lettersAlreadyGuessed = new ArrayList<>();
 
     // Constructor
@@ -77,5 +78,9 @@ public class GameBoard {
 
     public void setGameHint(String gameHint) {
         this.gameHint = gameHint;
+    }
+
+    public String toString() {
+        return String.format("Category: %s\nPuzzle: %s\n", getGameHint(),getGamePuzzle());
     }
 }
