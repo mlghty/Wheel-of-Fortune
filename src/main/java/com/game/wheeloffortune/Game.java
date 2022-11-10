@@ -1,75 +1,109 @@
 package com.game.wheeloffortune;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class Game {
 
-    private static List<Player> players;
-    private static String currentRoundPuzzle;
-    private static String currentRoundCategory;
+    private static final int NUMBER_OF_ROUNDS = 1;
+    private int currentRoundNumber;
+    private List<Player> players;
+    private Player currentPlayersTurn;
+//    private String currentRoundPuzzle;
+//    private String currentRoundCategory;
+    private GameBoard currentGameBoard;
 
-    private static int currentRoundNumber;
 
-    private static List<String> consonants;
-    private static List<String> vowels;
+
+    private static final List<Character> CONSONANTS = new ArrayList<>(List.of(
+            'B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N',
+            'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z'));
+    private static final List<Character> VOWELS = new ArrayList<>(List.of('A', 'E', 'I', 'O', 'U'));
 
 
     // constructors
-    public Game() {
+    public Game(Player... players) {
+        List<Player> playerList = new ArrayList<>();
+        Collections.addAll(playerList, players);
+        setPlayers(playerList);
     }
 
 
     // business
+    public void startRound() {
+        // TODO: Have this link to the GamePuzzle class
+        Map.Entry<String,String> currentGamePuzzle = Map.entry("Puzzle", "Hint");//GamePuzzle.getRandomPuzzle();
+        String currentRoundPuzzle = currentGamePuzzle.getKey();
+        String currentRoundCategory = currentGamePuzzle.getValue();
+        determineStartingPlayer();
+        setCurrentGameBoard(new GameBoard(currentRoundPuzzle,currentRoundCategory));
+    }
 
+    private void determineStartingPlayer() {
+        int numberOfPlayers = getPlayers().size();
+        int player = (int) (Math.random() * numberOfPlayers) + 1;
+        setCurrentPlayersTurn(players.get(player));
+    }
     // accessors
 
 
-    public static List<Player> getPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 
-    public static void setPlayers(List<Player> players) {
-        Game.players = players;
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 
-    public static String getCurrentRoundPuzzle() {
-        return currentRoundPuzzle;
-    }
+//    public String getCurrentRoundPuzzle() {
+//        return currentRoundPuzzle;
+//    }
+//
+//    public void setCurrentRoundPuzzle(String currentRoundPuzzle) {
+//        this.currentRoundPuzzle = currentRoundPuzzle;
+//    }
+//
+//    public String getCurrentRoundCategory() {
+//        return currentRoundCategory;
+//    }
+//
+//    public void setCurrentRoundCategory(String currentRoundCategory) {
+//        this.currentRoundCategory = currentRoundCategory;
+//    }
 
-    public static void setCurrentRoundPuzzle(String currentRoundPuzzle) {
-        Game.currentRoundPuzzle = currentRoundPuzzle;
-    }
-
-    public static String getCurrentRoundCategory() {
-        return currentRoundCategory;
-    }
-
-    public static void setCurrentRoundCategory(String currentRoundCategory) {
-        Game.currentRoundCategory = currentRoundCategory;
-    }
-
-    public static int getCurrentRoundNumber() {
+    public int getCurrentRoundNumber() {
         return currentRoundNumber;
     }
 
-    public static void setCurrentRoundNumber(int currentRoundNumber) {
-        Game.currentRoundNumber = currentRoundNumber;
+    public void setCurrentRoundNumber(int currentRoundNumber) {
+        this.currentRoundNumber = currentRoundNumber;
     }
 
-    public static List<String> getConsonants() {
-        return consonants;
+    public List<Character> getConsonants() {
+        return CONSONANTS;
     }
 
-    public static void setConsonants(List<String> consonants) {
-        Game.consonants = consonants;
+
+    public List<Character> getVowels() {
+        return VOWELS;
     }
 
-    public static List<String> getVowels() {
-        return vowels;
+    public Player getCurrentPlayersTurn() {
+        return currentPlayersTurn;
     }
 
-    public static void setVowels(List<String> vowels) {
-        Game.vowels = vowels;
+    public void setCurrentPlayersTurn(Player currentPlayersTurn) {
+        this.currentPlayersTurn = currentPlayersTurn;
+    }
+
+    public GameBoard getCurrentGameBoard() {
+        return currentGameBoard;
+    }
+
+    public void setCurrentGameBoard(GameBoard currentGameBoard) {
+        this.currentGameBoard = currentGameBoard;
     }
 
     @Override

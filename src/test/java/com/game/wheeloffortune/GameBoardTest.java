@@ -8,8 +8,8 @@ public class GameBoardTest {
         String gameHint = "General Java Knowledge";
         boolean puzzleSolved = false;
         GameBoard gameBoard = new GameBoard(gamePuzzle, gameHint);
-
-        while(!puzzleSolved) {
+        System.out.println(gameBoard);
+        /*while(!puzzleSolved) {
             int choice;
             Scanner option = new Scanner(System.in);
             System.out.println(gameBoard.getGamePuzzle());
@@ -29,7 +29,7 @@ public class GameBoardTest {
                     puzzleSolved = gameBoard.solvePuzzle(solution);
                     break;
             }
-        }
+        }*/
 
     }
 }
