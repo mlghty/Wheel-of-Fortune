@@ -1,21 +1,18 @@
 package com.game.wheeloffortune;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Game {
 
     private static final int NUMBER_OF_ROUNDS = 1;
+    private static final int COST_OF_VOWEL = 250;
     private int currentRoundNumber;
     private List<Player> players;
     private Player currentPlayersTurn;
+    private GameBoard currentGameBoard;
+    private Optional<Player> winningPlayer;
 //    private String currentRoundPuzzle;
 //    private String currentRoundCategory;
-    private GameBoard currentGameBoard;
-
-
 
     private static final List<Character> CONSONANTS = new ArrayList<>(List.of(
             'B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N',
@@ -30,10 +27,13 @@ public class Game {
         setPlayers(playerList);
     }
 
+    public Game(List<Player> players) {
+        setPlayers(players);
+    }
+
 
     // business
     public void startRound() {
-
         setUpPuzzle();
         determineStartingPlayer();
         currentRoundNumber++;
@@ -53,17 +53,7 @@ public class Game {
         setCurrentPlayersTurn(players.get(player));
     }
 
-    public void gameTurn() {
-        boolean turnOver = false;
-        getPlayerChoice();
-        while(!turnOver) {
 
-        }
-    }
-
-    private int getPlayerChoice() {
-        return 0;
-    }
     // accessors
 
 
@@ -74,22 +64,6 @@ public class Game {
     public void setPlayers(List<Player> players) {
         this.players = players;
     }
-
-//    public String getCurrentRoundPuzzle() {
-//        return currentRoundPuzzle;
-//    }
-//
-//    public void setCurrentRoundPuzzle(String currentRoundPuzzle) {
-//        this.currentRoundPuzzle = currentRoundPuzzle;
-//    }
-//
-//    public String getCurrentRoundCategory() {
-//        return currentRoundCategory;
-//    }
-//
-//    public void setCurrentRoundCategory(String currentRoundCategory) {
-//        this.currentRoundCategory = currentRoundCategory;
-//    }
 
     public int getCurrentRoundNumber() {
         return currentRoundNumber;
