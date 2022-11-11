@@ -111,18 +111,16 @@ public class Game {
                 currentPlayersTurn.setCurrentRoundMoney(
                         currentPlayersTurn.getCurrentRoundMoney() - COST_OF_VOWEL
                 );
-                return occurrenceOfLetter;
             } else {
                 getNextPlayer();
-                return occurrenceOfLetter;
             }
+            return occurrenceOfLetter;
         } else {
             throw new IllegalArgumentException("You must pick a valid vowel");
         }
     }
 
     // accessors
-
 
     public List<Player> getPlayers() {
         return players;
