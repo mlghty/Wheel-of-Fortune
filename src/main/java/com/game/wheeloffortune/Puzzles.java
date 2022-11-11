@@ -1,7 +1,9 @@
 package com.game.wheeloffortune;
 
-import org.junit.jupiter.api.Test;
-import org.sonatype.guice.plexus.config.Hints;
+
+// These said they were unused and my IDE was showing an error loading the Jupiter one
+//import org.junit.jupiter.api.Test;
+//import org.sonatype.guice.plexus.config.Hints;
 
 import java.util.*;
 

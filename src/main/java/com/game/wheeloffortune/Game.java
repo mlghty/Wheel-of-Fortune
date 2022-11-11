@@ -46,10 +46,9 @@ public class Game {
     }
 
     private void setUpPuzzle() {
-        // TODO: Have this link to the Puzzle class which will return a Map.entry<K,V>
-        Map.Entry<String, String> currentGamePuzzle = Map.entry("Puzzle", "Hint");//Puzzles.getRandomPuzzle();
-        String currentRoundPuzzle = currentGamePuzzle.getKey();
-        String currentRoundCategory = currentGamePuzzle.getValue();
+        List<String> currentGamePuzzle = Puzzles.getRandomPuzzle();
+        String currentRoundPuzzle = currentGamePuzzle.get(0);
+        String currentRoundCategory = currentGamePuzzle.get(1);
         setCurrentGameBoard(new GameBoard(currentRoundPuzzle, currentRoundCategory));
     }
 
@@ -93,11 +92,10 @@ public class Game {
                 currentPlayersTurn.setCurrentRoundMoney(
                         currentPlayersTurn.getCurrentRoundMoney() + winningsFromLetter
                 );
-                return occurrenceOfLetter;
             } else {
                 getNextPlayer();
-                return occurrenceOfLetter;
             }
+            return occurrenceOfLetter;
         } else {
             throw new IllegalArgumentException("You must pick a valid consonant");
         }
@@ -107,11 +105,10 @@ public class Game {
         if (currentPlayersTurn.getCurrentRoundMoney() >= COST_OF_VOWEL
                 && VOWELS.contains(Character.valueOf(vowel))) {
             int occurrenceOfLetter = currentGameBoard.guessLetter(vowel);
-            if (occurrenceOfLetter != 0) {
-                currentPlayersTurn.setCurrentRoundMoney(
-                        currentPlayersTurn.getCurrentRoundMoney() - COST_OF_VOWEL
-                );
-            } else {
+            currentPlayersTurn.setCurrentRoundMoney(
+                    currentPlayersTurn.getCurrentRoundMoney() - COST_OF_VOWEL
+            );
+            if (occurrenceOfLetter == 0) {
                 getNextPlayer();
             }
             return occurrenceOfLetter;
@@ -120,6 +117,9 @@ public class Game {
         }
     }
 
+    public int solvePuzzle(String puzzleGuess) {
+        return 0;
+    }
     // accessors
 
     public List<Player> getPlayers() {
@@ -176,13 +176,7 @@ public class Game {
     }
 
     public void setWinningPlayer() {
-        Comparator<Player> getWinner = new Comparator<Player>() {
-
-            @Override
-            public int compare(Player p1, Player p2) {
-                return p1.getTotalMoney() - p2.getTotalMoney();
-            }
-        };
+        Comparator<Player> getWinner = Comparator.comparingInt(Player::getTotalMoney);
         this.winningPlayer = players.stream().max(getWinner);
     }
 
