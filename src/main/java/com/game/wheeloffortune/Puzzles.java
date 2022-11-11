@@ -17,29 +17,39 @@ public class Puzzles {
 
 
     // TODO method public static Map.Entry<K,V> getRandomPuzzle()
-    public static String getRandomPuzzle() {
+    public static ArrayList<String> getRandomPuzzle() {
         Random randomKVPairIndex = new Random();
         List<String> keys = new ArrayList<String>(hintPuzzles.keySet());
         String randomPuzzle = keys.get(randomKVPairIndex.nextInt(keys.size()));
         String hintMatchedtoPuzzle = hintPuzzles.get(randomPuzzle);
-        return (randomPuzzle + " " + hintMatchedtoPuzzle);
 
-//            Map.Entry<String, String> hintpuzz = Map.entry("", "");
-//            for (Map.Entry<String, String> hp : hintPuzzles.entrySet()) {
-//                hintpuzz = hp;
-//                break;
-//            }
-//            return hintpuzz;
+        ArrayList<String> puzzleHintPair = new ArrayList<String>();
+        puzzleHintPair.add(randomPuzzle);
+        puzzleHintPair.add(hintMatchedtoPuzzle);
+        return puzzleHintPair;
+//        return (randomPuzzle + " " + hintMatchedtoPuzzle);
 
-
+//        public static List<String> getRandomPuzzle() {
 //        Random randomKVPairIndex = new Random();
-//        int upperbound = hintPuzzles.size();
-//        int randomNumber = randomKVPairIndex.nextInt(upperbound);
+//        List<String> keys = new ArrayList<String>(hintPuzzles.keySet());
+//        return keys;
+
+
+//        public static String getRandomPuzzle() {
+//        Random randomKVPairIndex = new Random();
+//        List<String> keys = new ArrayList<String>(hintPuzzles.keySet());
+//        String randomPuzzle = keys.get(randomKVPairIndex.nextInt(keys.size()));
+//        return randomPuzzle;
 //
-//        List keys = new ArrayList(hintPuzzles.keySet());
-//        List values = new ArrayList(hintPuzzles.values());
-//        String gameHint = (String) keys.get(randomNumber);
-//        String gamePuzzle = (String) values.get(randomNumber);
+//        public static String getRandomPuzzle() {
+//        Random randomKVPairIndex = new Random();
+//        List<String> keys = new ArrayList<String>(hintPuzzles.keySet());
+//        String randomPuzzle = keys.get(randomKVPairIndex.nextInt(keys.size()));
+//        String hintMatchedtoPuzzle = hintPuzzles.get(randomPuzzle);
+//        ArrayList<String> puzzleHintPair = new ArrayList<String>();
+//        puzzleHintPair.add(randomPuzzle);
+//        puzzleHintPair.add(hintMatchedtoPuzzle);
+//        return puzzleHintPair;
     }
 
     public static void main(String[] args) {
