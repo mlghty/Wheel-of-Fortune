@@ -6,26 +6,22 @@ public class Game {
 
     private static final int NUMBER_OF_ROUNDS = 1;
     private static final int COST_OF_VOWEL = 250;
-    private final Comparator<Player> getWinner = new Comparator<Player>() {
-
-        @Override
-        public int compare(Player p1, Player p2) {
-            return p1.getTotalMoney() - p2.getTotalMoney();
-        }
-    };
-    private int currentRoundNumber;
-    private int playerTurnChoice;
-    private List<Player> players;
-    private Player currentPlayersTurn;
-    private GameBoard currentGameBoard;
-    private Optional<Player> winningPlayer, roundWinner;
-//    private String currentRoundPuzzle;
-//    private String currentRoundCategory;
-
     private static final List<Character> CONSONANTS = new ArrayList<>(List.of(
             'B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N',
             'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z'));
     private static final List<Character> VOWELS = new ArrayList<>(List.of('A', 'E', 'I', 'O', 'U'));
+    private int currentRoundNumber;
+    private int playerTurnChoice;
+    private List<Player> players;
+    private Player currentPlayersTurn;
+    private int indexOfCurrentPlayer;
+    private int numberOfPlayers;
+    private GameBoard currentGameBoard;
+    private int valueOfWheelSpin;
+
+
+
+
 
 
     // constructors
@@ -56,47 +52,61 @@ public class Game {
     }
 
     private void determineStartingPlayer() {
-        int numberOfPlayers = getPlayers().size();
-        int player = (int) (Math.random() * numberOfPlayers);
-        setCurrentPlayersTurn(players.get(player));
+        numberOfPlayers = getPlayers().size();
+        indexOfCurrentPlayer = (int) (Math.random() * numberOfPlayers);
+        setCurrentPlayersTurn(players.get(indexOfCurrentPlayer));
     }
 
-    public void gameLoop() {
-        while(!winningPlayer.isPresent()) {
-            if(currentRoundNumber > NUMBER_OF_ROUNDS) {
-                winningPlayer = players.stream().max(getWinner);
-            }
-            roundLoop();
-            roundWinner = null;
+    private void getNextPlayer() {
+        indexOfCurrentPlayer++;
+        if(indexOfCurrentPlayer >= numberOfPlayers) {
+            indexOfCurrentPlayer -= numberOfPlayers;
+        }
+        currentPlayersTurn = players.get(indexOfCurrentPlayer);
+    }
+
+    private void bankruptCurrentPlayer() {
+        currentPlayersTurn.setCurrentRoundMoney(0);
+    }
+
+    public int spinWheel() {
+        valueOfWheelSpin = currentPlayersTurn.spinWheel();
+        if(valueOfWheelSpin == 0) {
+            getNextPlayer();
+            return valueOfWheelSpin;
+        } else if(valueOfWheelSpin == -1) {
+            bankruptCurrentPlayer();
+            getNextPlayer();
+            return valueOfWheelSpin;
+        } else {
+            return valueOfWheelSpin;
         }
     }
 
-    private void roundLoop() {
-        startRound();
-        while(!roundWinner.isPresent()) {
-            playerTurn();
+    public void pickLetter(char letterPicked) {
+
+        if (CONSONANTS.contains(Character.valueOf(letterPicked))) {
+            int occurrenceOfLetter = currentGameBoard.guessLetter(letterPicked);
+            int winningsFromLetter = occurrenceOfLetter * valueOfWheelSpin;
+            currentPlayersTurn.setCurrentRoundMoney(
+                    currentPlayersTurn.getCurrentRoundMoney() + winningsFromLetter
+            );
+        } else {
+            throw new IllegalArgumentException("You must pick a valid consonant");
         }
     }
 
-    private void playerTurn() {
-        boolean turnOver = false;
-        while(!turnOver) {
-            int choice = getPlayerChoice();
+    public void buyAVowel(char vowel) {
+        if(currentPlayersTurn.getCurrentRoundMoney() >= COST_OF_VOWEL
+            && VOWELS.contains(Character.valueOf(vowel))) {
+            currentGameBoard.guessLetter(vowel);
+            currentPlayersTurn.setCurrentRoundMoney(
+                    currentPlayersTurn.getCurrentRoundMoney() - COST_OF_VOWEL
+            );
+        } else {
+            throw new IllegalArgumentException("You must pick a valid vowel");
         }
     }
-    private void gameTurn() {
-        boolean turnOver = false;
-        getPlayerChoice();
-        while(!turnOver) {
-
-        }
-    }
-
-
-    private int getPlayerChoice() {
-        return 0;
-    }
-
 
     // accessors
 
@@ -156,3 +166,48 @@ public class Game {
     }
 
 }
+
+// Deprecated Code - Handled in Client
+
+//    private Optional<Player> winningPlayer, roundWinner;
+
+//private final Comparator<Player> getWinner = new Comparator<Player>() {
+//
+//    @Override
+//    public int compare(Player p1, Player p2) {
+//        return p1.getTotalMoney() - p2.getTotalMoney();
+//    }
+//};
+//    public void gameLoop() {
+//        while(!winningPlayer.isPresent()) {
+//            if(currentRoundNumber > NUMBER_OF_ROUNDS) {
+//                winningPlayer = players.stream().max(getWinner);
+//            }
+//            roundLoop();
+//            roundWinner = null;
+//        }
+//    }
+//
+//    private void roundLoop() {
+//        startRound();
+//        while(!roundWinner.isPresent()) {
+//            playerTurn();
+//        }
+//    }
+//
+//    private void playerTurn() {
+//        boolean turnOver = false;
+//        while(!turnOver) {
+//            int choice = getPlayerChoice();
+//        }
+//    }
+//    private void gameTurn() {
+//        boolean turnOver = false;
+//        getPlayerChoice();
+//        while(!turnOver) {
+//
+//        }
+//    }
+
+//    private String currentRoundPuzzle;
+//    private String currentRoundCategory;
