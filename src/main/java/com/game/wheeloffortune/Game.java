@@ -37,12 +37,18 @@ public class Game {
         if (currentRoundNumber < NUMBER_OF_ROUNDS) {
             setUpPuzzle();
             determineStartingPlayer();
+            resetRoundEarnings();
             currentRoundNumber++;
             return 1;
         } else {
             setWinningPlayer();
             return 0;
         }
+    }
+
+    private void resetRoundEarnings() {
+        getPlayers().stream()
+                .forEach(player -> player.setCurrentRoundMoney(0));
     }
 
     private void setUpPuzzle() {
@@ -118,7 +124,19 @@ public class Game {
     }
 
     public int solvePuzzle(String puzzleGuess) {
-        return 0;
+        boolean result = currentGameBoard.solvePuzzle(puzzleGuess);
+        int currentRoundEarnings = currentPlayersTurn.getCurrentRoundMoney();
+        if (result) {
+            if (currentRoundEarnings < 1000) {
+                currentRoundEarnings = 1000;
+            }
+            currentPlayersTurn.setTotalMoney(currentRoundEarnings
+                    + currentPlayersTurn.getTotalMoney());
+            return 1;
+        } else {
+            getNextPlayer();
+            return 0;
+        }
     }
     // accessors
 
