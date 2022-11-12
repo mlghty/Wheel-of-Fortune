@@ -45,12 +45,13 @@ public class GameTest {
                 Scanner scanner = new Scanner(System.in);
                 String input;
                 char letter;
+                System.out.println(newGame.getCurrentGameBoard());
                 System.out.println("Pick a letter");
                 input = scanner.next();
                 letter = input.charAt(0);
                 newGame.pickLetter(letter);
             } catch (IllegalArgumentException e) {
-                System.out.println("Try again!");
+                System.out.println(e);
             }
         }
     }
