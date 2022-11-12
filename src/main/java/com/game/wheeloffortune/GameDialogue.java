@@ -117,7 +117,7 @@ public class GameDialogue {
 
         boolean correctOption = false;
         int intUserInput = 0;
-        int wheelValue = currentGame.getCurrentPlayersTurn().spinWheel();
+        int wheelValue = currentGame.spinWheel();
         boolean isSolved = false;
 
         String solvePuzzleAttempt;
@@ -161,7 +161,6 @@ public class GameDialogue {
 
                         for (char consonant : currentGame.getConsonants()) {
                             if (guessedLetter.toUpperCase().charAt(0) == consonant) {
-                                System.out.println("EQUALS!");
                                 isValidConsonants = true;
                                 break;
                             }
@@ -181,6 +180,7 @@ public class GameDialogue {
                     int letterMultiplier = currentGame.pickLetter(guessedLetter.toUpperCase().charAt(0));
                     System.out.println("Letter appeared " + letterMultiplier + " times!");
                     currentGame.getCurrentPlayersTurn().setCurrentRoundMoney(wheelValue * letterMultiplier);
+                    TimeUnit.SECONDS.sleep(3);
                     break;
                 case 2:
 
@@ -213,7 +213,9 @@ public class GameDialogue {
 
                         currentGame.getCurrentPlayersTurn().setCurrentRoundMoney(wheelValue * vowelMultiplier);
                         System.out.println(currentGame.getCurrentPlayersTurn());
-                    }else{
+                        TimeUnit.SECONDS.sleep(3);
+
+                    } else {
                         System.out.println("Sorry not enough money...");
                         TimeUnit.SECONDS.sleep(2);
 
@@ -225,9 +227,13 @@ public class GameDialogue {
                     int isPuzzleSolved = currentGame.solvePuzzle(solvePuzzleAttempt);
                     if (isPuzzleSolved == 1) {
                         System.out.println("Solved!");
+                        isSolved = true;
                     } else {
                         System.out.println("Not Solved!");
                     }
+
+                    TimeUnit.SECONDS.sleep(3);
+
                     break;
             }
 
@@ -237,6 +243,13 @@ public class GameDialogue {
             intUserInput = 0;
             correctOption = false;
 
+        }
+
+
+        if (isSolved) {
+            currentGame.setWinningPlayer();
+            System.out.println("Winning Player!");
+            System.out.println(currentGame.getWinningPlayer());
         }
 
 
