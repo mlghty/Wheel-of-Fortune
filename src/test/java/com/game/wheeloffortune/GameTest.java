@@ -26,21 +26,6 @@ public class GameTest {
         Game newGame = new Game(player1);
         newGame.startRound();
         System.out.println(newGame.getCurrentGameBoard());
-
-        boolean test = true;
-        while (test) {
-            try {
-                Scanner scanner = new Scanner(System.in);
-                String input;
-                char letter;
-                System.out.println("Pick a letter");
-                input = scanner.next();
-                letter = input.charAt(0);
-                newGame.pickLetter(letter);
-            } catch (IllegalArgumentException e) {
-                System.out.println("Try again!");
-            }
-        }
     }
 
     @After
