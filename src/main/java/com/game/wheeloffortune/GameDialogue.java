@@ -43,7 +43,7 @@ public class GameDialogue {
             } else if (pressedKey.equalsIgnoreCase("q")) {
 //                System.out.println("Pressed q");
                 System.out.println("Exiting game...");
-                break;
+                System.exit(0);
             } else {
                 System.out.println("Error valid options are 'X' & 'Q'");
                 System.out.println("Press 'X' to Start Game: ");
@@ -58,11 +58,11 @@ public class GameDialogue {
             TimeUnit.SECONDS.sleep(3);
             clearGameScreen();
         }
-        
+
         return startGame;
     }
 
-    public int numberOfPlayers() {
+    public void numberOfPlayers() {
 
         int numPlayers = 0;
         System.out.println("Select number of players [1-3]");
@@ -78,7 +78,7 @@ public class GameDialogue {
         System.out.println("Number of Players: " + playerCount);
 
         numOfPlayer = numPlayers;
-        return numPlayers;
+//        return numPlayers;
     }
 
     public void setPlayerNames() {
@@ -206,6 +206,11 @@ public class GameDialogue {
 
         boolean startGame = startGame();
 
+        if (startGame) {
+//            numberOfPlayers();
+//            setPlayerNames();
+        }
+
         boolean correctOption = false;
         int intUserInput = 0;
         int wheelValue = currentGame.spinWheel();
@@ -262,16 +267,11 @@ public class GameDialogue {
 }
 
 
-class Main1 {
+class Main {
     public static void main(String[] args) throws InterruptedException {
+
         GameDialogue gameDialogue = new GameDialogue();
         gameDialogue.gameLoop();
-
-//        gameDialogue.startGame();
-//        gameDialogue.numberOfPlayers();
-//        gameDialogue.setPlayerNames();
-//        gameDialogue.displayCurrentPuzzle();
-
 
     }
 }
