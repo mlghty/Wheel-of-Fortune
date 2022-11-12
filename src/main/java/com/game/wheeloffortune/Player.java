@@ -35,7 +35,7 @@ public class Player {
     }
 
     public void setTotalMoney(int totalMoney) {
-        totalMoney = totalMoney;
+       this.totalMoney = totalMoney;
     }
 
     public int getCurrentRoundMoney() {
@@ -43,7 +43,7 @@ public class Player {
     }
 
     public void setCurrentRoundMoney(int currentRoundMoney) {
-        currentRoundMoney = currentRoundMoney;
+        this.currentRoundMoney += currentRoundMoney;
     }
 
 
