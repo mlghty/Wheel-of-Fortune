@@ -50,6 +50,7 @@ public class GameTest {
                 input = scanner.next();
                 letter = input.charAt(0);
                 newGame.pickLetter(letter);
+                test = false;
             } catch (IllegalArgumentException e) {
                 System.out.println(e);
             }
