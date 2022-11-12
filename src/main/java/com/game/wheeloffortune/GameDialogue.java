@@ -8,12 +8,10 @@ import java.util.concurrent.TimeUnit;
 
 public class GameDialogue {
 
-
     private Integer numOfPlayer;
     private Scanner myObj;
     private List<Player> players;
     private Game currentGame;
-
 
     public GameDialogue() {
         players = new ArrayList<>();
@@ -26,10 +24,11 @@ public class GameDialogue {
         numOfPlayer = 1;
     }
 
-
-    public boolean startGame() {
+    public boolean startGame() throws InterruptedException {
 
         boolean startGame = false;
+
+        System.out.println("WHEEL OF FORTUNE \n \n \n \n");
 
         System.out.println("Press 'X' to Start Game: ");
         System.out.println("Press 'Q' to Exit Game: ");
@@ -39,10 +38,10 @@ public class GameDialogue {
         while (!startGame) {
 
             if (pressedKey.equalsIgnoreCase("x")) {
-                System.out.println("Pressed x");
+//                System.out.println("Pressed x");
                 startGame = true;
             } else if (pressedKey.equalsIgnoreCase("q")) {
-                System.out.println("Pressed q");
+//                System.out.println("Pressed q");
                 System.out.println("Exiting game...");
                 break;
             } else {
@@ -54,10 +53,14 @@ public class GameDialogue {
             }
         }
 
-
+        if (startGame) {
+            System.out.println("Starting Game...");
+            TimeUnit.SECONDS.sleep(3);
+            clearGameScreen();
+        }
+        
         return startGame;
     }
-
 
     public int numberOfPlayers() {
 
@@ -78,7 +81,6 @@ public class GameDialogue {
         return numPlayers;
     }
 
-
     public void setPlayerNames() {
 
         for (int i = 1; i <= numOfPlayer; i++) {
@@ -93,7 +95,6 @@ public class GameDialogue {
         System.out.println(players);
 
     }
-
 
     public void displayCurrentPuzzle() {
 //        currentGame.startRound();
@@ -111,7 +112,6 @@ public class GameDialogue {
     public void clearGameScreen() {
         for (int i = 0; i < 50; ++i) System.out.println();
     }
-
 
     private void playerBuyConsonant(int wheelValue) throws InterruptedException {
         String guessedLetter;
@@ -203,6 +203,8 @@ public class GameDialogue {
     }
 
     public void gameLoop() throws InterruptedException {
+
+        boolean startGame = startGame();
 
         boolean correctOption = false;
         int intUserInput = 0;
