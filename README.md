@@ -23,6 +23,8 @@
     </li>
     <li><a href="#classes">Classes</a></li>
     <li><a href="#class-diagram">Class Diagram</a></li>
+    <li><a href="#user-stories">User Stories</a></li>
+    <li><a href="#user-stories">PowerPoint</a></li>
   </ol>
 
 ### Team Members
