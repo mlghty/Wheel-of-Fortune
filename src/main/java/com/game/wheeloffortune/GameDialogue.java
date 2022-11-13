@@ -1,5 +1,6 @@
 package com.game.wheeloffortune;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -16,12 +17,12 @@ public class GameDialogue {
     public GameDialogue() {
         players = new ArrayList<>();
         myObj = new Scanner(System.in);
-//        currentGame = new Game();
-        currentGame = new Game(new Player("joe"));
-        currentGame.startRound();
+        currentGame = new Game();
 
+//        currentGame = new Game(new Player("joe"));
+//        currentGame.startRound();
+//        numOfPlayer = 1;
 
-        numOfPlayer = 1;
     }
 
     public boolean startGame() throws InterruptedException {
@@ -63,13 +64,11 @@ public class GameDialogue {
     }
 
     public void numberOfPlayers() {
-
-        int numPlayers = 0;
         System.out.println("Select number of players [1-3]");
 
         Integer playerCount = Integer.parseInt(myObj.nextLine());
 
-        while (playerCount < 0 || playerCount > 3) {
+        while (playerCount < 1 || playerCount > 3) {
             System.out.println("Error please select between 1-3 players...");
             playerCount = Integer.parseInt(myObj.nextLine());
 
@@ -77,7 +76,8 @@ public class GameDialogue {
 
         System.out.println("Number of Players: " + playerCount);
 
-        numOfPlayer = numPlayers;
+        numOfPlayer = playerCount;
+        setPlayerNames();
 //        return numPlayers;
     }
 
@@ -92,7 +92,7 @@ public class GameDialogue {
         // sets players in game class after creating & assigning names
         currentGame.setPlayers(players);
 
-        System.out.println(players);
+//        System.out.println(players);
 
     }
 
@@ -142,7 +142,7 @@ public class GameDialogue {
         // Current puzzle is "Puzzle"
         int letterMultiplier = currentGame.pickLetter(guessedLetter.toUpperCase().charAt(0));
         System.out.println("Letter appeared " + letterMultiplier + " times!");
-        currentGame.getCurrentPlayersTurn().setCurrentRoundMoney(wheelValue * letterMultiplier);
+//        currentGame.getCurrentPlayersTurn().setCurrentRoundMoney(wheelValue * letterMultiplier);
         TimeUnit.SECONDS.sleep(3);
     }
 
@@ -174,8 +174,7 @@ public class GameDialogue {
 
             int vowelMultiplier = currentGame.buyAVowel(vowelPurchase.toUpperCase().charAt(0));
 
-
-            currentGame.getCurrentPlayersTurn().setCurrentRoundMoney(wheelValue * vowelMultiplier);
+//            currentGame.getCurrentPlayersTurn().setCurrentRoundMoney(wheelValue * vowelMultiplier);
             System.out.println(currentGame.getCurrentPlayersTurn());
             TimeUnit.SECONDS.sleep(3);
 
@@ -204,23 +203,38 @@ public class GameDialogue {
 
     public void gameLoop() throws InterruptedException {
 
-        boolean startGame = startGame();
+//        boolean startGame = startGame();
+        numberOfPlayers();
 
-        if (startGame) {
+        if (true) {
 //            numberOfPlayers();
 //            setPlayerNames();
+            currentGame.startRound();
+
         }
 
         boolean correctOption = false;
+        String playerName;
         int intUserInput = 0;
-        int wheelValue = currentGame.spinWheel();
+        int wheelValue;
         boolean isSolved = false;
 
         while (!isSolved) {
+            wheelValue = currentGame.spinWheel();
+            playerName = currentGame.getCurrentPlayersTurn().getName();
             displayCurrentPuzzle();
 
-            System.out.println("Spinning Wheel...");
-            System.out.println("Wheel Value:" + wheelValue + "\n");
+            System.out.println(playerName + " Spinning Wheel...");
+            System.out.println("Wheel Value: " + wheelValue + "\n");
+
+            if (wheelValue == 0) {
+                System.out.println("YOU LOSE A TURN! Next Players Turn: "
+                        + currentGame.getCurrentPlayersTurn().getName() + "\n");
+            } else if (wheelValue == -1) {
+                System.out.println("BANKRUPT! Next Players Turn: "
+                        + currentGame.getCurrentPlayersTurn().getName() + "\n");
+            }
+
 
             System.out.println(currentGame.getCurrentPlayersTurn() + "\n");
 

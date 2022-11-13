@@ -22,6 +22,9 @@ public class Game {
 
 
     // constructors
+    public Game() {
+    }
+
     public Game(Player... players) {
         List<Player> playerList = new ArrayList<>();
         Collections.addAll(playerList, players);
