@@ -18,6 +18,9 @@ public class GameTest {
     public void setUp() throws Exception {
         newGame = new Game(player1);
         newGame2 = new Game(player1, player2);
+        newGame2.startRound();
+        GameBoard gb = new GameBoard("HELLO", "WORLD");
+        newGame2.setCurrentGameBoard(gb);
     }
 
     @Test
@@ -60,9 +63,7 @@ public class GameTest {
 
     @Test
     public void testSpinWheel() {
-        newGame2.startRound();
-        GameBoard gb = new GameBoard("HELLO", "WORLD");
-        newGame2.setCurrentGameBoard(gb);
+
         System.out.println(newGame2.getCurrentPlayersTurn().getName()); // first player to go
         newGame2.setValueOfWheelSpin(500);
         newGame2.pickLetter('L'); // Should add 1000 to earnings
@@ -71,6 +72,27 @@ public class GameTest {
         newGame2.pickLetter('H'); // Should add 1000 to earnings
         assertEquals(1750, newGame2.getCurrentPlayersTurn().getCurrentRoundMoney());
 
+    }
+
+    @Test
+    public void testIfBankruptPassesTheTurnAndSetsThePlayersEarningsToZero() {
+        String player1 = newGame2.getCurrentPlayersTurn().getName();
+        newGame2.getCurrentPlayersTurn().setCurrentRoundMoney(1000);
+        int spinWheel = 1000;
+        while(spinWheel > 0) {
+            spinWheel = newGame2.spinWheel();
+        }
+        System.out.println(spinWheel);
+        String player2 = newGame2.getCurrentPlayersTurn().getName();
+        if(spinWheel == 0) {
+            newGame2.getNextPlayer();
+            assertEquals(player1, newGame2.getCurrentPlayersTurn().getName());
+            assertEquals(1000,newGame2.getCurrentPlayersTurn().getCurrentRoundMoney());
+        } else if(spinWheel == -1) {
+            newGame2.getNextPlayer();
+            assertEquals(player1, newGame2.getCurrentPlayersTurn().getName());
+            assertEquals(0,newGame2.getCurrentPlayersTurn().getCurrentRoundMoney());
+        }
     }
 }
 
