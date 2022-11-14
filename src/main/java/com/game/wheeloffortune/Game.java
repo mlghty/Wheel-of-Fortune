@@ -51,7 +51,7 @@ public class Game {
     }
 
     private void resetRoundEarnings() {
-        getPlayers().stream()
+        getPlayers()
                 .forEach(player -> player.setCurrentRoundMoney(0));
     }
 
@@ -95,7 +95,7 @@ public class Game {
     }
 
     public int pickLetter(char letterPicked) throws IllegalArgumentException {
-        if (CONSONANTS.contains(Character.valueOf(letterPicked))) {
+        if (CONSONANTS.contains(letterPicked)) {
             int occurrenceOfLetter = currentGameBoard.guessLetter(letterPicked);
             if (occurrenceOfLetter > 0) {
                 int winningsFromLetter = occurrenceOfLetter * valueOfWheelSpin;
@@ -113,7 +113,7 @@ public class Game {
 
     public int buyAVowel(char vowel) throws IllegalArgumentException {
         if (currentPlayersTurn.getCurrentRoundMoney() >= COST_OF_VOWEL
-                && VOWELS.contains(Character.valueOf(vowel))) {
+                && VOWELS.contains(vowel)) {
             int occurrenceOfLetter = currentGameBoard.guessLetter(vowel);
             currentPlayersTurn.setCurrentRoundMoney(
                     currentPlayersTurn.getCurrentRoundMoney() - COST_OF_VOWEL

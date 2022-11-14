@@ -115,7 +115,8 @@ public class GameDialogue {
         } catch (final Exception e) {
             System.out.println("Clearing manually!");
             TimeUnit.SECONDS.sleep(3);
-            for (int i = 0; i < 50; ++i) System.out.println();
+            //for (int i = 0; i < 50; ++i) System.out.println();
+            System.out.print("\033\143");
         }
     }
 
