@@ -19,8 +19,6 @@ public class Player {
         return wheelValue;
     }
 
-
-
     // accessors
     public String getName() {
         return playerName;

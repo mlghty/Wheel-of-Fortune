@@ -1,23 +1,23 @@
 package com.game.wheeloffortune;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class GameDialogue {
 
     private Integer numOfPlayer;
-    private Scanner myObj;
+    private Scanner userInputScanner;
     private List<Player> players;
     private Game currentGame;
+    private Boolean startGame;
 
     public GameDialogue() {
         players = new ArrayList<>();
-        myObj = new Scanner(System.in);
+        userInputScanner = new Scanner(System.in);
         currentGame = new Game();
+        startGame = false;
 
 //        currentGame = new Game(new Player("joe"));
 //        currentGame.startRound();
@@ -25,32 +25,26 @@ public class GameDialogue {
 
     }
 
-    public boolean startGame() throws InterruptedException {
-
-        boolean startGame = false;
+    public void startGame() throws InterruptedException {
 
         System.out.println("WHEEL OF FORTUNE \n \n \n \n");
 
         System.out.println("Press 'X' to Start Game: ");
         System.out.println("Press 'Q' to Exit Game: ");
 
-        String pressedKey = myObj.nextLine();
+        String pressedKey = userInputScanner.nextLine();
 
         while (!startGame) {
-
             if (pressedKey.equalsIgnoreCase("x")) {
-//                System.out.println("Pressed x");
                 startGame = true;
             } else if (pressedKey.equalsIgnoreCase("q")) {
-//                System.out.println("Pressed q");
                 System.out.println("Exiting game...");
                 System.exit(0);
             } else {
                 System.out.println("Error valid options are 'X' & 'Q'");
                 System.out.println("Press 'X' to Start Game: ");
                 System.out.println("Press 'Q' to Exit Game: ");
-                pressedKey = myObj.nextLine();  // Read user input
-
+                pressedKey = userInputScanner.nextLine();  // Read user input
             }
         }
 
@@ -60,17 +54,16 @@ public class GameDialogue {
             clearGameScreen();
         }
 
-        return startGame;
     }
 
     public void numberOfPlayers() {
         System.out.println("Select number of players [1-3]");
 
-        Integer playerCount = Integer.parseInt(myObj.nextLine());
+        Integer playerCount = Integer.parseInt(userInputScanner.nextLine());
 
         while (playerCount < 1 || playerCount > 3) {
             System.out.println("Error please select between 1-3 players...");
-            playerCount = Integer.parseInt(myObj.nextLine());
+            playerCount = Integer.parseInt(userInputScanner.nextLine());
 
         }
 
@@ -78,47 +71,55 @@ public class GameDialogue {
 
         numOfPlayer = playerCount;
         setPlayerNames();
-//        return numPlayers;
     }
 
     public void setPlayerNames() {
-
         for (int i = 1; i <= numOfPlayer; i++) {
             System.out.println("Please enter name for Player " + i);
-            String playerName = myObj.nextLine();
+            String playerName = userInputScanner.nextLine();
             players.add(new Player(playerName));
         }
-
         // sets players in game class after creating & assigning names
         currentGame.setPlayers(players);
-
-//        System.out.println(players);
-
     }
 
     public void displayCurrentPuzzle() {
-//        currentGame.startRound();
         GameBoard currentGameBoard = currentGame.getCurrentGameBoard();
         String puzzleHint = currentGameBoard.getGameHint();
-        System.out.println("Hint: " + puzzleHint);
         String puzzle = currentGameBoard.getGamePuzzle();
-        System.out.println("Puzzle: " + puzzle);
-//        System.out.println("\n \n \n \n \n \n");
-        System.out.println("\n");
+
+        System.out.println("Hint: " + puzzleHint);
+        System.out.println("Puzzle: " + puzzle + "\n");
     }
 
-    // temp until game is run on indepent terminal screen
-    // and not under intellijs
+    // temp until game is run on independent terminal screen
+    // and not under intelli js
     public void clearGameScreen() {
         for (int i = 0; i < 50; ++i) System.out.println();
     }
 
-    private void playerBuyConsonant(int wheelValue) throws InterruptedException {
+    private void playerBuyConsonant() throws InterruptedException {
         String guessedLetter;
         boolean isValidConsonants = false;
+        String playerName = currentGame.getCurrentPlayersTurn().getName();
+
+
+        int wheelValue = currentGame.spinWheel();
+        System.out.println(playerName + " Spinning Wheel...");
+        System.out.println("Wheel Value: " + wheelValue + "\n");
+
+
+        if (wheelValue == 0) {
+            System.out.println("YOU LOSE A TURN! Next Players Turn: "
+                    + currentGame.getCurrentPlayersTurn().getName() + "\n");
+        } else if (wheelValue == -1) {
+            System.out.println("BANKRUPT! Next Players Turn: "
+                    + currentGame.getCurrentPlayersTurn().getName() + "\n");
+        }
+
         System.out.println("Guessing letter...");
         System.out.println("Enter letter: ");
-        guessedLetter = myObj.nextLine();
+        guessedLetter = userInputScanner.nextLine();
 
         while (!isValidConsonants) {
 
@@ -129,30 +130,30 @@ public class GameDialogue {
                 }
             }
 
-
             if (!isValidConsonants) {
-                System.out.println("Error Please enter valid consonant!");
-                guessedLetter = myObj.nextLine();
+                System.out.println("Error invalid consonant you lose a turn!!");
+                currentGame.getNextPlayer();
+                TimeUnit.SECONDS.sleep(3);
+                break;
+            } else {
+                int occurrences = currentGame.pickLetter(guessedLetter.toUpperCase().charAt(0));
+                System.out.println("Letter appeared " + occurrences + " times!");
+                TimeUnit.SECONDS.sleep(3);
             }
-
 
         }
 
 
-        // Current puzzle is "Puzzle"
-        int letterMultiplier = currentGame.pickLetter(guessedLetter.toUpperCase().charAt(0));
-        System.out.println("Letter appeared " + letterMultiplier + " times!");
-//        currentGame.getCurrentPlayersTurn().setCurrentRoundMoney(wheelValue * letterMultiplier);
-        TimeUnit.SECONDS.sleep(3);
     }
 
-    private void playerBuyVowel(int wheelValue) throws InterruptedException {
+    private void playerBuyVowel() throws InterruptedException {
         String vowelPurchase;
         boolean isValidVowel = false;
+
         if (currentGame.getCurrentPlayersTurn().getCurrentRoundMoney() >= 250) {
             System.out.println("Buying vowel...");
             System.out.println("Enter Vowel...");
-            vowelPurchase = myObj.nextLine();
+            vowelPurchase = userInputScanner.nextLine();
 
             while (!isValidVowel) {
                 for (char consonant : currentGame.getVowels()) {
@@ -161,22 +162,20 @@ public class GameDialogue {
                         break;
                     }
                 }
-
                 if (!isValidVowel) {
-                    System.out.println("Error Please enter valid vowel!");
-                    vowelPurchase = myObj.nextLine();
+                    System.out.println("Invalid vowel, Sorry you lose a turn!");
+                    currentGame.getNextPlayer();
+                    TimeUnit.SECONDS.sleep(3);
+                    break;
 
+                } else {
+                    int occurrences = currentGame.buyAVowel(vowelPurchase.toUpperCase().charAt(0));
+                    System.out.println("Vowel occurrences: " + occurrences + "!!");
+                    System.out.println(currentGame.getCurrentPlayersTurn());
+                    TimeUnit.SECONDS.sleep(3);
                 }
 
             }
-
-//                ('A', 'E', 'I', 'O', 'U'));
-
-            int vowelMultiplier = currentGame.buyAVowel(vowelPurchase.toUpperCase().charAt(0));
-
-//            currentGame.getCurrentPlayersTurn().setCurrentRoundMoney(wheelValue * vowelMultiplier);
-            System.out.println(currentGame.getCurrentPlayersTurn());
-            TimeUnit.SECONDS.sleep(3);
 
         } else {
             System.out.println("Sorry not enough money...");
@@ -187,9 +186,11 @@ public class GameDialogue {
 
     private boolean playerAttemptSolve(boolean isSolved) throws InterruptedException {
         String solvePuzzleAttempt;
+
         System.out.println("Solve Puzzle: ");
-        solvePuzzleAttempt = myObj.nextLine();
+        solvePuzzleAttempt = userInputScanner.nextLine();
         int isPuzzleSolved = currentGame.solvePuzzle(solvePuzzleAttempt);
+
         if (isPuzzleSolved == 1) {
             System.out.println("Solved!");
             isSolved = true;
@@ -203,63 +204,53 @@ public class GameDialogue {
 
     public void gameLoop() throws InterruptedException {
 
-//        boolean startGame = startGame();
-        numberOfPlayers();
+        // commented out for convenience for now
 
-        if (true) {
+//        if (startGame) {
 //            numberOfPlayers();
 //            setPlayerNames();
-            currentGame.startRound();
+//            currentGame.startRound();
+//        }
 
-        }
+
+        // comment out when complete
+        numberOfPlayers();
+        currentGame.startRound();
 
         boolean correctOption = false;
-        String playerName;
-        int intUserInput = 0;
-        int wheelValue;
+        Integer intUserInput = 0;
         boolean isSolved = false;
 
         while (!isSolved) {
-            wheelValue = currentGame.spinWheel();
-            playerName = currentGame.getCurrentPlayersTurn().getName();
             displayCurrentPuzzle();
-
-            System.out.println(playerName + " Spinning Wheel...");
-            System.out.println("Wheel Value: " + wheelValue + "\n");
-
-            if (wheelValue == 0) {
-                System.out.println("YOU LOSE A TURN! Next Players Turn: "
-                        + currentGame.getCurrentPlayersTurn().getName() + "\n");
-            } else if (wheelValue == -1) {
-                System.out.println("BANKRUPT! Next Players Turn: "
-                        + currentGame.getCurrentPlayersTurn().getName() + "\n");
-            }
-
-
             System.out.println(currentGame.getCurrentPlayersTurn() + "\n");
 
             while (!correctOption) {
+
                 System.out.println("Options...");
                 System.out.println("Press 1 to guess a letter.");
                 System.out.println("Press 2 to buy a vowel.");
                 System.out.println("Press 3 to SOLVE...");
-                String pressedKey = myObj.nextLine();
 
-                if (pressedKey.equals("1") || pressedKey.equals("2") || pressedKey.equals("3")) {
+                String pressedKey = userInputScanner.nextLine();
+
+                if (pressedKey.matches("[1-3]")) {
                     intUserInput = Integer.parseInt(pressedKey);
                     correctOption = true;
+                } else {
+                    System.out.println("Incorrect options - Please Select from [1-3]");
                 }
             }
 
             switch (intUserInput) {
                 case 1:
-                    playerBuyConsonant(wheelValue);
+                    playerBuyConsonant();
                     break;
                 case 2:
-                    playerBuyVowel(wheelValue);
+                    playerBuyVowel();
                     break;
                 case 3:
-                    isSolved = playerAttemptSolve(isSolved);
+                    isSolved = playerAttemptSolve(false);
                     break;
             }
 
@@ -283,9 +274,7 @@ public class GameDialogue {
 
 class Main {
     public static void main(String[] args) throws InterruptedException {
-
         GameDialogue gameDialogue = new GameDialogue();
         gameDialogue.gameLoop();
-
     }
 }

@@ -68,7 +68,7 @@ public class Game {
         setCurrentPlayersTurn(players.get(indexOfCurrentPlayer));
     }
 
-    private void getNextPlayer() {
+    public void getNextPlayer() {
         indexOfCurrentPlayer++;
         if (indexOfCurrentPlayer >= numberOfPlayers) {
             indexOfCurrentPlayer -= numberOfPlayers;
