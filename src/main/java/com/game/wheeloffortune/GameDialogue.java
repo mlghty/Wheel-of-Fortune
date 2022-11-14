@@ -95,15 +95,26 @@ public class GameDialogue {
 
     // temp until game is run on independent terminal screen
     // and not under intelli js
-    public void clearGameScreen() {
+    public void clearGameScreen() throws InterruptedException {
+
+//        try {
+//            String OperatingSystem = System.getProperty("os.name");
+//            if (OperatingSystem.contains("Windows")) {
+//                Runtime.getRuntime().exec("cls");
+//            } else {
+//                Runtime.getRuntime().exec("clear");
+//            }
+//        } catch (final Exception e) {
+//            System.out.println("Clearing manually!");
+//            TimeUnit.SECONDS.sleep(3);
+//            for (int i = 0; i < 50; ++i) System.out.println();
+//        }
+
         try {
-            String OperatingSystem = System.getProperty("os.name");
-            if (OperatingSystem.contains("Windows")) {
-                Runtime.getRuntime().exec("cls");
-            } else {
-                Runtime.getRuntime().exec("clear");
-            }
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
         } catch (final Exception e) {
+            System.out.println("Clearing manually!");
+            TimeUnit.SECONDS.sleep(3);
             for (int i = 0; i < 50; ++i) System.out.println();
         }
     }
