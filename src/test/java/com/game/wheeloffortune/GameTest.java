@@ -11,12 +11,13 @@ import static org.junit.Assert.*;
 
 public class GameTest {
 
-    private Game newGame;
+    private Game newGame,newGame2;
     private Player player1 = new Player("Joe");
     private Player player2 = new Player("Cindy");
     @Before
     public void setUp() throws Exception {
         newGame = new Game(player1);
+        newGame2 = new Game(player1, player2);
     }
 
     @Test
@@ -55,6 +56,21 @@ public class GameTest {
                 System.out.println(e);
             }
         }
+    }
+
+    @Test
+    public void testSpinWheel() {
+        newGame2.startRound();
+        GameBoard gb = new GameBoard("HELLO", "WORLD");
+        newGame2.setCurrentGameBoard(gb);
+        System.out.println(newGame2.getCurrentPlayersTurn().getName()); // first player to go
+        newGame2.setValueOfWheelSpin(500);
+        newGame2.pickLetter('L'); // Should add 1000 to earnings
+        System.out.println(newGame2.getCurrentPlayersTurn().getCurrentRoundMoney());
+        newGame2.setValueOfWheelSpin(750);
+        newGame2.pickLetter('H'); // Should add 1000 to earnings
+        assertEquals(1750, newGame2.getCurrentPlayersTurn().getCurrentRoundMoney());
+
     }
 }
 

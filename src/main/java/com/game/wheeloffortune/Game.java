@@ -97,7 +97,7 @@ public class Game {
     public int pickLetter(char letterPicked) throws IllegalArgumentException {
         if (CONSONANTS.contains(Character.valueOf(letterPicked))) {
             int occurrenceOfLetter = currentGameBoard.guessLetter(letterPicked);
-            if (occurrenceOfLetter != 0) {
+            if (occurrenceOfLetter > 0) {
                 int winningsFromLetter = occurrenceOfLetter * valueOfWheelSpin;
                 currentPlayersTurn.setCurrentRoundMoney(
                         currentPlayersTurn.getCurrentRoundMoney() + winningsFromLetter
@@ -136,6 +136,7 @@ public class Game {
             }
             currentPlayersTurn.setTotalMoney(currentRoundEarnings
                     + currentPlayersTurn.getTotalMoney());
+            resetRoundEarnings();
             return 1;
         } else {
             getNextPlayer();
@@ -150,6 +151,7 @@ public class Game {
 
     public void setPlayers(List<Player> players) {
         this.players = players;
+        this.numberOfPlayers = players.size();
     }
 
     public int getCurrentRoundNumber() {
