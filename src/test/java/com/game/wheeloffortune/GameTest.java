@@ -77,6 +77,11 @@ public class GameTest {
     }
 
     @Test
+    public void testGameToStringMethod() {
+        System.out.println(newGame2.toString());
+    }
+
+    @Test
     public void testIfBankruptPassesTheTurnAndSetsThePlayersEarningsToZero() {
         String player1 = newGame2.getCurrentPlayersTurn().getName();
         newGame2.getCurrentPlayersTurn().setCurrentRoundMoney(1000);
@@ -98,3 +103,6 @@ public class GameTest {
     }
 }
 
+
+
+//jar cvfe jarexample.jar com.game.wheeloffortune Client.class

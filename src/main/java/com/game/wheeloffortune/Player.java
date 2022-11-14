@@ -48,8 +48,7 @@ public class Player {
     @Override
     public String toString() {
         return  getClass().getSimpleName() +" name: " + playerName
-                + "\nTotal money: " + getTotalMoney()
-                + "\nTotal round money: " + getCurrentRoundMoney() + '\n';
+                + "\nTotal money: " + getTotalMoney() + '\n';
     }
 
 }

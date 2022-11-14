@@ -207,52 +207,12 @@ public class Game {
 
     @Override
     public String toString() {
-        return "Game{}";
+        String returnValue = "";
+        for(Player p : players) {
+           returnValue = returnValue.concat(p.toString());
+           returnValue = returnValue.concat("\n");
+        }
+        return returnValue;
     }
 
 }
-
-// Deprecated Code - Handled in Client
-
-//    private Optional<Player> winningPlayer, roundWinner;
-
-//private final Comparator<Player> getWinner = new Comparator<Player>() {
-//
-//    @Override
-//    public int compare(Player p1, Player p2) {
-//        return p1.getTotalMoney() - p2.getTotalMoney();
-//    }
-//};
-//    public void gameLoop() {
-//        while(!winningPlayer.isPresent()) {
-//            if(currentRoundNumber > NUMBER_OF_ROUNDS) {
-//                winningPlayer = players.stream().max(getWinner);
-//            }
-//            roundLoop();
-//            roundWinner = null;
-//        }
-//    }
-//
-//    private void roundLoop() {
-//        startRound();
-//        while(!roundWinner.isPresent()) {
-//            playerTurn();
-//        }
-//    }
-//
-//    private void playerTurn() {
-//        boolean turnOver = false;
-//        while(!turnOver) {
-//            int choice = getPlayerChoice();
-//        }
-//    }
-//    private void gameTurn() {
-//        boolean turnOver = false;
-//        getPlayerChoice();
-//        while(!turnOver) {
-//
-//        }
-//    }
-
-//    private String currentRoundPuzzle;
-//    private String currentRoundCategory;
