@@ -109,4 +109,4 @@ Once we have incorporated the basics of the game and have a working prototype th
 + User wants to compete against 2 other players for cash prizes by solving word puzzles, game should have color, sound and artwork
 
 ### Some Image Here
-![Wheel-Of-Fortune](https://i.imgur.com/7rujzV5.png)
+![Wheel-Of-Fortune](https://i.imgur.com/508wCGo.png)
