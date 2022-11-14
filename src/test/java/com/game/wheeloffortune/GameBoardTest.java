@@ -1,5 +1,7 @@
 package com.game.wheeloffortune;
 
+import org.junit.Test;
+
 import java.util.Scanner;
 
 public class GameBoardTest {
@@ -30,6 +32,7 @@ public class GameBoardTest {
                     break;
             }
         }*/
+
 
     }
 }

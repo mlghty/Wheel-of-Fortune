@@ -149,7 +149,7 @@ public class GameDialogue {
     private void playerBuyVowel(int wheelValue) throws InterruptedException {
         String vowelPurchase;
         boolean isValidVowel = false;
-        if (currentGame.getCurrentPlayersTurn().getTotalMoney() >= 250) {
+        if (currentGame.getCurrentPlayersTurn().getCurrentRoundMoney() >= 250) {
             System.out.println("Buying vowel...");
             System.out.println("Enter Vowel...");
             vowelPurchase = myObj.nextLine();
