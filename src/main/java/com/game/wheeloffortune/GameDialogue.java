@@ -261,6 +261,7 @@ public class GameDialogue {
 //            correctOption = false;
 
             if (isSolved && currentGame.startRound() == 0) {
+                clearGameScreen();
                 currentGame.setWinningPlayer();
                 System.out.println("Winning Player!");
                 System.out.println(currentGame.getWinningPlayer());
@@ -270,7 +271,6 @@ public class GameDialogue {
                 correctOption = false;
                 isSolved = false;
             }
-
 
         }
 
