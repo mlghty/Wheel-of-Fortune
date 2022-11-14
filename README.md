@@ -1,5 +1,8 @@
 # Wheel of Fortune
 
+<p align="center">
+  <img width="260" height="200" src="https://i.imgur.com/7rujzV5.png">
+</p>
 
 [//]: # (## Table of contents)
 
@@ -95,7 +98,7 @@ Once we have incorporated the basics of the game and have a working prototype th
 + + display player options
 
 ### Class Diagram
-![Class-Diagram](https://i.imgur.com/mtoSbUl.png)
+![Class-Diagram](https://i.imgur.com/508wCGo.png)
 
 ### Requirements
 + Req1
@@ -107,6 +110,3 @@ Once we have incorporated the basics of the game and have a working prototype th
 + User wants to compete against other players for cash prize by solving word puzzles
 + User wants to compete against other players for cash prizes by solving word puzzles, would like to see ascii art and it has sounds effects
 + User wants to compete against 2 other players for cash prizes by solving word puzzles, game should have color, sound and artwork
-
-### Some Image Here
-![Wheel-Of-Fortune](https://i.imgur.com/508wCGo.png)
