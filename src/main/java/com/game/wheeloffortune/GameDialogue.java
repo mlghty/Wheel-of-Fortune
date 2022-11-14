@@ -88,6 +88,7 @@ public class GameDialogue {
         String puzzleHint = currentGameBoard.getGameHint();
         String puzzle = currentGameBoard.getGamePuzzle();
 
+        System.out.println("Round #: " + currentGame.getCurrentRoundNumber());
         System.out.println("Hint: " + puzzleHint);
         System.out.println("Puzzle: " + puzzle + "\n");
     }
@@ -255,22 +256,35 @@ public class GameDialogue {
             }
 
             // reset vars
-            clearGameScreen();
-            intUserInput = 0;
-            correctOption = false;
+//            clearGameScreen();
+//            intUserInput = 0;
+//            correctOption = false;
+
+            if (isSolved && currentGame.startRound() == 0) {
+                currentGame.setWinningPlayer();
+                System.out.println("Winning Player!");
+                System.out.println(currentGame.getWinningPlayer());
+            } else {
+                clearGameScreen();
+                intUserInput = 0;
+                correctOption = false;
+                isSolved = false;
+            }
+
 
         }
 
-        if (isSolved) {
-            currentGame.setWinningPlayer();
-            System.out.println("Winning Player!");
-            System.out.println(currentGame.getWinningPlayer());
-        }
+//        if (isSolved && currentGame.startRound() == 0) {
+//            currentGame.setWinningPlayer();
+//            System.out.println("Winning Player!");
+//            System.out.println(currentGame.getWinningPlayer());
+//        }else{
+//            isSolved = false;
+//        }
 
     }
 
 }
-
 
 class Main {
     public static void main(String[] args) throws InterruptedException {
