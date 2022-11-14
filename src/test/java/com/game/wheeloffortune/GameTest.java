@@ -30,6 +30,8 @@ public class GameTest {
         Game newGame = new Game(player1);
         newGame.startRound();
         System.out.println(newGame.getCurrentGameBoard());
+        newGame.setWinningPlayer();
+        System.out.println(newGame.getWinningPlayer());
     }
 
     @After

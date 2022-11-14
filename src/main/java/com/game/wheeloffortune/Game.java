@@ -131,9 +131,6 @@ public class Game {
         boolean result = currentGameBoard.solvePuzzle(puzzleGuess);
         int currentRoundEarnings = currentPlayersTurn.getCurrentRoundMoney();
         if (result) {
-            if (currentRoundEarnings < 1000) {
-                currentRoundEarnings = 1000;
-            }
             currentPlayersTurn.setTotalMoney(currentRoundEarnings
                     + currentPlayersTurn.getTotalMoney());
             resetRoundEarnings();
@@ -195,8 +192,12 @@ public class Game {
         this.valueOfWheelSpin = valueOfWheelSpin;
     }
 
-    public Optional<Player> getWinningPlayer() {
-        return winningPlayer;
+    public String getWinningPlayer() {
+        if(winningPlayer.isPresent()) {
+            return winningPlayer.get().toString();
+        } else {
+            return "There is no winner!";
+        }
     }
 
     public void setWinningPlayer() {
