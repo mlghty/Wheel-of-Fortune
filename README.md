@@ -24,7 +24,7 @@
     <li><a href="#classes">Classes</a></li>
     <li><a href="#class-diagram">Class Diagram</a></li>
     <li><a href="#user-stories">User Stories</a></li>
-    <li><a href="#user-stories">PowerPoint</a></li>
+    <li><a href="#user-stories"><a href="https://docs.google.com/presentation/d/15D6eHSgaPes-T5kfZW9MUirDGpUcAEPs_v0GowhEqVU/edit#slide=id.p">PowerPoint</a></a></li>
   </ol>
 
 ### Team Members
