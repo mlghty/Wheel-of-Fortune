@@ -15,10 +15,16 @@ public class Puzzles {
         hintPuzzles.put("PRIMITIVE", "Data Type");
         hintPuzzles.put("HOT DOGS ARE NOT TACOS", "Food");
         hintPuzzles.put("EXCEPTIONS", "Something Thrown");
+        hintPuzzles.put("DATA ABSTRACTION","Hiding Data");
+        hintPuzzles.put("POLYMORPHISM", "Many Different Functions");
+        hintPuzzles.put("ENUMERATED TYPE","Unchanged Type");
+        hintPuzzles.put("LUXURY SUITES","Places");
+        hintPuzzles.put("SNACK PACK","Rhyme Time");
+        hintPuzzles.put("FOREVER YOUNG","Phrase");
+
     }
 
 
-    // TODO method public static Map.Entry<K,V> getRandomPuzzle()
     public static ArrayList<String> getRandomPuzzle() {
         Random randomKVPairIndex = new Random();
         List<String> keys = new ArrayList<String>(hintPuzzles.keySet());
@@ -29,6 +35,8 @@ public class Puzzles {
         puzzleHintPair.add(randomPuzzle);
         puzzleHintPair.add(hintMatchedtoPuzzle);
         return puzzleHintPair;
+
+
 //        return (randomPuzzle + " " + hintMatchedtoPuzzle);
 
 //        public static List<String> getRandomPuzzle() {
@@ -43,19 +51,7 @@ public class Puzzles {
 //        String randomPuzzle = keys.get(randomKVPairIndex.nextInt(keys.size()));
 //        return randomPuzzle;
 //
-//        public static String getRandomPuzzle() {
-//        Random randomKVPairIndex = new Random();
-//        List<String> keys = new ArrayList<String>(hintPuzzles.keySet());
-//        String randomPuzzle = keys.get(randomKVPairIndex.nextInt(keys.size()));
-//        String hintMatchedtoPuzzle = hintPuzzles.get(randomPuzzle);
-//        ArrayList<String> puzzleHintPair = new ArrayList<String>();
-//        puzzleHintPair.add(randomPuzzle);
-//        puzzleHintPair.add(hintMatchedtoPuzzle);
-//        return puzzleHintPair;
-    }
 
-    public static void main(String[] args) {
-        System.out.println(getRandomPuzzle());
     }
 }
 
