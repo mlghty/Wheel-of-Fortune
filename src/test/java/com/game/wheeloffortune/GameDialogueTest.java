@@ -10,25 +10,16 @@ import static org.junit.Assert.*;
 
 public class GameDialogueTest {
 
-
     private GameDialogue gameDialogueTest;
     private Game gamePuzzleTest;
     private Player player1 = new Player("Joe");
-
 
     @Before
     public void setUp() {
         System.out.println("Before");
         gamePuzzleTest = new Game();
-        gamePuzzleTest.startRound();
-        GameBoard gb = new GameBoard("HELLO", "WORLD");
-
-        gamePuzzleTest.setCurrentGameBoard(gb);
-
-        gameDialogueTest = new GameDialogue(gamePuzzleTest);
-
+        gameDialogueTest = new GameDialogue();
     }
-
 
     @Test
     public void _start_Valid_Game_Test() throws InterruptedException {
@@ -42,19 +33,6 @@ public class GameDialogueTest {
         assertTrue(startGame);
 
     }
-
-
-//    @Test
-//    public void _start_Invalid_Game_Test() throws InterruptedException {
-//
-//        ByteArrayInputStream input = new ByteArrayInputStream("Q".getBytes());
-//        Scanner sc = new Scanner(input);
-//        gameDialogueTest.setUserInputScanner(sc);
-//
-////        exit.expectSystemExitWithStatus(0);
-//        gameDialogueTest.startGame();
-//
-//    }
 
     @Test
     public void _test_numberOfPlayers_one_player() {
@@ -159,17 +137,5 @@ public class GameDialogueTest {
         assertEquals(expectedNumOfPlayers, actualNumOfPlayer);
 
     }
-
-//    @Test
-//    public void _test_gameLoop_consonants() throws InterruptedException {
-//
-//        ByteArrayInputStream input = new ByteArrayInputStream("x\n1\nJoeG\n1\nl\nh\n".getBytes());
-//        Scanner sc = new Scanner(input);
-//        gameDialogueTest.setUserInputScanner(sc);
-//        gameDialogueTest.gameLoop();
-//
-//
-//
-//    }
 
 }

@@ -247,7 +247,6 @@ public class GameDialogue {
             currentGame.startRound();
         }
 
-
         boolean correctOption = false;
         Integer intUserInput = 0;
         boolean isSolved = false;
