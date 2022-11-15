@@ -19,7 +19,7 @@ public class WOFLogoAsciiArt {
 
         Graphics WOF = bufferedImage.getGraphics();
         //setting font style and size
-        WOF.setFont(new Font("Arial", Font.BOLD, 16));
+        WOF.setFont(new Font("Arial", Font.BOLD, 12));
 
         Graphics2D WOFGraphic = (Graphics2D) WOF;
         WOFGraphic.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
