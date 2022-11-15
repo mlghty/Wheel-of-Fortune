@@ -17,8 +17,9 @@ public class Game {
     private int numberOfPlayers;
     private GameBoard currentGameBoard;
     private int valueOfWheelSpin;
-    private Optional<Player> winningPlayer;
+    private Player winningPlayer;
 
+    private List<String> usedPuzzles;
 
 
     // constructors
@@ -55,6 +56,11 @@ public class Game {
                 .forEach(player -> player.setCurrentRoundMoney(0));
     }
 
+
+    /*
+     * Get a random puzzle from Puzzles then check to see if it is in usedPuzzles List
+     * if it is then get another puzzle, if it isn't then send the puzzle and hint to gameBoard
+     */
     private void setUpPuzzle() {
         List<String> currentGamePuzzle = Puzzles.getRandomPuzzle();
         String currentRoundPuzzle = currentGamePuzzle.get(0);
@@ -163,7 +169,6 @@ public class Game {
         return CONSONANTS;
     }
 
-
     public List<Character> getVowels() {
         return VOWELS;
     }
@@ -193,24 +198,30 @@ public class Game {
     }
 
     public String getWinningPlayer() {
-        if(winningPlayer.isPresent()) {
-            return winningPlayer.get().toString();
+        if (!winningPlayer.getName().equals("temp")) {
+            return winningPlayer.toString();
         } else {
             return "There is no winner!";
         }
     }
 
     public void setWinningPlayer() {
-        Comparator<Player> getWinner = Comparator.comparingInt(Player::getTotalMoney);
-        this.winningPlayer = players.stream().max(getWinner);
+        Player tempPlayer = new Player("temp");
+        tempPlayer.setTotalMoney(Integer.MIN_VALUE);
+        for (Player p : players) {
+            if (p.getTotalMoney() > tempPlayer.getTotalMoney()) {
+                tempPlayer = p;
+            }
+        }
+        this.winningPlayer = tempPlayer;
     }
 
     @Override
     public String toString() {
         String returnValue = "";
-        for(Player p : players) {
-           returnValue = returnValue.concat(p.toString());
-           returnValue = returnValue.concat("\n");
+        for (Player p : players) {
+            returnValue = returnValue.concat(p.toString());
+            returnValue = returnValue.concat("\n");
         }
         return returnValue;
     }
