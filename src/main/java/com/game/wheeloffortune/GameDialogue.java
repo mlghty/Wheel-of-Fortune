@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -15,6 +16,11 @@ public class GameDialogue {
     private List<Player> players;
     private Game currentGame;
     private Boolean startGame;
+
+
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+
 
     public GameDialogue() {
         players = new ArrayList<>();
@@ -41,7 +47,7 @@ public class GameDialogue {
         WOFLogoAsciiArt.printWOFLogo();
 
         String test = "Press 'X' to Start Game 'Q' to Exit!: ";
-        System.out.println("Press 'X' to Start Game 'Q' to Exit!: ");
+        System.out.println(ANSI_GREEN + "Press 'X' to Start Game 'Q' to Exit!: " + ANSI_RESET);
 //        System.out.println("Press 'Q' to Exit Game: ");
 
 //        String.format("%-1", test);
@@ -250,10 +256,18 @@ public class GameDialogue {
         boolean correctOption = false;
         Integer intUserInput = 0;
         boolean isSolved = false;
+        String playerName;
+        String playerColor;
 
         while (!isSolved) {
             displayCurrentPuzzle();
-            System.out.println(currentGame.getCurrentPlayersTurn() + "\n");
+
+            playerName = String.valueOf(currentGame.getCurrentPlayersTurn());
+            playerColor = currentGame.getCurrentPlayersTurn().getPlayerColor();
+
+            System.out.println("Color: " + playerColor.concat("test"));
+
+            System.out.println(playerColor + playerName + "\n" + ANSI_RESET );
 
             while (!correctOption) {
 

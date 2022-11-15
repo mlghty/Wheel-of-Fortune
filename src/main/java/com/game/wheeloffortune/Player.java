@@ -6,10 +6,15 @@ public class Player {
     private int totalMoney;
     private int currentRoundMoney;
 
+    private String playerColor;
+
     public Player(String playerName) {
         totalMoney = 0;
         currentRoundMoney = 0;
         setName(playerName);
+//        playerColor = "\u001B[36m";
+        playerColor = Wheel.getRandomPlayerColor();
+
     }
 
     // business
@@ -50,6 +55,23 @@ public class Player {
         } else {
             throw new IllegalArgumentException("Error currentRoundMoney must be a int >= 0 !");
         }
+    }
+
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+
+    public String getPlayerColor() {
+        return playerColor;
+    }
+
+    public void setPlayerColor(String playerColor) {
+        this.playerColor = playerColor;
     }
 
 

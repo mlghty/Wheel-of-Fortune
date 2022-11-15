@@ -11,13 +11,10 @@ import static org.junit.Assert.*;
 public class GameDialogueTest {
 
     private GameDialogue gameDialogueTest;
-    private Game gamePuzzleTest;
-    private Player player1 = new Player("Joe");
 
     @Before
     public void setUp() {
         System.out.println("Before");
-        gamePuzzleTest = new Game();
         gameDialogueTest = new GameDialogue();
     }
 
