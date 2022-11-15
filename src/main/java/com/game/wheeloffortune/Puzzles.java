@@ -27,6 +27,7 @@ public class Puzzles {
 
     public static ArrayList<String> getRandomPuzzle() {
         Random randomKVPairIndex = new Random();
+        int randomIndex = randomKVPairIndex.nextInt(10);
         List<String> keys = new ArrayList<String>(hintPuzzles.keySet());
         String randomPuzzle = keys.get(randomKVPairIndex.nextInt(keys.size()));
         String hintMatchedtoPuzzle = hintPuzzles.get(randomPuzzle);

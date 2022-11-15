@@ -19,7 +19,7 @@ public class Game {
     private int valueOfWheelSpin;
     private Player winningPlayer;
 
-    private List<String> usedPuzzles;
+    private List<String> usedPuzzles = new ArrayList<>();
 
 
     // constructors
@@ -62,10 +62,20 @@ public class Game {
      * if it is then get another puzzle, if it isn't then send the puzzle and hint to gameBoard
      */
     private void setUpPuzzle() {
-        List<String> currentGamePuzzle = Puzzles.getRandomPuzzle();
-        String currentRoundPuzzle = currentGamePuzzle.get(0);
-        String currentRoundCategory = currentGamePuzzle.get(1);
-        setCurrentGameBoard(new GameBoard(currentRoundPuzzle, currentRoundCategory));
+
+        boolean isAlreadyFound = false;
+        while (! isAlreadyFound) {
+            List<String> currentGamePuzzle = Puzzles.getRandomPuzzle();
+            if (usedPuzzles.contains(currentGamePuzzle.get(0))) {
+                continue;
+            } else {
+                String currentRoundPuzzle = currentGamePuzzle.get(0);
+                String currentRoundCategory = currentGamePuzzle.get(1);
+               usedPuzzles.add(currentRoundPuzzle);
+                setCurrentGameBoard(new GameBoard(currentRoundPuzzle, currentRoundCategory));
+                isAlreadyFound = true;
+            }
+       }
     }
 
     private void determineStartingPlayer() {
