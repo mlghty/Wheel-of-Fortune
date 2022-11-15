@@ -14,7 +14,6 @@ public class GameDialogue {
     private Scanner userInputScanner;
     private List<Player> players;
     private Game currentGame;
-
     private Boolean startGame;
 
     public GameDialogue() {
@@ -27,6 +26,13 @@ public class GameDialogue {
 //        currentGame.startRound();
 //        numOfPlayer = 1;
 
+    }
+
+    public GameDialogue(Game gameTest){
+        players = new ArrayList<>();
+        userInputScanner = new Scanner(System.in);
+        currentGame = gameTest;
+        startGame = false;
     }
 
     public void startGame() throws InterruptedException {
@@ -238,7 +244,7 @@ public class GameDialogue {
         startGame();
         if (startGame) {
             numberOfPlayers();
-            setPlayerNames();
+//            setPlayerNames();
             currentGame.startRound();
         }
 
@@ -316,6 +322,10 @@ public class GameDialogue {
 
     public void setNumOfPlayer(Integer numOfPlayer) {
         this.numOfPlayer = numOfPlayer;
+    }
+
+    public void setCurrentGame(Game currentGame) {
+        this.currentGame = currentGame;
     }
 
 }

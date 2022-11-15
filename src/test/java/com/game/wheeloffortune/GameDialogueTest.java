@@ -12,12 +12,21 @@ public class GameDialogueTest {
 
 
     private GameDialogue gameDialogueTest;
+    private Game gamePuzzleTest;
+    private Player player1 = new Player("Joe");
 
 
     @Before
     public void setUp() {
         System.out.println("Before");
-        gameDialogueTest = new GameDialogue();
+        gamePuzzleTest = new Game();
+        gamePuzzleTest.startRound();
+        GameBoard gb = new GameBoard("HELLO", "WORLD");
+
+        gamePuzzleTest.setCurrentGameBoard(gb);
+
+        gameDialogueTest = new GameDialogue(gamePuzzleTest);
+
     }
 
 
@@ -151,9 +160,16 @@ public class GameDialogueTest {
 
     }
 
-    @Test
-    public void gameLoop() {
-
-    }
+//    @Test
+//    public void _test_gameLoop_consonants() throws InterruptedException {
+//
+//        ByteArrayInputStream input = new ByteArrayInputStream("x\n1\nJoeG\n1\nl\nh\n".getBytes());
+//        Scanner sc = new Scanner(input);
+//        gameDialogueTest.setUserInputScanner(sc);
+//        gameDialogueTest.gameLoop();
+//
+//
+//
+//    }
 
 }
