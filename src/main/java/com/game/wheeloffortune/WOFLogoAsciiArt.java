@@ -7,7 +7,7 @@ public class WOFLogoAsciiArt {
 
     public static void printWOFLogo() {
         //x axis
-        int width = 119;
+        int width = 200;
         //y axis
         int height = 20;
 
@@ -19,11 +19,11 @@ public class WOFLogoAsciiArt {
 
         Graphics WOF = bufferedImage.getGraphics();
         //setting font style and size
-        WOF.setFont(new Font("Arial", Font.BOLD, 12));
+        WOF.setFont(new Font("Arial", Font.BOLD, 15));
 
         Graphics2D WOFGraphic = (Graphics2D) WOF;
         WOFGraphic.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        WOF.drawString("WHEEL OF FORTUNE", 10, 20);
+        WOF.drawString("WHEEL OF FORTUNE", 5, 15);
 
         for (int y = 0; y < height; y++) {
             StringBuilder sb = new StringBuilder();
