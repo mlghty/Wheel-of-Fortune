@@ -9,10 +9,12 @@ import java.util.concurrent.TimeUnit;
 
 public class GameDialogue {
 
+
     private Integer numOfPlayer;
     private Scanner userInputScanner;
     private List<Player> players;
     private Game currentGame;
+
     private Boolean startGame;
 
     public GameDialogue() {
@@ -32,9 +34,11 @@ public class GameDialogue {
 //        System.out.println("WHEEL OF FORTUNE \n \n \n \n");
         WOFLogoAsciiArt.printWOFLogo();
 
+        String test = "Press 'X' to Start Game 'Q' to Exit!: ";
+        System.out.println("Press 'X' to Start Game 'Q' to Exit!: ");
+//        System.out.println("Press 'Q' to Exit Game: ");
 
-        System.out.println("Press 'X' to Start Game: ");
-        System.out.println("Press 'Q' to Exit Game: ");
+//        String.format("%-1", test);
 
         String pressedKey = userInputScanner.nextLine();
 
@@ -281,10 +285,6 @@ public class GameDialogue {
                     break;
             }
 
-            // reset vars
-//            clearGameScreen();
-//            intUserInput = 0;
-//            correctOption = false;
 
             if (isSolved && currentGame.startRound() == 0) {
                 clearGameScreen();
@@ -300,14 +300,22 @@ public class GameDialogue {
 
         }
 
-//        if (isSolved && currentGame.startRound() == 0) {
-//            currentGame.setWinningPlayer();
-//            System.out.println("Winning Player!");
-//            System.out.println(currentGame.getWinningPlayer());
-//        }else{
-//            isSolved = false;
-//        }
+    }
 
+    public void setUserInputScanner(Scanner userInputScanner) {
+        this.userInputScanner = userInputScanner;
+    }
+
+    public Boolean getStartGame() {
+        return startGame;
+    }
+
+    public Integer getNumOfPlayer() {
+        return numOfPlayer;
+    }
+
+    public void setNumOfPlayer(Integer numOfPlayer) {
+        this.numOfPlayer = numOfPlayer;
     }
 
 }
