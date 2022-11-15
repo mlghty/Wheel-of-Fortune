@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 public class WOFLogoAsciiArt {
 
-    private void printWOFLogo() {
+    public static void printWOFLogo() {
         //x axis
         int width = 200;
         //y axis

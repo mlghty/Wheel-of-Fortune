@@ -1,5 +1,7 @@
 package com.game.wheeloffortune;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -27,7 +29,9 @@ public class GameDialogue {
 
     public void startGame() throws InterruptedException {
 
-        System.out.println("WHEEL OF FORTUNE \n \n \n \n");
+//        System.out.println("WHEEL OF FORTUNE \n \n \n \n");
+        WOFLogoAsciiArt.printWOFLogo();
+
 
         System.out.println("Press 'X' to Start Game: ");
         System.out.println("Press 'Q' to Exit Game: ");
@@ -227,17 +231,18 @@ public class GameDialogue {
     public void gameLoop() throws InterruptedException {
 
         // commented out for convenience for now
-
-//        if (startGame) {
-//            numberOfPlayers();
-//            setPlayerNames();
-//            currentGame.startRound();
-//        }
+        startGame();
+        if (startGame) {
+            numberOfPlayers();
+            setPlayerNames();
+            currentGame.startRound();
+        }
 
 
         // comment out when complete
-        numberOfPlayers();
-        currentGame.startRound();
+
+//        numberOfPlayers();
+//        currentGame.startRound();
 
         boolean correctOption = false;
         Integer intUserInput = 0;
