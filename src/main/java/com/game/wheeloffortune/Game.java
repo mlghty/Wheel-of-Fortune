@@ -156,7 +156,8 @@ public class Game {
             return 0;
         }
     }
-    // accessors
+
+    // Accessors (Getters and Setters)
 
     public List<Player> getPlayers() {
         return players;
@@ -208,9 +209,13 @@ public class Game {
     }
 
     public String getWinningPlayer() {
-        if (!winningPlayer.getName().equals("temp")) {
-            return winningPlayer.toString();
-        } else {
+        try {
+            if (!winningPlayer.getName().equals("temp")) {
+                return winningPlayer.toString();
+            } else {
+                return "There is no winner!";
+            }
+        } catch (NullPointerException e) {
             return "There is no winner!";
         }
     }
@@ -224,6 +229,10 @@ public class Game {
             }
         }
         this.winningPlayer = tempPlayer;
+    }
+
+    public List<String> getUsedPuzzles() {
+        return usedPuzzles;
     }
 
     @Override

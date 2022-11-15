@@ -4,16 +4,16 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class GameTest {
 
     private Game newGame, newGame2;
-    private Player player1 = new Player("Joe");
-    private Player player2 = new Player("Cindy");
+    private final Player player1 = new Player("Joe");
+    private final Player player2 = new Player("Cindy");
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         newGame = new Game(player1);
         newGame2 = new Game(player1, player2);
         newGame2.startRound();
@@ -33,7 +33,7 @@ public class GameTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
     }
 
     @Test
@@ -53,7 +53,7 @@ public class GameTest {
     public void testGameToStringMethodPrintsCorrectly() {
         String expectedValue = "Player name: Joe\nTotal money: 0\nRound money: 0\n\n" +
                 "Player name: Cindy\nTotal money: 0\nRound money: 0\n\n";
-        assertTrue(expectedValue.equals(newGame2.toString()));
+        assertEquals(expectedValue, newGame2.toString());
     }
 
     @Test
@@ -65,7 +65,6 @@ public class GameTest {
             spinWheel = newGame2.spinWheel();
         }
         System.out.println(spinWheel);
-        String player2 = newGame2.getCurrentPlayersTurn().getName();
         if (spinWheel == 0) {
             newGame2.getNextPlayer();
             assertEquals(player1, newGame2.getCurrentPlayersTurn().getName());
@@ -82,7 +81,7 @@ public class GameTest {
         newGame.getPlayers().get(0).setTotalMoney(10000);
         newGame.setWinningPlayer();
         String expectedValue = "Player name: Joe\nTotal money: 10000\nRound money: 0\n";
-        assertTrue(expectedValue.equals(newGame.getWinningPlayer()));
+        assertEquals(expectedValue, newGame.getWinningPlayer());
     }
 
     @Test
@@ -92,7 +91,7 @@ public class GameTest {
             newGame.pickLetter('1');
         }
         catch (IllegalArgumentException e) {
-            assertTrue(e.getMessage().equals("You must pick a valid consonant"));
+            assertEquals("You must pick a valid consonant", e.getMessage());
         }
     }
 
@@ -104,7 +103,7 @@ public class GameTest {
             newGame.buyAVowel('1');
         }
         catch (IllegalArgumentException e) {
-            assertTrue(e.getMessage().equals("You must pick a valid vowel"));
+            assertEquals("You must pick a valid vowel", e.getMessage());
         }
     }
 
@@ -129,7 +128,27 @@ public class GameTest {
     }
 
     @Test
-    public void testGetWinningPlayerReturnsTheStringThereIsNoWinner() {
-        
+    public void _testGetWinningPlayerReturnsTheStringThereIsNoWinnerForANullWinningPlayerField() {
+        String actualValue = newGame2.getWinningPlayer();
+        String expectedValue = "There is no winner!";
+        assertEquals(expectedValue, actualValue);
+    }
+
+    @Test
+    public void _testSetWinningPlayerMethodReplacesWinningPlayerFieldWithAPlayerInsteadOfTempPlayerWithMIN_VALUEIntegerIfNoPlayerHasWonYet() {
+        newGame2.setWinningPlayer();
+        String expectedPlayer = "Player name: Joe\nTotal money: 0\nRound money: 0\n";
+        String actualPlayer = newGame2.getWinningPlayer();
+        assertEquals(expectedPlayer, actualPlayer);
+    }
+
+
+    @Test
+    public void testThatTheSetUpPuzzleMethodProperlyEnsuresThereAreNoRepeatPuzzlesByIteratingThroughTheSetupPuzzleMethodMultipleTimesAndEnsuringThereAreNoRepeats() {
+        for(int i = 0; i < 9; i++) {
+            newGame2.startRound();
+            newGame2.setCurrentRoundNumber(0);
+        }
+        assertEquals(10,newGame2.getUsedPuzzles().size());
     }
 }
