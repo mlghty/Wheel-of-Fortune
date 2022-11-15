@@ -31,22 +31,31 @@ public class Player {
         return totalMoney;
     }
 
-    public void setTotalMoney(int totalMoney) {
-       this.totalMoney = totalMoney;
+    public void setTotalMoney(int totalMoney) throws IllegalArgumentException {
+
+        if (totalMoney >= 0) {
+            this.totalMoney = totalMoney;
+        } else {
+            throw new IllegalArgumentException("Error totalMoney must be a int > 0 !");
+        }
     }
 
     public int getCurrentRoundMoney() {
         return currentRoundMoney;
     }
 
-    public void setCurrentRoundMoney(int currentRoundMoney) {
-        this.currentRoundMoney = currentRoundMoney;
+    public void setCurrentRoundMoney(int currentRoundMoney) throws IllegalArgumentException {
+        if (currentRoundMoney >= 0) {
+            this.currentRoundMoney = currentRoundMoney;
+        } else {
+            throw new IllegalArgumentException("Error currentRoundMoney must be a int > 0 !");
+        }
     }
 
 
     @Override
     public String toString() {
-        return  getClass().getSimpleName() +" name: " + playerName
+        return getClass().getSimpleName() + " name: " + playerName
                 + "\nTotal money: " + getTotalMoney()
                 + "\nRound money: " + getCurrentRoundMoney() + '\n';
     }
