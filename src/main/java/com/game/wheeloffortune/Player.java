@@ -33,7 +33,7 @@ public class Player {
 
     public void setTotalMoney(int totalMoney) throws IllegalArgumentException {
 
-        if (totalMoney > 0) {
+        if (totalMoney >= 0) {
             this.totalMoney = totalMoney;
         } else {
             throw new IllegalArgumentException("Error totalMoney must be a int > 0 !");
@@ -45,7 +45,7 @@ public class Player {
     }
 
     public void setCurrentRoundMoney(int currentRoundMoney) throws IllegalArgumentException {
-        if (currentRoundMoney > 0) {
+        if (currentRoundMoney >= 0) {
             this.currentRoundMoney = currentRoundMoney;
         } else {
             throw new IllegalArgumentException("Error currentRoundMoney must be a int > 0 !");

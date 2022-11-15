@@ -244,15 +244,9 @@ public class GameDialogue {
         startGame();
         if (startGame) {
             numberOfPlayers();
-//            setPlayerNames();
             currentGame.startRound();
         }
 
-
-        // comment out when complete
-
-//        numberOfPlayers();
-//        currentGame.startRound();
 
         boolean correctOption = false;
         Integer intUserInput = 0;
