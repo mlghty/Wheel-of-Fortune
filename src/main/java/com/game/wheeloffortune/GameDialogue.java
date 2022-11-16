@@ -98,6 +98,8 @@ public class GameDialogue {
     }
 
     public void displayCurrentPuzzle() {
+//        for (int i = 0; i < 6; ++i) System.out.println();
+
         GameBoard currentGameBoard = currentGame.getCurrentGameBoard();
         String puzzleHint = currentGameBoard.getGameHint();
         String puzzle = currentGameBoard.getGamePuzzle();
@@ -113,8 +115,8 @@ public class GameDialogue {
         try {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
         } catch (final Exception e) {
-            System.out.println("Clearing manually!");
-            TimeUnit.SECONDS.sleep(3);
+//            System.out.println("Clearing manually!");
+            TimeUnit.MILLISECONDS.sleep(50L);
             System.out.print("\033\143");
         }
 
@@ -127,6 +129,10 @@ public class GameDialogue {
         boolean isValidConsonants = false;
         String playerName = currentGame.getCurrentPlayersTurn().getName();
         String playerColor = currentGame.getCurrentPlayersTurn().getPlayerColor();
+
+
+        clearGameScreen();
+        WOFAsciiArt.printWOFBanner(playerColor,13);
 
 
         int wheelValue = currentGame.spinWheel();
@@ -180,6 +186,10 @@ public class GameDialogue {
         String vowelPurchase;
         boolean isValidVowel = false;
 
+        clearGameScreen();
+        String playerColor = currentGame.getCurrentPlayersTurn().getPlayerColor();
+        WOFAsciiArt.printWOFBanner(playerColor,15);
+
         if (currentGame.getCurrentPlayersTurn().getCurrentRoundMoney() >= 250) {
             System.out.println("Buying a vowel cost $250...");
             System.out.println("Enter Vowel...");
@@ -201,7 +211,7 @@ public class GameDialogue {
                 } else {
                     int occurrences = currentGame.buyAVowel(vowelPurchase.toUpperCase().charAt(0));
                     System.out.println("Vowel occurrences: " + occurrences + "!!");
-                    System.out.println(currentGame.getCurrentPlayersTurn());
+//                    System.out.println(currentGame.getCurrentPlayersTurn());
                     TimeUnit.SECONDS.sleep(3);
                 }
 
@@ -249,13 +259,12 @@ public class GameDialogue {
         String playerColor;
 
         while (!isSolved) {
-            displayCurrentPuzzle();
+
 
             playerName = String.valueOf(currentGame.getCurrentPlayersTurn());
             playerColor = currentGame.getCurrentPlayersTurn().getPlayerColor();
-
-//            System.out.println("Color: " + playerColor.concat("test"));
-
+            WOFAsciiArt.printWOFBanner(playerColor,6);
+            displayCurrentPuzzle();
             System.out.println(playerColor + playerName + "\n" + ANSI_RESET);
 
             while (!correctOption) {

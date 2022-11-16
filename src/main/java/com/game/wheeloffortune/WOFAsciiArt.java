@@ -198,6 +198,39 @@ public class WOFAsciiArt {
         }
     }
 
+    public static void printWOFBanner(String Color,int spaces){
+
+
+
+        BufferedImage bufferedImage = new BufferedImage(
+                terminalWidth, 30,
+                BufferedImage.TYPE_INT_RGB);
+
+        Graphics WOF = bufferedImage.getGraphics();
+        //setting font style and size
+        WOF.setFont(new Font("Arial", Font.PLAIN, fontSize));
+
+        Graphics2D WOFGraphic = (Graphics2D) WOF;
+        WOFGraphic.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        WOF.drawString("WHEEL OF FORTUNE", x_offset, 10);
+
+        for (int y = 0; y < 30; y++) {
+            StringBuilder sb = new StringBuilder();
+            for (int x = 0; x < terminalWidth; x++) {
+
+//                sb.append(bufferedImage.getRGB(x, y) == -16777216 ? "$" : " ");
+                sb.append(bufferedImage.getRGB(x, y) == -16777216 ? " " : "$");
+
+            }
+            if (sb.toString().trim().isEmpty()) {
+                continue;
+            }
+            System.out.println(Color + sb + ANSI_RESET);
+        }
+
+        for (int i = 0; i < spaces; ++i) System.out.println();
+
+    }
 }
 
 // for testing
