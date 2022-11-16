@@ -163,19 +163,14 @@ public class WOFAsciiArt {
 
     public static void winningPlayerMessage() {
 
-        //x axis
         int width = 170;
-        //y axis
         int height = 15;
 
-
-        //constructor new buffered image
         BufferedImage bufferedImage = new BufferedImage(
                 width, height,
                 BufferedImage.TYPE_INT_RGB);
 
         Graphics winningMessage = bufferedImage.getGraphics();
-        //setting font style and size
         winningMessage.setFont(new Font("Futura", Font.PLAIN, 15));
 
         Graphics2D winningMessageGraphics
@@ -187,7 +182,6 @@ public class WOFAsciiArt {
             StringBuilder sb1 = new StringBuilder();
             for (int x = 0; x < width; x++) {
 
-                //all colors -16777216 are replaced by " "
                 sb1.append(bufferedImage.getRGB(x, y) == -16777216 ? " " : "$");
 
                 // sb.append(bufferedImage.getRGB(x, y) == -16777216 ? "$" : " ");
@@ -201,20 +195,14 @@ public class WOFAsciiArt {
 
     public static void printOutBankruptMessage() {
 
-
-        //x axis
         int width = 170;
-        //y axis
         int height = 15;
 
-
-        //constructor new buffered image
         BufferedImage bufferedImage = new BufferedImage(
                 width, height,
                 BufferedImage.TYPE_INT_RGB);
 
         Graphics bankruptMessage = bufferedImage.getGraphics();
-        //setting font style and size
         bankruptMessage.setFont(new Font("Roboto", Font.PLAIN, 15));
 
         Graphics2D bankruptMessage1
@@ -278,8 +266,7 @@ public class WOFAsciiArt {
 
 //class Main1 {
 //    public static void main(String[] args) {
-//
-//        WOFLogoAsciiArt.printWOFLogo();
+//      WOFAsciiArt.printOutBankruptMessage();
 //
 //    }
 //}
