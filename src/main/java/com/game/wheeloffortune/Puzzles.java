@@ -37,14 +37,8 @@ public class    Puzzles {
         puzzleHintPair.add(hintMatchedtoPuzzle);
         return puzzleHintPair;
 
-
-//        return (randomPuzzle + " " + hintMatchedtoPuzzle);
-
-//        public static List<String> getRandomPuzzle() {
-//        Random randomKVPairIndex = new Random();
-//        List<String> keys = new ArrayList<String>(hintPuzzles.keySet());
-//        return keys;
-
+    }
+}
 
 //        public static String getRandomPuzzle() {
 //        Random randomKVPairIndex = new Random();
@@ -52,8 +46,10 @@ public class    Puzzles {
 //        String randomPuzzle = keys.get(randomKVPairIndex.nextInt(keys.size()));
 //        return randomPuzzle;
 //
+//        return (randomPuzzle + " " + hintMatchedtoPuzzle);
 
-    }
-}
-
+//        public static List<String> getRandomPuzzle() {
+//        Random randomKVPairIndex = new Random();
+//        List<String> keys = new ArrayList<String>(hintPuzzles.keySet());
+//        return keys;
 

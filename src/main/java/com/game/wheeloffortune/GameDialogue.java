@@ -1,10 +1,7 @@
 package com.game.wheeloffortune;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -44,7 +41,7 @@ public class GameDialogue {
 
     public void startGame() throws InterruptedException {
 
-        WOFLogoAsciiArt.printWOFLogo();
+        WOFAsciiArt.printWOFLogo();
 
         String test = "Press 'X' to Start Game 'Q' to Exit!: ";
         System.out.println(ANSI_GREEN + "Press 'X' to Start Game 'Q' to Exit!: " + ANSI_RESET);
@@ -307,6 +304,7 @@ public class GameDialogue {
                 currentGame.setWinningPlayer();
                 System.out.println("Winning Player!");
                 System.out.println(currentGame.getWinningPlayer());
+                WOFAsciiArt.winningPlayerMessage();
             } else {
                 clearGameScreen();
                 intUserInput = 0;
