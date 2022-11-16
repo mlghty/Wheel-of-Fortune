@@ -197,6 +197,7 @@ public class WOFAsciiArt {
             System.out.println(ANSI_GREEN + sb1 + ANSI_RESET);
         }
     }
+
 }
 
 // for testing

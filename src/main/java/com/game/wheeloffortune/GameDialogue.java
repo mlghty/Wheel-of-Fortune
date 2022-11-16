@@ -23,17 +23,14 @@ public class GameDialogue {
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_BLINK = "\033[5m";
 
+    public static final String ANSI_BG_GREEN = "\u001b[42m";
+
 
     public GameDialogue() {
         players = new ArrayList<>();
         userInputScanner = new Scanner(System.in);
         currentGame = new Game();
         startGame = false;
-
-//        currentGame = new Game(new Player("joe"));
-//        currentGame.startRound();
-//        numOfPlayer = 1;
-
     }
 
     public GameDialogue(Game gameTest) {
@@ -45,12 +42,10 @@ public class GameDialogue {
 
     public void startGame() throws InterruptedException {
 
-
         WOFAsciiArt.windowSizes();
         WOFAsciiArt.printWOFLogoBlink();
 
-        String test = "Press 'X' to Start Game 'Q' to Exit!: ";
-        System.out.println(ANSI_GREEN + "Press 'X' to Start Game 'Q' to Exit!: " + ANSI_RESET);
+        System.out.println(ANSI_BG_GREEN + ANSI_RED +  "Press 'X' to Start Game 'Q' to Exit!: " + ANSI_RESET);
 
         String pressedKey = userInputScanner.nextLine();
 
@@ -73,7 +68,6 @@ public class GameDialogue {
             TimeUnit.SECONDS.sleep(3);
             clearGameScreen();
         }
-
     }
 
     public void numberOfPlayers() {
@@ -116,28 +110,16 @@ public class GameDialogue {
     // temp until game is run on independent terminal screen
     // and not under intelli js
     public void clearGameScreen() throws InterruptedException {
-
-//        try {
-//            String OperatingSystem = System.getProperty("os.name");
-//            if (OperatingSystem.contains("Windows")) {
-//                Runtime.getRuntime().exec("cls");
-//            } else {
-//                Runtime.getRuntime().exec("clear");
-//            }
-//        } catch (final Exception e) {
-//            System.out.println("Clearing manually!");
-//            TimeUnit.SECONDS.sleep(3);
-//            for (int i = 0; i < 50; ++i) System.out.println();
-//        }
-
         try {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
         } catch (final Exception e) {
             System.out.println("Clearing manually!");
             TimeUnit.SECONDS.sleep(3);
-            //for (int i = 0; i < 50; ++i) System.out.println();
             System.out.print("\033\143");
         }
+
+        for (int i = 0; i < 29; ++i) System.out.println();
+
     }
 
     private void playerBuyConsonant() throws InterruptedException {
@@ -256,6 +238,7 @@ public class GameDialogue {
         startGame();
         if (startGame) {
             numberOfPlayers();
+            clearGameScreen();
             currentGame.startRound();
         }
 
