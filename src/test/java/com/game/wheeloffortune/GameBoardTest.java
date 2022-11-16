@@ -39,7 +39,7 @@ public class GameBoardTest {
     }
 
     @Test
-    public void guessLetterNotInPuzzleShouldReturnZero(){
+    public void guessLetterNotInPuzzleShouldReturnZero() {
         int expectedValue = 0;
         Assert.assertEquals(expectedValue,
                 gameBoard2.guessLetter('Z'));
@@ -51,7 +51,7 @@ public class GameBoardTest {
     }
 
     @Test
-    public void solvePuzzleTestShouldReturnFalse(){
+    public void solvePuzzleTestShouldReturnFalse() {
         Assert.assertFalse(gameBoard2.solvePuzzle("Classic TV"));
     }
 

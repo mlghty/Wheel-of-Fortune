@@ -222,7 +222,7 @@ public class Game {
 
     public void setWinningPlayer() {
         Player tempPlayer = new Player("temp");
-        tempPlayer.setTotalMoney(Integer.MIN_VALUE);
+        tempPlayer.setTotalMoney(0);
         for (Player p : players) {
             if (p.getTotalMoney() > tempPlayer.getTotalMoney()) {
                 tempPlayer = p;

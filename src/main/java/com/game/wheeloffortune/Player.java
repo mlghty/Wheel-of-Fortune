@@ -39,7 +39,6 @@ public class Player {
     }
 
     public void setTotalMoney(int totalMoney) throws IllegalArgumentException {
-
         if (totalMoney >= 0) {
             this.totalMoney = totalMoney;
         } else {
