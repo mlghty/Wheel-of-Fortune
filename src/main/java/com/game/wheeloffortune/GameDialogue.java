@@ -46,8 +46,8 @@ public class GameDialogue {
     public void startGame() throws InterruptedException {
 
 
-        WOFAsciiArt.windowSizes();
-        WOFAsciiArt.printWOFLogoBlink();
+//        WOFAsciiArt.windowSizes();
+//        WOFAsciiArt.printWOFLogoBlink();
 
         String test = "Press 'X' to Start Game 'Q' to Exit!: ";
         System.out.println(ANSI_GREEN + "Press 'X' to Start Game 'Q' to Exit!: " + ANSI_RESET);
