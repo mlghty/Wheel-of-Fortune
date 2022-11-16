@@ -58,7 +58,6 @@ public class WOFAsciiArt {
             //System.out.println("Clearing manually!");
             //TimeUnit.SECONDS.sleep(3);
             TimeUnit.MILLISECONDS.sleep(100L);
-            //for (int i = 0; i < 50; ++i) System.out.println();
             System.out.print("\033\143");
         }
     }
