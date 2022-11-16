@@ -200,34 +200,40 @@ public class WOFAsciiArt {
     }
     public static void printOutBankruptMessage() {
 
-        int width = 120;
+
+        //x axis
+        int width = 170;
+        //y axis
         int height = 15;
 
+
+        //constructor new buffered image
         BufferedImage bufferedImage = new BufferedImage(
                 width, height,
                 BufferedImage.TYPE_INT_RGB);
 
         Graphics bankruptMessage = bufferedImage.getGraphics();
         //setting font style and size
-        bankruptMessage.setFont(new Font("Roboto", Font.PLAIN, 12));
+        bankruptMessage.setFont(new Font("Roboto", Font.PLAIN, 15));
 
-        Graphics2D bankruptMessage1 = (Graphics2D) bankruptMessage;
+        Graphics2D bankruptMessage1
+                = (Graphics2D) bankruptMessage;
         bankruptMessage1.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        bankruptMessage.drawString("Bankrupt", 5, 13);
+        bankruptMessage.drawString( "BANKRUPT", 5, 13);
 
-        for (int y = 0; y < terminalHeight; y++) {
-            StringBuilder sb2 = new StringBuilder();
-            for (int x = 0; x < terminalWidth; x++) {
+        for (int y = 0; y < height; y++) {
+            StringBuilder sb1 = new StringBuilder();
+            for (int x = 0; x < width; x++) {
 
                 //all colors -16777216 are replaced by " "
-           sb2.append(bufferedImage.getRGB(x, y) == -16777216 ? " ": "$");
+                sb1.append(bufferedImage.getRGB(x, y) == -16777216 ? " " : "$");
 
-     //           sb.append(bufferedImage.getRGB(x, y) == -16777216 ? "$" : " ");
+                // sb.append(bufferedImage.getRGB(x, y) == -16777216 ? "$" : " ");
             }
-            if (sb2.toString().trim().isEmpty()) {
+            if (sb1.toString().trim().isEmpty()) {
                 continue;
             }
-            System.out.println(ANSI_RED + sb2 + ANSI_RESET);
+            System.out.println(ANSI_RED + sb1 + ANSI_RESET);
         }
     }
 }
