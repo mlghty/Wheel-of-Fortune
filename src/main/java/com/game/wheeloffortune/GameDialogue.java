@@ -172,7 +172,11 @@ public class GameDialogue {
                 break;
             } else {
                 int occurrences = currentGame.pickLetter(guessedLetter.toUpperCase().charAt(0));
-                System.out.println("Letter " + guessedLetter + " appeared " + occurrences + " times!");
+                if (occurrences >= 0) {
+                    System.out.println("Letter " + guessedLetter + " appeared " + occurrences + " times!");
+                } else {
+                    System.out.println("Letter " + guessedLetter + " was already guessed!");
+                }
                 TimeUnit.SECONDS.sleep(3);
             }
 
@@ -195,8 +199,8 @@ public class GameDialogue {
             vowelPurchase = userInputScanner.nextLine();
 
             while (!isValidVowel) {
-                for (char consonant : currentGame.getVowels()) {
-                    if (vowelPurchase.toUpperCase().charAt(0) == consonant) {
+                for (char vowel : currentGame.getVowels()) {
+                    if (vowelPurchase.toUpperCase().charAt(0) == vowel) {
                         isValidVowel = true;
                         break;
                     }
@@ -209,8 +213,11 @@ public class GameDialogue {
 
                 } else {
                     int occurrences = currentGame.buyAVowel(vowelPurchase.toUpperCase().charAt(0));
-                    System.out.println("Vowel occurrences: " + occurrences + "!!");
-//                    System.out.println(currentGame.getCurrentPlayersTurn());
+                    if (occurrences >= 0) {
+                        System.out.println("Vowel occurrences: " + occurrences + "!!");
+                    } else {
+                        System.out.println("Vowel " + vowelPurchase.toUpperCase().charAt(0) + " was already guessed!");
+                    }
                     TimeUnit.SECONDS.sleep(3);
                 }
 

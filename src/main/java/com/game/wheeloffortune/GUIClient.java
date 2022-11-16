@@ -313,9 +313,13 @@ public class GUIClient extends JFrame {
             button.addActionListener(e -> {
                 if (game.getConsonants().contains(c) && wheelSpun) {
                     int i = game.pickLetter(c);
-                    if (i < 1) {
+                    if (i == 0) {
                         JOptionPane.showMessageDialog(null,
                                 c + " was not in the Puzzle. Next Player's turn.",
+                                "Incorrect", JOptionPane.WARNING_MESSAGE);
+                    } else if (i == -1) {
+                        JOptionPane.showMessageDialog(null,
+                                c + " was already chosen! Next Player's turn.",
                                 "Incorrect", JOptionPane.WARNING_MESSAGE);
                     }
                 } else {
@@ -333,9 +337,13 @@ public class GUIClient extends JFrame {
                                         "You don't have enough money!",
                                         "No Money", JOptionPane.WARNING_MESSAGE);
                             }
-                            if (i < 1) {
+                            if (i == 0) {
                                 JOptionPane.showMessageDialog(null,
                                         c + " was not in the Puzzle. Next Player's turn.",
+                                        "Incorrect", JOptionPane.WARNING_MESSAGE);
+                            } else if (i == -1) {
+                                JOptionPane.showMessageDialog(null,
+                                        c + " was already chosen! Next Player's turn.",
                                         "Incorrect", JOptionPane.WARNING_MESSAGE);
                             }
                         } else {
@@ -361,9 +369,13 @@ public class GUIClient extends JFrame {
             button.addActionListener(e -> {
                 if (game.getConsonants().contains(c) && wheelSpun) {
                     int i = game.pickLetter(c);
-                    if (i < 1) {
+                    if (i == 0) {
                         JOptionPane.showMessageDialog(null,
                                 c + " was not in the Puzzle. Next Player's turn.",
+                                "Incorrect", JOptionPane.WARNING_MESSAGE);
+                    } else if (i == -1) {
+                        JOptionPane.showMessageDialog(null,
+                                c + " was already chosen! Next Player's turn.",
                                 "Incorrect", JOptionPane.WARNING_MESSAGE);
                     }
                 } else {
@@ -381,9 +393,13 @@ public class GUIClient extends JFrame {
                                         "You don't have enough money!",
                                         "No Money", JOptionPane.WARNING_MESSAGE);
                             }
-                            if (i < 1) {
+                            if (i == 0) {
                                 JOptionPane.showMessageDialog(null,
                                         c + " was not in the Puzzle. Next Player's turn.",
+                                        "Incorrect", JOptionPane.WARNING_MESSAGE);
+                            } else if (i == -1) {
+                                JOptionPane.showMessageDialog(null,
+                                        c + " was already chosen! Next Player's turn.",
                                         "Incorrect", JOptionPane.WARNING_MESSAGE);
                             }
                         } else {
@@ -409,9 +425,13 @@ public class GUIClient extends JFrame {
             button.addActionListener(e -> {
                 if (game.getConsonants().contains(c) && wheelSpun) {
                     int i = game.pickLetter(c);
-                    if (i < 1) {
+                    if (i == 0) {
                         JOptionPane.showMessageDialog(null,
                                 c + " was not in the Puzzle. Next Player's turn.",
+                                "Incorrect", JOptionPane.WARNING_MESSAGE);
+                    } else if (i == -1) {
+                        JOptionPane.showMessageDialog(null,
+                                c + " was already chosen! Next Player's turn.",
                                 "Incorrect", JOptionPane.WARNING_MESSAGE);
                     }
                 } else {
@@ -429,9 +449,13 @@ public class GUIClient extends JFrame {
                                         "You don't have enough money!",
                                         "No Money", JOptionPane.WARNING_MESSAGE);
                             }
-                            if (i < 1) {
+                            if (i == 0) {
                                 JOptionPane.showMessageDialog(null,
                                         c + " was not in the Puzzle. Next Player's turn.",
+                                        "Incorrect", JOptionPane.WARNING_MESSAGE);
+                            } else if (i == -1) {
+                                JOptionPane.showMessageDialog(null,
+                                        c + " was already chosen! Next Player's turn.",
                                         "Incorrect", JOptionPane.WARNING_MESSAGE);
                             }
                         } else {

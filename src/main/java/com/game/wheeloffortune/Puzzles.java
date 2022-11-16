@@ -21,6 +21,7 @@ public class    Puzzles {
         hintPuzzles.put("LUXURY SUITES","Places");
         hintPuzzles.put("SNACK PACK","Rhyme Time");
         hintPuzzles.put("FOREVER YOUNG","Phrase");
+        hintPuzzles.put("SANG IS THE BEST JAVA INSTRUCTOR", "Java Fact");
 
     }
 
