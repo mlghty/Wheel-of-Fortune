@@ -37,6 +37,8 @@ public class GUIClient extends JFrame {
     }
 
     private void setMainWindow() {
+        ImageIcon icon = new ImageIcon("colorWheel.png");
+        mainWindow.setIconImage(icon.getImage());
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainWindow.setLayout(new BorderLayout());
         mainWindow.setSize(1200, 720);
@@ -459,23 +461,14 @@ public class GUIClient extends JFrame {
     public static void main(String[] args) {
 
         List<Player> players = new ArrayList<>();
-        /*
-        try {
-            game.startGame();
-            game.clearGameScreen();
-            Scanner userInputScanner = new Scanner(System.in);
-            for (int i = 1; i <= 3; i++) {
-                System.out.println("Please enter name for Player " + i);
-                String playerName = userInputScanner.nextLine();
-                players.add(new Player(playerName));
-            }
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+        for(int i = 1; i < 4; i++) {
+            String pName = JOptionPane.showInputDialog(null,
+                    "Input Player " + i + "'s Name: ","Player Name Input", JOptionPane.PLAIN_MESSAGE);
+            players.add(new Player(pName));
         }
-        */
-        players.add(new Player("Joe"));
-        players.add(new Player("John"));
-        players.add(new Player("James"));
+//        players.add(new Player("Joe"));
+//        players.add(new Player("John"));
+//        players.add(new Player("James"));
         new GUIClient(players);
     }
 }
