@@ -200,7 +200,7 @@ public class WOFAsciiArt {
     }
     public static void printOutBankruptMessage() {
 
-        int width = 170;
+        int width = 120;
         int height = 15;
 
         BufferedImage bufferedImage = new BufferedImage(
@@ -209,11 +209,11 @@ public class WOFAsciiArt {
 
         Graphics bankruptMessage = bufferedImage.getGraphics();
         //setting font style and size
-        bankruptMessage.setFont(new Font("Roboto", Font.PLAIN, 15));
+        bankruptMessage.setFont(new Font("Roboto", Font.PLAIN, 12));
 
         Graphics2D bankruptMessage1 = (Graphics2D) bankruptMessage;
         bankruptMessage1.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        bankruptMessage.drawString("Bankrupt", x_offset, y_offset);
+        bankruptMessage.drawString("Bankrupt", 5, 13);
 
         for (int y = 0; y < terminalHeight; y++) {
             StringBuilder sb2 = new StringBuilder();

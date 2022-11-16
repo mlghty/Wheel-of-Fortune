@@ -291,6 +291,7 @@ public class GameDialogue {
                 clearGameScreen();
                 currentGame.setWinningPlayer();
                 WOFAsciiArt.winningPlayerMessage();
+                System.out.println();
                 System.out.println("Winning Player!");
                 System.out.println(currentGame.getWinningPlayer());
 
