@@ -17,12 +17,9 @@ public class WOFAsciiArt {
 
 
     public static String WINDOWS_SET_TITLE = "cmd /c title %s";
-    public static String STRING_LINUX_SET_TITLE = "echo -ne \"\\033]0;%s\\007\"";
-
+    public static String STRING_LINUX_SET_TITLE = "echo -ne \"\\033]0;WOF\\007\"";
 
     public static void printWOFLogo() {
-        windowSizes();
-
         BufferedImage bufferedImage = new BufferedImage(
                 terminalWidth, terminalHeight,
                 BufferedImage.TYPE_INT_RGB);
@@ -100,7 +97,16 @@ public class WOFAsciiArt {
             System.out.println("x Offset: " + terminalWidth);
             System.out.println("y Offset: " + terminalHeight);
 
-            setTitle("Wheel of Fortune", STRING_LINUX_SET_TITLE);
+            //("Wheel of Fortune", STRING_LINUX_SET_TITLE);
+            try {
+
+                String command = STRING_LINUX_SET_TITLE;
+                Process proc = Runtime.getRuntime().exec(command);
+
+                //System.out.flush();
+            } catch (Exception e) {
+                System.out.println("Error: " + e);
+            }
 
         }
     }
@@ -154,7 +160,7 @@ public class WOFAsciiArt {
         printWOFLogo();
     }
 
-    public static void winningPlayerMessage(){
+    public static void winningPlayerMessage() {
 
         //x axis
         int width = 170;
@@ -174,14 +180,14 @@ public class WOFAsciiArt {
         Graphics2D winningMessageGraphics
                 = (Graphics2D) winningMessage;
         winningMessageGraphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        winningMessage.drawString( "YOU'VE WON", 5, 13);
+        winningMessage.drawString("YOU'VE WON", 5, 13);
 
         for (int y = 0; y < height; y++) {
             StringBuilder sb1 = new StringBuilder();
             for (int x = 0; x < width; x++) {
 
                 //all colors -16777216 are replaced by " "
-                sb1.append(bufferedImage.getRGB(x, y) == -16777216 ? " ": "$");
+                sb1.append(bufferedImage.getRGB(x, y) == -16777216 ? " " : "$");
 
                 // sb.append(bufferedImage.getRGB(x, y) == -16777216 ? "$" : " ");
             }
