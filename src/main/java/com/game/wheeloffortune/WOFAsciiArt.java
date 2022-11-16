@@ -53,10 +53,11 @@ public class WOFAsciiArt {
 
     public static void clearAsciiArt() throws InterruptedException {
         try {
-            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            new ProcessBuilder("cmd", "/c", "cls", "clear").inheritIO().start().waitFor();
         } catch (final Exception e) {
-            System.out.println("Clearing manually!");
-            TimeUnit.SECONDS.sleep(3);
+            //System.out.println("Clearing manually!");
+            //TimeUnit.SECONDS.sleep(3);
+            TimeUnit.MILLISECONDS.sleep(100L);
             //for (int i = 0; i < 50; ++i) System.out.println();
             System.out.print("\033\143");
         }
@@ -83,11 +84,15 @@ public class WOFAsciiArt {
 
         } else if (os.contains("mac")) {
 
+
+            // 80 x 24 default
+            // for mac
+
             terminalWidth = 120;
             terminalHeight = 30;
-            fontSize = 11;
-            x_offset = 0; // move logo left or right
-            y_offset = 0; // move logo up or down
+            fontSize = 10;
+            x_offset = 10; // move logo left or right
+            y_offset = 20; // move logo up or down
 
             System.out.println("OSX Detected");
             System.out.println("Font Size: " + fontSize);
