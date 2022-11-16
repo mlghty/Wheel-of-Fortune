@@ -7,7 +7,7 @@ package com.game.wheeloffortune;
 
 import java.util.*;
 
-public class Puzzles {
+public class    Puzzles {
 
     private static Map<String, String> hintPuzzles = new HashMap<String, String>();
     static {

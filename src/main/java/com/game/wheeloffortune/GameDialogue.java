@@ -20,6 +20,7 @@ public class GameDialogue {
 
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_RED = "\u001B[31m";
 
 
     public GameDialogue() {
@@ -34,7 +35,7 @@ public class GameDialogue {
 
     }
 
-    public GameDialogue(Game gameTest){
+    public GameDialogue(Game gameTest) {
         players = new ArrayList<>();
         userInputScanner = new Scanner(System.in);
         currentGame = gameTest;
@@ -43,14 +44,10 @@ public class GameDialogue {
 
     public void startGame() throws InterruptedException {
 
-//        System.out.println("WHEEL OF FORTUNE \n \n \n \n");
         WOFLogoAsciiArt.printWOFLogo();
 
         String test = "Press 'X' to Start Game 'Q' to Exit!: ";
         System.out.println(ANSI_GREEN + "Press 'X' to Start Game 'Q' to Exit!: " + ANSI_RESET);
-//        System.out.println("Press 'Q' to Exit Game: ");
-
-//        String.format("%-1", test);
 
         String pressedKey = userInputScanner.nextLine();
 
@@ -144,19 +141,25 @@ public class GameDialogue {
         String guessedLetter;
         boolean isValidConsonants = false;
         String playerName = currentGame.getCurrentPlayersTurn().getName();
+        String playerColor = currentGame.getCurrentPlayersTurn().getPlayerColor();
 
 
         int wheelValue = currentGame.spinWheel();
-        System.out.println(playerName + " Spinning Wheel...");
+//        System.out.println(" Spinning Wheel...");
+        System.out.print(playerColor  + playerName + ANSI_RESET);
+        System.out.println(" Spinning Wheel...");
+
         System.out.println("Wheel Value: " + wheelValue + "\n");
 
 
         if (wheelValue == 0) {
-            System.out.println("YOU LOSE A TURN! Next Players Turn: "
-                    + currentGame.getCurrentPlayersTurn().getName() + "\n");
+            System.out.println( ANSI_RED + "YOU LOSE A TURN! Next Players Turn: "
+                    + currentGame.getCurrentPlayersTurn().getName() + "\n" + ANSI_RESET);
+            return;
         } else if (wheelValue == -1) {
-            System.out.println("BANKRUPT! Next Players Turn: "
-                    + currentGame.getCurrentPlayersTurn().getName() + "\n");
+            System.out.println(ANSI_RED + "BANKRUPT! Next Players Turn: "
+                    + currentGame.getCurrentPlayersTurn().getName() + "\n" + ANSI_RESET);
+            return;
         }
 
         System.out.println("Guessing letter...");
@@ -173,7 +176,7 @@ public class GameDialogue {
             }
 
             if (!isValidConsonants) {
-                System.out.println("Error invalid consonant you lose a turn!!");
+                System.out.println(ANSI_RED + "Error invalid consonant you lose a turn!!" + ANSI_RESET);
                 currentGame.getNextPlayer();
                 TimeUnit.SECONDS.sleep(3);
                 break;
@@ -205,7 +208,7 @@ public class GameDialogue {
                     }
                 }
                 if (!isValidVowel) {
-                    System.out.println("Invalid vowel, Sorry you lose a turn!");
+                    System.out.println(ANSI_RED + "Invalid vowel, Sorry you lose a turn!" + ANSI_RESET);
                     currentGame.getNextPlayer();
                     TimeUnit.SECONDS.sleep(3);
                     break;
@@ -220,7 +223,7 @@ public class GameDialogue {
             }
 
         } else {
-            System.out.println("Sorry not enough money...");
+            System.out.println(ANSI_RED + "Sorry not enough money..." + ANSI_RESET);
             TimeUnit.SECONDS.sleep(2);
 
         }
@@ -265,9 +268,9 @@ public class GameDialogue {
             playerName = String.valueOf(currentGame.getCurrentPlayersTurn());
             playerColor = currentGame.getCurrentPlayersTurn().getPlayerColor();
 
-            System.out.println("Color: " + playerColor.concat("test"));
+//            System.out.println("Color: " + playerColor.concat("test"));
 
-            System.out.println(playerColor + playerName + "\n" + ANSI_RESET );
+            System.out.println(playerColor + playerName + "\n" + ANSI_RESET);
 
             while (!correctOption) {
 
@@ -282,7 +285,7 @@ public class GameDialogue {
                     intUserInput = Integer.parseInt(pressedKey);
                     correctOption = true;
                 } else {
-                    System.out.println("Incorrect options - Please Select from [1-3]");
+                    System.out.println(ANSI_RED + "Incorrect options - Please Select from [1-3]" + ANSI_RESET);
                 }
             }
 

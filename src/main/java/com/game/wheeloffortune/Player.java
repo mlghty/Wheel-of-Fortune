@@ -5,16 +5,14 @@ public class Player {
     private String playerName;
     private int totalMoney;
     private int currentRoundMoney;
-
     private String playerColor;
+    private static Wheel playerWheel = new Wheel();
 
     public Player(String playerName) {
         totalMoney = 0;
         currentRoundMoney = 0;
         setName(playerName);
-//        playerColor = "\u001B[36m";
-        playerColor = Wheel.getRandomPlayerColor();
-
+        playerColor = playerWheel.getRandomUniquePlayerColor();
     }
 
     // business
@@ -29,7 +27,11 @@ public class Player {
     }
 
     public void setName(String name) {
-        playerName = name;
+        if (name.length() > 0) {
+            this.playerName = name;
+        } else {
+            System.out.println("Player name length must be greater > 0!");
+        }
     }
 
     public int getTotalMoney() {
@@ -57,23 +59,9 @@ public class Player {
         }
     }
 
-
-    public String getPlayerName() {
-        return playerName;
-    }
-
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
-    }
-
     public String getPlayerColor() {
         return playerColor;
     }
-
-    public void setPlayerColor(String playerColor) {
-        this.playerColor = playerColor;
-    }
-
 
     @Override
     public String toString() {
