@@ -1,7 +1,10 @@
 package com.game.wheeloffortune;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -18,6 +21,7 @@ public class GameDialogue {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_BLINK = "\033[5m";
 
 
     public GameDialogue() {
@@ -41,7 +45,9 @@ public class GameDialogue {
 
     public void startGame() throws InterruptedException {
 
-        WOFAsciiArt.printWOFLogo();
+
+        WOFAsciiArt.windowSizes();
+        WOFAsciiArt.printWOFLogoBlink();
 
         String test = "Press 'X' to Start Game 'Q' to Exit!: ";
         System.out.println(ANSI_GREEN + "Press 'X' to Start Game 'Q' to Exit!: " + ANSI_RESET);

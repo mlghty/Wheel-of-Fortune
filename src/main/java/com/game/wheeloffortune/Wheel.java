@@ -50,4 +50,12 @@ public class Wheel {
         return playerColor;
     }
 
+
+    public String getRandomColor() {
+
+        int playerColorInt = new Random().nextInt(colorValues.size());
+        String playerColor = colorValues.get(playerColorInt);
+        return playerColor;
+    }
+
 }
