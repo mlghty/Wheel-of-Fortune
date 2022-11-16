@@ -4,8 +4,8 @@ import java.util.*;
 
 public class Game {
 
-    private static final int NUMBER_OF_ROUNDS = 3;
-    private static final int COST_OF_VOWEL = 250;
+    public static final int NUMBER_OF_ROUNDS = 3;
+    public static final int COST_OF_VOWEL = 250;
     private static final List<Character> CONSONANTS = new ArrayList<>(List.of(
             'B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N',
             'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z'));

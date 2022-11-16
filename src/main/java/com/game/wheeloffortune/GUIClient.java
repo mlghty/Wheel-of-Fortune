@@ -25,14 +25,15 @@ public class GUIClient extends JFrame {
     boolean wheelSpun = false;
     boolean vowelBought = false;
     private JPanel playerPanel;
+    private List<Player> players;
 
     GUIClient(List<Player> players) {
+        this.players = players;
         game = new Game(players);
         game.startRound();
         mainWindow = new JFrame();
         setMainWindow();
         updateWindow();
-        buttons();
     }
 
     private void setMainWindow() {
@@ -275,7 +276,24 @@ public class GUIClient extends JFrame {
             if (i == 1) {
                 JOptionPane.showMessageDialog(null,
                         "That is correct!", "Congratulations!", JOptionPane.WARNING_MESSAGE);
-                game.startRound();
+                if (game.getCurrentRoundNumber() >= Game.NUMBER_OF_ROUNDS) {
+                    game.startRound();
+                    int choice = JOptionPane.showConfirmDialog(null,
+                            "Winner was: \n" + game.getWinningPlayer() +"\nCongratulations!\nPlay another game?",
+                            "Winner!",JOptionPane.YES_NO_OPTION);
+                    if(choice == 0) {
+                        game = new Game(players);
+                        for(Player p : game.getPlayers()) {
+                            p.setTotalMoney(0);
+                            p.setCurrentRoundMoney(0);
+                        }
+                        game.startRound();
+                    } else if (choice == 1) {
+                        System.exit(0);
+                    }
+                } else {
+                    game.startRound();
+                }
             } else {
                 JOptionPane.showMessageDialog(null,
                         "Sorry that wasn't correct. Next Player's turn.",
@@ -326,7 +344,6 @@ public class GUIClient extends JFrame {
 
                     }
                 }
-                System.out.println(c);
                 updateWindow();
                 vowelBought = false;
                 wheelSpun = false;
@@ -375,7 +392,6 @@ public class GUIClient extends JFrame {
 
                     }
                 }
-                System.out.println(c);
                 updateWindow();
                 vowelBought = false;
                 wheelSpun = false;
@@ -424,7 +440,6 @@ public class GUIClient extends JFrame {
 
                     }
                 }
-                System.out.println(c);
                 updateWindow();
                 vowelBought = false;
                 wheelSpun = false;
