@@ -181,7 +181,7 @@ public class WOFAsciiArt {
         Graphics2D winningMessageGraphics
                 = (Graphics2D) winningMessage;
         winningMessageGraphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        winningMessage.drawString( "CONGRATULATIONS", 5, 13);
+        winningMessage.drawString("CONGRATULATIONS", 5, 13);
 
         for (int y = 0; y < height; y++) {
             StringBuilder sb1 = new StringBuilder();
@@ -198,6 +198,7 @@ public class WOFAsciiArt {
             System.out.println(ANSI_GREEN + sb1 + ANSI_RESET);
         }
     }
+
     public static void printOutBankruptMessage() {
 
 
@@ -219,7 +220,7 @@ public class WOFAsciiArt {
         Graphics2D bankruptMessage1
                 = (Graphics2D) bankruptMessage;
         bankruptMessage1.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        bankruptMessage.drawString( "BANKRUPT", 5, 13);
+        bankruptMessage.drawString("BANKRUPT", 5, 13);
 
         for (int y = 0; y < height; y++) {
             StringBuilder sb1 = new StringBuilder();
@@ -238,12 +239,7 @@ public class WOFAsciiArt {
     }
 
 
-
-
-
-
-    public static void printWOFBanner(String Color,int spaces){
-
+    public static void printWOFBanner(String Color, int spaces) {
 
 
         BufferedImage bufferedImage = new BufferedImage(
