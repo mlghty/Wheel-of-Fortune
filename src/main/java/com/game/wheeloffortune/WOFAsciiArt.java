@@ -103,7 +103,8 @@ public class WOFAsciiArt {
 
     public static void setTitle(final String title, String OS) {
         try {
-            new ProcessBuilder(String.format(OS, title.replaceAll("\"", "")).split(" ")).inheritIO().start().waitFor();
+            new ProcessBuilder(String.format(OS,
+                    title.replaceAll("\"", "")).split(" ")).inheritIO().start().waitFor();
             System.out.flush();
         } catch (Exception e) {
             System.out.println("Error: " + e);
@@ -183,7 +184,7 @@ public class WOFAsciiArt {
             if (sb1.toString().trim().isEmpty()) {
                 continue;
             }
-            System.out.println(sb1);
+            System.out.println(ANSI_GREEN + sb1 + ANSI_RESET);
         }
     }
 }
