@@ -14,6 +14,7 @@ public class WOFAsciiArt {
 
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_RED = "\u001B[31m";
 
 
     public static String WINDOWS_SET_TITLE = "cmd /c title %s";
@@ -180,7 +181,7 @@ public class WOFAsciiArt {
         Graphics2D winningMessageGraphics
                 = (Graphics2D) winningMessage;
         winningMessageGraphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        winningMessage.drawString("YOU'VE WON", 5, 13);
+        winningMessage.drawString( "CONGRATULATIONS", 5, 13);
 
         for (int y = 0; y < height; y++) {
             StringBuilder sb1 = new StringBuilder();
@@ -197,6 +198,49 @@ public class WOFAsciiArt {
             System.out.println(ANSI_GREEN + sb1 + ANSI_RESET);
         }
     }
+    public static void printOutBankruptMessage() {
+
+
+        //x axis
+        int width = 170;
+        //y axis
+        int height = 15;
+
+
+        //constructor new buffered image
+        BufferedImage bufferedImage = new BufferedImage(
+                width, height,
+                BufferedImage.TYPE_INT_RGB);
+
+        Graphics bankruptMessage = bufferedImage.getGraphics();
+        //setting font style and size
+        bankruptMessage.setFont(new Font("Roboto", Font.PLAIN, 15));
+
+        Graphics2D bankruptMessage1
+                = (Graphics2D) bankruptMessage;
+        bankruptMessage1.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        bankruptMessage.drawString( "BANKRUPT", 5, 13);
+
+        for (int y = 0; y < height; y++) {
+            StringBuilder sb1 = new StringBuilder();
+            for (int x = 0; x < width; x++) {
+
+                //all colors -16777216 are replaced by " "
+                sb1.append(bufferedImage.getRGB(x, y) == -16777216 ? " " : "$");
+
+                // sb.append(bufferedImage.getRGB(x, y) == -16777216 ? "$" : " ");
+            }
+            if (sb1.toString().trim().isEmpty()) {
+                continue;
+            }
+            System.out.println(ANSI_RED + sb1 + ANSI_RESET);
+        }
+    }
+
+
+
+
+
 
     public static void printWOFBanner(String Color,int spaces){
 
@@ -231,6 +275,7 @@ public class WOFAsciiArt {
         for (int i = 0; i < spaces; ++i) System.out.println();
 
     }
+
 }
 
 // for testing

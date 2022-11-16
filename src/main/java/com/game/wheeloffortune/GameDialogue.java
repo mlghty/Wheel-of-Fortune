@@ -1,10 +1,7 @@
 package com.game.wheeloffortune;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -22,6 +19,7 @@ public class GameDialogue {
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_BLINK = "\033[5m";
+    public static final String ANSI_CYAN = "\u001B[36m";
 
     public static final String ANSI_BG_GREEN = "\u001b[42m";
 
@@ -148,6 +146,7 @@ public class GameDialogue {
                     + currentGame.getCurrentPlayersTurn().getName() + "\n" + ANSI_RESET);
             return;
         } else if (wheelValue == -1) {
+            WOFAsciiArt.printOutBankruptMessage();
             System.out.println(ANSI_RED + "BANKRUPT! Next Players Turn: "
                     + currentGame.getCurrentPlayersTurn().getName() + "\n" + ANSI_RESET);
             return;
@@ -232,10 +231,10 @@ public class GameDialogue {
         int isPuzzleSolved = currentGame.solvePuzzle(solvePuzzleAttempt);
 
         if (isPuzzleSolved == 1) {
-            System.out.println("Great Job! You Solved the Puzzle!");
+            System.out.println(ANSI_CYAN + "Great Job! You Solved the Puzzle!" + ANSI_RESET);
             isSolved = true;
         } else {
-            System.out.println("Incorrect Guess! You did not solve the puzzle!");
+            System.out.println(ANSI_RED + "Incorrect Guess! You did not solve the puzzle!" + ANSI_RESET);
         }
 
         TimeUnit.SECONDS.sleep(3);
@@ -300,9 +299,11 @@ public class GameDialogue {
             if (isSolved && currentGame.startRound() == 0) {
                 clearGameScreen();
                 currentGame.setWinningPlayer();
+                WOFAsciiArt.winningPlayerMessage();
+                System.out.println();
                 System.out.println("Winning Player!");
                 System.out.println(currentGame.getWinningPlayer());
-                WOFAsciiArt.winningPlayerMessage();
+
             } else {
                 clearGameScreen();
                 intUserInput = 0;
