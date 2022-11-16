@@ -46,8 +46,8 @@ public class GameDialogue {
     public void startGame() throws InterruptedException {
 
 
-//        WOFAsciiArt.windowSizes();
-//        WOFAsciiArt.printWOFLogoBlink();
+        WOFAsciiArt.windowSizes();
+        WOFAsciiArt.printWOFLogoBlink();
 
         String test = "Press 'X' to Start Game 'Q' to Exit!: ";
         System.out.println(ANSI_GREEN + "Press 'X' to Start Game 'Q' to Exit!: " + ANSI_RESET);
@@ -150,7 +150,7 @@ public class GameDialogue {
         int wheelValue = currentGame.spinWheel();
 //        System.out.println(" Spinning Wheel...");
         System.out.print(playerColor  + playerName + ANSI_RESET);
-        System.out.println(" Spinning Wheel...");
+        System.out.println(" is Spinning the Wheel...");
 
         System.out.println("Wheel Value: " + wheelValue + "\n");
 
@@ -165,8 +165,8 @@ public class GameDialogue {
             return;
         }
 
-        System.out.println("Guessing letter...");
-        System.out.println("Enter letter: ");
+        System.out.println("Guessing a Consonant...");
+        System.out.println("Enter a Consonant: ");
         guessedLetter = userInputScanner.nextLine();
 
         while (!isValidConsonants) {
@@ -185,7 +185,7 @@ public class GameDialogue {
                 break;
             } else {
                 int occurrences = currentGame.pickLetter(guessedLetter.toUpperCase().charAt(0));
-                System.out.println("Letter appeared " + occurrences + " times!");
+                System.out.println("Letter " + guessedLetter + " appeared " + occurrences + " times!");
                 TimeUnit.SECONDS.sleep(3);
             }
 
@@ -199,7 +199,7 @@ public class GameDialogue {
         boolean isValidVowel = false;
 
         if (currentGame.getCurrentPlayersTurn().getCurrentRoundMoney() >= 250) {
-            System.out.println("Buying vowel...");
+            System.out.println("Buying a vowel cost $250...");
             System.out.println("Enter Vowel...");
             vowelPurchase = userInputScanner.nextLine();
 
@@ -235,15 +235,15 @@ public class GameDialogue {
     private boolean playerAttemptSolve(boolean isSolved) throws InterruptedException {
         String solvePuzzleAttempt;
 
-        System.out.println("Solve Puzzle: ");
+        System.out.println("Enter Your Guess to Solve the Puzzle: ");
         solvePuzzleAttempt = userInputScanner.nextLine();
         int isPuzzleSolved = currentGame.solvePuzzle(solvePuzzleAttempt);
 
         if (isPuzzleSolved == 1) {
-            System.out.println("Solved!");
+            System.out.println("Great Job! You Solved the Puzzle!");
             isSolved = true;
         } else {
-            System.out.println("Not Solved!");
+            System.out.println("Incorrect Guess! You did not solve the puzzle!");
         }
 
         TimeUnit.SECONDS.sleep(3);
@@ -278,8 +278,8 @@ public class GameDialogue {
             while (!correctOption) {
 
                 System.out.println("Options...");
-                System.out.println("Press 1 to guess a letter.");
-                System.out.println("Press 2 to buy a vowel.");
+                System.out.println("Press 1 to Spin the Wheel and Guess a Consonant...");
+                System.out.println("Press 2 to Buy a Vowel for $250...");
                 System.out.println("Press 3 to SOLVE...");
 
                 String pressedKey = userInputScanner.nextLine();
