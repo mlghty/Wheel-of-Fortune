@@ -208,8 +208,7 @@ public class Game {
 
     public String getWinningPlayer() {
         try {
-            if (!winningPlayer.getName().equals("temp")) {
-
+            if (!winningPlayer.getName().equals("Temp")) {
                 return winningPlayer.toString();
             } else {
                 return "There is no winner!";
@@ -221,18 +220,18 @@ public class Game {
 
     public Player getWinningPlayerObject() {
         try {
-            if (!winningPlayer.getName().equals("temp")) {
+            if (!winningPlayer.getName().equals("Temp")) {
                 return winningPlayer;
             } else {
                 return null;
             }
         } catch (NullPointerException e) {
-            return null;
+            throw new NullPointerException("There is now winner!");
         }
     }
 
     public void setWinningPlayer() {
-        Player tempPlayer = new Player("temp");
+        Player tempPlayer = new Player("Temp");
         tempPlayer.setTotalMoney(0);
         for (Player p : players) {
             if (p.getTotalMoney() > tempPlayer.getTotalMoney()) {

@@ -1,6 +1,7 @@
 package com.game.wheeloffortune;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,11 +10,13 @@ import static org.junit.Assert.assertEquals;
 public class GameTest {
 
     private Game newGame, newGame2;
-    private final Player player1 = new Player("Joe");
-    private final Player player2 = new Player("Cindy");
+    private Player player1;
+    private Player player2;
 
     @Before
     public void setUp() {
+        player1 = new Player("Joe");
+        player2 = new Player("Cindy");
         newGame = new Game(player1);
         newGame2 = new Game(player1, player2);
         newGame2.startRound();
@@ -34,6 +37,10 @@ public class GameTest {
 
     @After
     public void tearDown() {
+        player1 = null;
+        player2 = null;
+        newGame = null;
+        newGame2 = null;
     }
 
     @Test
@@ -135,13 +142,24 @@ public class GameTest {
     }
 
     @Test
-    public void _testSetWinningPlayerMethodReplacesWinningPlayerFieldWithAPlayerInsteadOfTempPlayerWithMIN_VALUEIntegerIfNoPlayerHasWonYet() {
+    public void _testSetWinningPlayerMethodReplacesWinningPlayerFieldWithAMessageInsteadOfTempPlayerIfNoPlayerHasWonYet() {
         newGame2.setWinningPlayer();
         String expectedPlayer = "There is no winner!";
         String actualPlayer = newGame2.getWinningPlayer();
+        System.out.println(actualPlayer);
         assertEquals(expectedPlayer, actualPlayer);
     }
 
+    @Test
+    public void _TestGetWinningPlayerObjectMethodThrowsExceptionAndHasCorrectMessageIfNoActualWinnerHasBeenEstablished() {
+        String message = "There is now winner!";
+        try {
+            newGame2.getWinningPlayerObject();
+            Assert.fail();
+        } catch (NullPointerException e) {
+            assertEquals(message,e.getMessage());
+        }
+    }
 
     @Test
     public void testThatTheSetUpPuzzleMethodProperlyEnsuresThereAreNoRepeatPuzzlesByIteratingThroughTheSetupPuzzleMethodMultipleTimesAndEnsuringThereAreNoRepeats() {
