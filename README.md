@@ -101,8 +101,9 @@ Once we have incorporated the basics of the game and have a working prototype th
 ![Class-Diagram](https://i.imgur.com/508wCGo.png)
 
 ### Requirements
-+ Req1
-+ Req2
++ Java 11
++ Terminal window 120(Width) x 30(Height)
+
 
 ### User Stories
 + User wants to play single round of word guessing game
