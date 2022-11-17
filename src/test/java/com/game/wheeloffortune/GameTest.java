@@ -137,7 +137,7 @@ public class GameTest {
     @Test
     public void _testSetWinningPlayerMethodReplacesWinningPlayerFieldWithAPlayerInsteadOfTempPlayerWithMIN_VALUEIntegerIfNoPlayerHasWonYet() {
         newGame2.setWinningPlayer();
-        String expectedPlayer = "Player name: Joe\nTotal money: 0\nRound money: 0\n";
+        String expectedPlayer = "There is no winner!";
         String actualPlayer = newGame2.getWinningPlayer();
         assertEquals(expectedPlayer, actualPlayer);
     }

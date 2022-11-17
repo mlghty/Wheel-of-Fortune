@@ -4,16 +4,13 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Scanner;
-
 public class GameBoardTest {
 
     private GameBoard gameBoard, gameBoard2;
-    boolean puzzleSolved = false;
 
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         gameBoard = new GameBoard(
                 "Sang is the best Java Instructor",
                 "General Java Knowledge");

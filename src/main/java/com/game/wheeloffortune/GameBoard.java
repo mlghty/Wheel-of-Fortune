@@ -22,7 +22,7 @@ public class GameBoard {
         int numberOfTimesLetterAppears = 0;
         letterGuessed = Character.toUpperCase(letterGuessed);
         if(lettersAlreadyGuessed.contains(letterGuessed)) {
-            return 0;
+            return -1;
         } else {
             lettersAlreadyGuessed.add(letterGuessed);
         }
