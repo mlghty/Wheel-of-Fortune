@@ -31,19 +31,12 @@ public class GameDialogue {
         startGame = false;
     }
 
-    public GameDialogue(Game gameTest) {
-        players = new ArrayList<>();
-        userInputScanner = new Scanner(System.in);
-        currentGame = gameTest;
-        startGame = false;
-    }
-
     public void startGame() throws InterruptedException {
 
         WOFAsciiArt.windowSizes();
         WOFAsciiArt.printWOFLogoBlink();
 
-        System.out.println(ANSI_BG_GREEN + ANSI_RED +  "Press 'X' to Start Game 'Q' to Exit!: " + ANSI_RESET);
+        System.out.println(ANSI_BG_GREEN + ANSI_RED + "Press 'X' to Start Game 'Q' to Exit!: " + ANSI_RESET);
 
         String pressedKey = userInputScanner.nextLine();
 
@@ -69,17 +62,22 @@ public class GameDialogue {
     }
 
     public void numberOfPlayers() {
-        System.out.println("Select number of players [1-3]");
+
+        WOFAsciiArt.printReadyPlayer();
+        WOFAsciiArt.printStarryNight();
+
+
+        System.out.println(ANSI_GREEN + "Select number of players [1-3]" + ANSI_RESET);
 
         Integer playerCount = Integer.parseInt(userInputScanner.nextLine());
 
         while (playerCount < 1 || playerCount > 3) {
-            System.out.println("Error please select between 1-3 players...");
+            System.out.println(ANSI_RED + "Error please select between 1-3 players..." + ANSI_RESET );
             playerCount = Integer.parseInt(userInputScanner.nextLine());
 
         }
 
-        System.out.println("Number of Players: " + playerCount);
+        System.out.println(ANSI_GREEN + "Number of Players: " + playerCount + ANSI_RESET);
 
         numOfPlayer = playerCount;
         setPlayerNames();
@@ -87,7 +85,7 @@ public class GameDialogue {
 
     public void setPlayerNames() {
         for (int i = 1; i <= numOfPlayer; i++) {
-            System.out.println("Please enter name for Player " + i);
+            System.out.println(ANSI_GREEN + "Please enter name for Player " + i + ANSI_RESET);
             String playerName = userInputScanner.nextLine();
             players.add(new Player(playerName));
         }
@@ -130,25 +128,30 @@ public class GameDialogue {
 
 
         clearGameScreen();
-        WOFAsciiArt.printWOFBanner(playerColor,13);
+        WOFAsciiArt.printWOFBanner(playerColor, 13);
 
 
         int wheelValue = currentGame.spinWheel();
 //        System.out.println(" Spinning Wheel...");
-        System.out.print(playerColor  + playerName + ANSI_RESET);
+        System.out.print(playerColor + playerName + ANSI_RESET);
         System.out.println(" is Spinning the Wheel...");
 
         System.out.println("Wheel Value: " + wheelValue + "\n");
 
 
         if (wheelValue == 0) {
-            System.out.println( ANSI_RED + "YOU LOSE A TURN! Next Players Turn: "
+            System.out.println(ANSI_RED + "YOU LOSE A TURN! Next Players Turn: "
                     + currentGame.getCurrentPlayersTurn().getName() + "\n" + ANSI_RESET);
+            TimeUnit.SECONDS.sleep(5);
+
             return;
         } else if (wheelValue == -1) {
+            TimeUnit.SECONDS.sleep(3);
             WOFAsciiArt.printOutBankruptMessage();
             System.out.println(ANSI_RED + "BANKRUPT! Next Players Turn: "
                     + currentGame.getCurrentPlayersTurn().getName() + "\n" + ANSI_RESET);
+            TimeUnit.SECONDS.sleep(3);
+
             return;
         }
 
@@ -177,8 +180,6 @@ public class GameDialogue {
             }
 
         }
-
-
     }
 
     private void playerBuyVowel() throws InterruptedException {
@@ -187,7 +188,7 @@ public class GameDialogue {
 
         clearGameScreen();
         String playerColor = currentGame.getCurrentPlayersTurn().getPlayerColor();
-        WOFAsciiArt.printWOFBanner(playerColor,15);
+        WOFAsciiArt.printWOFBanner(playerColor, 18);
 
         if (currentGame.getCurrentPlayersTurn().getCurrentRoundMoney() >= 250) {
             System.out.println("Buying a vowel cost $250...");
@@ -226,6 +227,10 @@ public class GameDialogue {
     private boolean playerAttemptSolve(boolean isSolved) throws InterruptedException {
         String solvePuzzleAttempt;
 
+        clearGameScreen();
+        String playerColor = currentGame.getCurrentPlayersTurn().getPlayerColor();
+        WOFAsciiArt.printWOFBanner(playerColor, 17);
+
         System.out.println("Enter Your Guess to Solve the Puzzle: ");
         solvePuzzleAttempt = userInputScanner.nextLine();
         int isPuzzleSolved = currentGame.solvePuzzle(solvePuzzleAttempt);
@@ -260,13 +265,19 @@ public class GameDialogue {
         while (!isSolved) {
 
 
-            playerName = String.valueOf(currentGame.getCurrentPlayersTurn());
-            playerColor = currentGame.getCurrentPlayersTurn().getPlayerColor();
-            WOFAsciiArt.printWOFBanner(playerColor,6);
-            displayCurrentPuzzle();
-            System.out.println(playerColor + playerName + "\n" + ANSI_RESET);
+//            playerName = String.valueOf(currentGame.getCurrentPlayersTurn());
+//            playerColor = currentGame.getCurrentPlayersTurn().getPlayerColor();
+//            WOFAsciiArt.printWOFBanner(playerColor,6);
+//            displayCurrentPuzzle();
+//            System.out.println(playerColor + playerName + "\n" + ANSI_RESET);
 
             while (!correctOption) {
+
+                playerName = String.valueOf(currentGame.getCurrentPlayersTurn());
+                playerColor = currentGame.getCurrentPlayersTurn().getPlayerColor();
+                WOFAsciiArt.printWOFBanner(playerColor, 6);
+                displayCurrentPuzzle();
+                System.out.println(playerColor + playerName + "\n" + ANSI_RESET);
 
                 System.out.println("Options...");
                 System.out.println("Press 1 to Spin the Wheel and Guess a Consonant...");
@@ -280,7 +291,10 @@ public class GameDialogue {
                     correctOption = true;
                 } else {
                     System.out.println(ANSI_RED + "Incorrect options - Please Select from [1-3]" + ANSI_RESET);
+                    TimeUnit.SECONDS.sleep(3);
+                    clearGameScreen();
                 }
+
             }
 
             switch (intUserInput) {
@@ -299,11 +313,16 @@ public class GameDialogue {
             if (isSolved && currentGame.startRound() == 0) {
                 clearGameScreen();
                 currentGame.setWinningPlayer();
-                WOFAsciiArt.winningPlayerMessage();
-                System.out.println();
-                System.out.println("Winning Player!");
-                System.out.println(currentGame.getWinningPlayer());
+                String winningPlayerColor = currentGame.getWinningPlayerObject().getPlayerColor();
+                WOFAsciiArt.printAsciiMessage("CONGRATULATIONS!", winningPlayerColor);
+                WOFAsciiArt.printAsciiMessage(currentGame.getWinningPlayerObject().getName(), winningPlayerColor);
+                WOFAsciiArt.printAsciiMessage(
+                        "$" +
+                                String.valueOf(currentGame.getWinningPlayerObject().getTotalMoney()),
+                                winningPlayerColor);
+                currentGame.getWinningPlayer();
 
+                TimeUnit.SECONDS.sleep(100);
             } else {
                 clearGameScreen();
                 intUserInput = 0;
@@ -334,7 +353,6 @@ public class GameDialogue {
     public void setCurrentGame(Game currentGame) {
         this.currentGame = currentGame;
     }
-
 }
 
 class Main {

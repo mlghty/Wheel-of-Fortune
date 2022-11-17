@@ -2,9 +2,7 @@ package com.game.wheeloffortune;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 public class Wheel {
 
@@ -50,12 +48,9 @@ public class Wheel {
         return playerColor;
     }
 
-
     public String getRandomColor() {
-
-        int playerColorInt = new Random().nextInt(colorValues.size());
-        String playerColor = colorValues.get(playerColorInt);
-        return playerColor;
+        int randomColorIndex = new Random().nextInt(colorValues.size());
+        String randomColor = colorValues.get(randomColorIndex);
+        return randomColor;
     }
-
 }

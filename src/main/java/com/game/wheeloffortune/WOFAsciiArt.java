@@ -2,6 +2,7 @@ package com.game.wheeloffortune;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class WOFAsciiArt {
@@ -16,36 +17,31 @@ public class WOFAsciiArt {
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_RED = "\u001B[31m";
 
-
-    public static String WINDOWS_SET_TITLE = "cmd /c title %s";
+    public static String STRING_WINDOWS_SET_TITLE = "cmd /c title %s";
     public static String STRING_LINUX_SET_TITLE = "echo -ne \"\\033]0;WOF\\007\"";
 
     public static void printWOFLogo() {
         BufferedImage bufferedImage = new BufferedImage(
-                terminalWidth, terminalHeight,
+                terminalWidth,
+                terminalHeight,
                 BufferedImage.TYPE_INT_RGB);
 
-        Graphics WOF = bufferedImage.getGraphics();
-        //setting font style and size
-        WOF.setFont(new Font("Arial", Font.BOLD, fontSize));
+        Graphics logoGraphics = bufferedImage.getGraphics();
+        logoGraphics.setFont(new Font("Arial", Font.BOLD, fontSize));
 
-        Graphics2D WOFGraphic = (Graphics2D) WOF;
-        WOFGraphic.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        WOF.drawString("WHEEL OF FORTUNE", x_offset, y_offset);
+        Graphics2D logo = (Graphics2D) logoGraphics;
+        logo.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        logoGraphics.drawString("WHEEL OF FORTUNE", x_offset, y_offset);
 
         for (int y = 0; y < terminalHeight; y++) {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder logoStringBuilder = new StringBuilder();
             for (int x = 0; x < terminalWidth; x++) {
-
-                //all colors -16777216 are replaced by " "
-//            sb.append(bufferedImage.getRGB(x, y) == -16777216 ? " ": "$");
-
-                sb.append(bufferedImage.getRGB(x, y) == -16777216 ? "$" : " ");
+                logoStringBuilder.append(bufferedImage.getRGB(x, y) == -16777216 ? "$" : " ");
             }
-            if (sb.toString().trim().isEmpty()) {
+            if (logoStringBuilder.toString().trim().isEmpty()) {
                 continue;
             }
-            System.out.println(ANSI_GREEN + sb + ANSI_RESET);
+            System.out.println(ANSI_GREEN + logoStringBuilder + ANSI_RESET);
         }
     }
 
@@ -53,8 +49,6 @@ public class WOFAsciiArt {
         try {
             new ProcessBuilder("cmd", "/c", "cls", "clear").inheritIO().start().waitFor();
         } catch (final Exception e) {
-            //System.out.println("Clearing manually!");
-            //TimeUnit.SECONDS.sleep(3);
             TimeUnit.MILLISECONDS.sleep(100L);
             System.out.print("\033\143");
         }
@@ -62,6 +56,7 @@ public class WOFAsciiArt {
 
     public static void windowSizes() {
         String os = System.getProperty("os.name").toLowerCase();
+
         if (os.contains("win")) {
             terminalWidth = 120;
             terminalHeight = 30;
@@ -77,11 +72,9 @@ public class WOFAsciiArt {
             System.out.println("x Offset: " + terminalWidth);
             System.out.println("y Offset: " + terminalHeight);
 
-            setTitle("Wheel of Fortune", WINDOWS_SET_TITLE);
+            setTitle("Wheel of Fortune", STRING_WINDOWS_SET_TITLE);
 
         } else if (os.contains("mac")) {
-
-
             // 80 x 24 default
             // for mac
 
@@ -98,17 +91,7 @@ public class WOFAsciiArt {
             System.out.println("x Offset: " + terminalWidth);
             System.out.println("y Offset: " + terminalHeight);
 
-            //("Wheel of Fortune", STRING_LINUX_SET_TITLE);
-            try {
-
-                String command = STRING_LINUX_SET_TITLE;
-                Process proc = Runtime.getRuntime().exec(command);
-
-                //System.out.flush();
-            } catch (Exception e) {
-                System.out.println("Error: " + e);
-            }
-
+            setTitle("Wheel of Fortune", STRING_LINUX_SET_TITLE);
         }
     }
 
@@ -123,163 +106,283 @@ public class WOFAsciiArt {
     }
 
     public static void printWOFLogoBlink() throws InterruptedException {
-
-        String ansiColor = null;
-        StringBuilder sb = null;
-        //constructor new buffered image
-        BufferedImage bufferedImage = new BufferedImage(
-                terminalWidth, terminalHeight,
-                BufferedImage.TYPE_INT_RGB);
-
-        Graphics WOF = bufferedImage.getGraphics();
-        //setting font style and size
         for (int i = 0; i < 10; i++) {
-            ansiColor = new Wheel().getRandomColor();
+            String ansiColor = new Wheel().getRandomColor();
 
-            WOF.setFont(new Font("Arial", Font.BOLD, fontSize));
-            Graphics2D WOFGraphic = (Graphics2D) WOF;
-            WOFGraphic.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-            WOF.drawString("WHEEL OF FORTUNE", x_offset, y_offset);
+            BufferedImage bufferedImage = new BufferedImage(
+                    terminalWidth,
+                    terminalHeight,
+                    BufferedImage.TYPE_INT_RGB);
+
+            Graphics logoBlinkGraphic = bufferedImage.getGraphics();
+
+
+            logoBlinkGraphic.setFont(new Font(
+                    "Arial",
+                    Font.BOLD,
+                    fontSize));
+
+            Graphics2D logoBlink = (Graphics2D) logoBlinkGraphic;
+
+            logoBlink.setRenderingHint(
+                    RenderingHints.KEY_TEXT_ANTIALIASING,
+                    RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+
+            logoBlinkGraphic.drawString("WHEEL OF FORTUNE", x_offset, y_offset);
 
             for (int y = 0; y < terminalHeight; y++) {
-                sb = new StringBuilder();
+                StringBuilder logoBlinkStringBuilder = new StringBuilder();
                 for (int x = 0; x < terminalWidth; x++) {
-                    sb.append(bufferedImage.getRGB(x, y) == -16777216 ? "$" : " ");
+                    logoBlinkStringBuilder.append(bufferedImage.getRGB(x, y) == -16777216 ? "$" : " ");
                 }
-                if (sb.toString().trim().isEmpty()) {
+                if (logoBlinkStringBuilder.toString().trim().isEmpty()) {
                     continue;
                 }
-                System.out.println(ansiColor + sb + ANSI_RESET);
+                System.out.println(ansiColor + logoBlinkStringBuilder + ANSI_RESET);
             }
 
             TimeUnit.MILLISECONDS.sleep(50L);
             clearAsciiArt();
             TimeUnit.MILLISECONDS.sleep(50L);
-
         }
-
         printWOFLogo();
     }
 
-    public static void winningPlayerMessage() {
+    public static void printAsciiMessage(String message, String playerColor) throws InterruptedException {
 
-        //x axis
-        int width = 170;
-        //y axis
-        int height = 15;
-
-
-        //constructor new buffered image
         BufferedImage bufferedImage = new BufferedImage(
-                width, height,
+                terminalWidth,
+                terminalHeight,
                 BufferedImage.TYPE_INT_RGB);
 
-        Graphics winningMessage = bufferedImage.getGraphics();
-        //setting font style and size
-        winningMessage.setFont(new Font("Futura", Font.PLAIN, 15));
+        Graphics asciiMessageGraphic = bufferedImage.getGraphics();
+        asciiMessageGraphic.setFont(new Font("Arial", Font.PLAIN, 11));
 
-        Graphics2D winningMessageGraphics
-                = (Graphics2D) winningMessage;
-        winningMessageGraphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        winningMessage.drawString("CONGRATULATIONS", 5, 13);
+        Graphics2D winningMessageGraphics = (Graphics2D) asciiMessageGraphic;
+        winningMessageGraphics.setRenderingHint(
+                RenderingHints.KEY_TEXT_ANTIALIASING,
+                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
-        for (int y = 0; y < height; y++) {
-            StringBuilder sb1 = new StringBuilder();
-            for (int x = 0; x < width; x++) {
+        asciiMessageGraphic.drawString(message, 2, 13);
 
-                //all colors -16777216 are replaced by " "
-                sb1.append(bufferedImage.getRGB(x, y) == -16777216 ? " " : "$");
+        for (int y = 0; y < terminalHeight; y++) {
 
-                // sb.append(bufferedImage.getRGB(x, y) == -16777216 ? "$" : " ");
+            StringBuilder asciiMessageStringBuilder = new StringBuilder();
+
+            for (int x = 0; x < terminalWidth; x++) {
+                asciiMessageStringBuilder.append(bufferedImage.getRGB(x, y) == -16777216 ? " " : "$");
             }
-            if (sb1.toString().trim().isEmpty()) {
+            if (asciiMessageStringBuilder.toString().trim().isEmpty()) {
                 continue;
             }
-            System.out.println(ANSI_GREEN + sb1 + ANSI_RESET);
+
+            System.out.println(playerColor + asciiMessageStringBuilder + ANSI_RESET);
         }
     }
 
+    public static void printSpaces(int spaces) {
+        for (int i = 0; i < spaces; ++i) System.out.println();
+    }
+
+
+    // refactor a mess
     public static void printOutBankruptMessage() {
 
-
-        //x axis
-        int width = 170;
-        //y axis
-        int height = 15;
-
-
-        //constructor new buffered image
-        BufferedImage bufferedImage = new BufferedImage(
-                width, height,
-                BufferedImage.TYPE_INT_RGB);
-
-        Graphics bankruptMessage = bufferedImage.getGraphics();
-        //setting font style and size
-        bankruptMessage.setFont(new Font("Roboto", Font.PLAIN, 15));
-
-        Graphics2D bankruptMessage1
-                = (Graphics2D) bankruptMessage;
-        bankruptMessage1.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        bankruptMessage.drawString("BANKRUPT", 5, 13);
-
-        for (int y = 0; y < height; y++) {
-            StringBuilder sb1 = new StringBuilder();
-            for (int x = 0; x < width; x++) {
-
-                //all colors -16777216 are replaced by " "
-                sb1.append(bufferedImage.getRGB(x, y) == -16777216 ? " " : "$");
-
-                // sb.append(bufferedImage.getRGB(x, y) == -16777216 ? "$" : " ");
-            }
-            if (sb1.toString().trim().isEmpty()) {
-                continue;
-            }
-            System.out.println(ANSI_RED + sb1 + ANSI_RESET);
+        try {
+            clearAsciiArt();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+
+        for (int i = 8; i < 14; i++) {
+            printSpaces(10);
+            BufferedImage bufferedImage = new BufferedImage(
+                    terminalWidth, terminalHeight,
+                    BufferedImage.TYPE_INT_RGB);
+
+            Graphics bankruptMessage = bufferedImage.getGraphics();
+            bankruptMessage.setFont(new Font("TimesRoman", Font.PLAIN, i));
+
+            Graphics2D bankruptMessage1
+                    = (Graphics2D) bankruptMessage;
+            bankruptMessage1.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+            bankruptMessage.drawString("B A N K R U P T!", 30 - i, 15);
+
+            for (int y = 0; y < terminalHeight; y++) {
+                StringBuilder sb1 = new StringBuilder();
+                for (int x = 0; x < terminalWidth; x++) {
+                    sb1.append(bufferedImage.getRGB(x, y) == -16777216 ? " " : "$");
+
+                }
+                if (sb1.toString().trim().isEmpty()) {
+                    continue;
+                }
+
+                System.out.println(ANSI_RED + sb1 + ANSI_RESET);
+            }
+
+            if (i != 13) {
+                try {
+
+                    TimeUnit.MILLISECONDS.sleep(200L);
+                    clearAsciiArt();
+                    TimeUnit.MILLISECONDS.sleep(200L);
+
+                } catch (InterruptedException e) {
+                    System.out.println("Error: " + e);
+                }
+            } else {
+                try {
+                    TimeUnit.SECONDS.sleep(2);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        printSpaces(10);
     }
 
 
-    public static void printWOFBanner(String Color, int spaces) {
-
+    public static void printWOFBanner(String playerColor, int spaces) {
 
         BufferedImage bufferedImage = new BufferedImage(
-                terminalWidth, 30,
+                terminalWidth,
+                terminalHeight,
                 BufferedImage.TYPE_INT_RGB);
 
-        Graphics WOF = bufferedImage.getGraphics();
+        Graphics banner = bufferedImage.getGraphics();
         //setting font style and size
-        WOF.setFont(new Font("Arial", Font.PLAIN, fontSize));
+        banner.setFont(new Font(
+                "Arial",
+                Font.PLAIN,
+                fontSize));
 
-        Graphics2D WOFGraphic = (Graphics2D) WOF;
-        WOFGraphic.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        WOF.drawString("WHEEL OF FORTUNE", x_offset, 10);
+        Graphics2D bannerGraphic = (Graphics2D) banner;
+        bannerGraphic.setRenderingHint(
+                RenderingHints.KEY_TEXT_ANTIALIASING,
+                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
-        for (int y = 0; y < 30; y++) {
-            StringBuilder sb = new StringBuilder();
+        banner.drawString(
+                "WHEEL OF FORTUNE",
+                x_offset,
+                10);
+
+        for (int y = 0; y < terminalHeight; y++) {
+            StringBuilder bannerStringBuilder = new StringBuilder();
             for (int x = 0; x < terminalWidth; x++) {
-
-//                sb.append(bufferedImage.getRGB(x, y) == -16777216 ? "$" : " ");
-                sb.append(bufferedImage.getRGB(x, y) == -16777216 ? " " : "$");
-
+                bannerStringBuilder.append(bufferedImage.getRGB(x, y) == -16777216 ? " " : "$");
             }
-            if (sb.toString().trim().isEmpty()) {
+            if (bannerStringBuilder.toString().trim().isEmpty()) {
                 continue;
             }
-            System.out.println(Color + sb + ANSI_RESET);
+            System.out.println(playerColor + bannerStringBuilder + ANSI_RESET);
         }
-
-        for (int i = 0; i < spaces; ++i) System.out.println();
-
+        printSpaces(spaces);
     }
 
+    public static void printStarryNight() {
+
+        Random random = new Random();
+
+        int spaceBetweenChars = 80;     // up decrease down decrease
+        int length = 200; // down
+        int width = 120; // width
+        String eachLineOfStars = "";
+
+        for (int i = 0; i < length; i++) {
+            for (int j = 0; j < width; j++) {
+                int number = random.nextInt(spaceBetweenChars);
+//                System.out.println("Number: " + number);
+                if (number < 3) {
+                    eachLineOfStars = eachLineOfStars + "+";
+                } else if (number == 3) {
+                    eachLineOfStars = eachLineOfStars + "`";
+                } else if (number == 4) {
+                    eachLineOfStars = eachLineOfStars + ".";
+                } else if (number == 5) {
+                    eachLineOfStars = eachLineOfStars + "*";
+                } else {
+                    eachLineOfStars = eachLineOfStars + " ";
+                }
+            }
+
+            System.out.println(eachLineOfStars);
+            // reset star line
+            eachLineOfStars = "";
+
+            try {
+                Thread.sleep(10);
+            } catch (Exception e) {
+                System.out.println("Error: " + e);
+            }
+        }
+    }
+
+    public static void printReadyPlayer() {
+        printSpaces(18);
+
+        BufferedImage bufferedImage = new BufferedImage(
+                terminalWidth,
+                terminalHeight,
+                BufferedImage.TYPE_INT_RGB);
+
+        Graphics readyBanner = bufferedImage.getGraphics();
+
+        readyBanner.setFont(new Font("Arial", Font.BOLD, 8));
+        Graphics2D readyGraphic = (Graphics2D) readyBanner;
+        readyGraphic.setRenderingHint(
+                RenderingHints.KEY_TEXT_ANTIALIASING,
+                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+
+        readyBanner.drawString("R E A D Y", 40, 15);
+
+        for (int y = 0; y < terminalHeight; y++) {
+            StringBuilder readyStringBuilder = new StringBuilder();
+            for (int x = 0; x < terminalWidth; x++) {
+                readyStringBuilder.append(bufferedImage.getRGB(x, y) == -16777216 ? " " : "$");
+            }
+            if (readyStringBuilder.toString().trim().isEmpty()) {
+                continue;
+            }
+            System.out.println(ANSI_GREEN + readyStringBuilder + ANSI_RESET);
+        }
+
+        printPlayer();
+    }
+
+    public static void printPlayer() {
+        BufferedImage bufferedImage = new BufferedImage(
+                terminalWidth,
+                terminalHeight,
+                BufferedImage.TYPE_INT_RGB);
+
+        Graphics playerBanner = bufferedImage.getGraphics();
+        playerBanner.setFont(new Font("Arial", Font.BOLD, 10));
+        Graphics2D playerGraphic = (Graphics2D) playerBanner;
+
+        playerGraphic.setRenderingHint(
+                RenderingHints.KEY_TEXT_ANTIALIASING,
+                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+
+        playerBanner.drawString("P L A Y E R S", 25, 25);
+
+        for (int y = 0; y < terminalHeight; y++) {
+            StringBuilder playerStringBuilder = new StringBuilder();
+            for (int x = 0; x < terminalWidth; x++) {
+                playerStringBuilder.append(bufferedImage.getRGB(x, y) == -16777216 ? " " : "$");
+            }
+            if (playerStringBuilder.toString().trim().isEmpty()) {
+                continue;
+            }
+            System.out.println(ANSI_GREEN + playerStringBuilder + ANSI_RESET);
+        }
+
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            System.out.println("Error: " + e);
+        }
+
+    }
 }
 
-// for testing
-
-//class Main1 {
-//    public static void main(String[] args) {
-//
-//        WOFLogoAsciiArt.printWOFLogo();
-//
-//    }
-//}

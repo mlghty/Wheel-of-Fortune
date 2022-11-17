@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Game {
 
-    public static final int NUMBER_OF_ROUNDS = 3;
+    public static final int NUMBER_OF_ROUNDS = 1;
     public static final int COST_OF_VOWEL = 250;
     private static final List<Character> CONSONANTS = new ArrayList<>(List.of(
             'B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N',
@@ -64,18 +64,18 @@ public class Game {
     private void setUpPuzzle() {
 
         boolean isAlreadyFound = false;
-        while (! isAlreadyFound) {
+        while (!isAlreadyFound) {
             List<String> currentGamePuzzle = Puzzles.getRandomPuzzle();
             if (usedPuzzles.contains(currentGamePuzzle.get(0))) {
                 continue;
             } else {
                 String currentRoundPuzzle = currentGamePuzzle.get(0);
                 String currentRoundCategory = currentGamePuzzle.get(1);
-               usedPuzzles.add(currentRoundPuzzle);
+                usedPuzzles.add(currentRoundPuzzle);
                 setCurrentGameBoard(new GameBoard(currentRoundPuzzle, currentRoundCategory));
                 isAlreadyFound = true;
             }
-       }
+        }
     }
 
     private void determineStartingPlayer() {
@@ -211,12 +211,26 @@ public class Game {
     public String getWinningPlayer() {
         try {
             if (!winningPlayer.getName().equals("temp")) {
+
                 return winningPlayer.toString();
             } else {
                 return "There is no winner!";
             }
         } catch (NullPointerException e) {
             return "There is no winner!";
+        }
+    }
+
+    public Player getWinningPlayerObject() {
+        try {
+            if (!winningPlayer.getName().equals("temp")) {
+
+                return winningPlayer;
+            } else {
+                return null;
+            }
+        } catch (NullPointerException e) {
+            return null;
         }
     }
 
