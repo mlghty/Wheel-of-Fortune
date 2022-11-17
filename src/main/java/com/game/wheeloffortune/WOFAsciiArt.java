@@ -395,6 +395,12 @@ public class WOFAsciiArt {
 
         setWindowSizesManually();
 
+        try {
+            clearAsciiArt();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         String[] clientOptions = null;
         int fontSize = 0;
 
@@ -480,17 +486,7 @@ public class WOFAsciiArt {
         }
 
     }
-
-    public String setSpacesForWinOrMac(String AsciiMessage) {
-        if (operatingSystem.equals("win")) {
-            return AsciiMessage;
-
-        } else if (operatingSystem.equals("mac")) {
-            return "";
-        }
-
-        return "";
-    }
+    
 
 }
 
