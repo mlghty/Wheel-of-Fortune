@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: com.game.wheeloffortune.Main
+Main-Class: com.game.wheeloffortune.Client
 

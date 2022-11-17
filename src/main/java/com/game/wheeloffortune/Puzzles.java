@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Puzzles {
 
-    private static Map<String, String> hintPuzzles = new HashMap<String, String>();
+    private static final Map<String, String> hintPuzzles = new HashMap<>();
 
     static {
         hintPuzzles.put("REFERENCE VARIABLE", "Objects In Memory");
@@ -20,8 +20,6 @@ public class Puzzles {
     }
 
     public static ArrayList<String> getRandomPuzzle() {
-        //   int randomIndex = randomKVPairIndex.nextInt(10);
-
         Random randomKVPairIndex = new Random();
         List<String> keys = new ArrayList<>(hintPuzzles.keySet());
         String randomPuzzle = keys.get(randomKVPairIndex.nextInt(keys.size()));

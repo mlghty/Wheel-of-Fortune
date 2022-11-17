@@ -7,8 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 public class GameDialogue {
 
-
-    private Integer numOfPlayer;
+    private Integer numOfPlayers;
     private Scanner userInputScanner;
     private List<Player> players;
     private Game currentGame;
@@ -20,7 +19,6 @@ public class GameDialogue {
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_BLINK = "\033[5m";
     public static final String ANSI_CYAN = "\u001B[36m";
-
     public static final String ANSI_BG_GREEN = "\u001b[42m";
 
 
@@ -79,12 +77,12 @@ public class GameDialogue {
 
         System.out.println(ANSI_GREEN + "Number of Players: " + playerCount + ANSI_RESET);
 
-        numOfPlayer = playerCount;
+        numOfPlayers = playerCount;
         setPlayerNames();
     }
 
     public void setPlayerNames() {
-        for (int i = 1; i <= numOfPlayer; i++) {
+        for (int i = 1; i <= numOfPlayers; i++) {
             System.out.println(ANSI_GREEN + "Please enter name for Player " + i + ANSI_RESET);
             String playerName = userInputScanner.nextLine();
             players.add(new Player(playerName));
@@ -111,13 +109,11 @@ public class GameDialogue {
         try {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
         } catch (final Exception e) {
-//            System.out.println("Clearing manually!");
             TimeUnit.MILLISECONDS.sleep(50L);
             System.out.print("\033\143");
         }
 
         for (int i = 0; i < 29; ++i) System.out.println();
-
     }
 
     private void playerBuyConsonant() throws InterruptedException {
@@ -342,22 +338,16 @@ public class GameDialogue {
         return startGame;
     }
 
-    public Integer getNumOfPlayer() {
-        return numOfPlayer;
+    public Integer getNumOfPlayers() {
+        return numOfPlayers;
     }
 
-    public void setNumOfPlayer(Integer numOfPlayer) {
-        this.numOfPlayer = numOfPlayer;
+    public void setNumOfPlayers(Integer numOfPlayers) {
+        this.numOfPlayers = numOfPlayers;
     }
 
     public void setCurrentGame(Game currentGame) {
         this.currentGame = currentGame;
     }
-}
 
-class Main {
-    public static void main(String[] args) throws InterruptedException {
-        GameDialogue gameDialogue = new GameDialogue();
-        gameDialogue.gameLoop();
-    }
 }

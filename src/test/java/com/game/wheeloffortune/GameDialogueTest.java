@@ -43,7 +43,7 @@ public class GameDialogueTest {
         gameDialogueTest.numberOfPlayers();
 
 
-        Integer actualNumOfPlayers = gameDialogueTest.getNumOfPlayer();
+        Integer actualNumOfPlayers = gameDialogueTest.getNumOfPlayers();
 
         assertEquals(expectedNumOfPlayers, actualNumOfPlayers);
 
@@ -61,7 +61,7 @@ public class GameDialogueTest {
         gameDialogueTest.numberOfPlayers();
 
 
-        Integer actualNumOfPlayers = gameDialogueTest.getNumOfPlayer();
+        Integer actualNumOfPlayers = gameDialogueTest.getNumOfPlayers();
 
         assertEquals(expectedNumOfPlayers, actualNumOfPlayers);
 
@@ -79,7 +79,7 @@ public class GameDialogueTest {
         gameDialogueTest.numberOfPlayers();
 
 
-        Integer actualNumOfPlayers = gameDialogueTest.getNumOfPlayer();
+        Integer actualNumOfPlayers = gameDialogueTest.getNumOfPlayers();
 
         assertEquals(expectedNumOfPlayers, actualNumOfPlayers);
 
@@ -88,7 +88,7 @@ public class GameDialogueTest {
     @Test
     public void _test_setPlayerNames_one_player() {
 
-        gameDialogueTest.setNumOfPlayer(1);
+        gameDialogueTest.setNumOfPlayers(1);
         ByteArrayInputStream input = new ByteArrayInputStream("3\nJoeG".getBytes());
         Scanner sc = new Scanner(input);
         gameDialogueTest.setUserInputScanner(sc);
@@ -96,7 +96,7 @@ public class GameDialogueTest {
         gameDialogueTest.setPlayerNames();
 
         Integer expectedNumOfPlayers = 1;
-        Integer actualNumOfPlayer = gameDialogueTest.getNumOfPlayer();
+        Integer actualNumOfPlayer = gameDialogueTest.getNumOfPlayers();
 
         assertEquals(expectedNumOfPlayers, actualNumOfPlayer);
     }
@@ -104,7 +104,7 @@ public class GameDialogueTest {
     @Test
     public void _test_setPlayerNames_two_players() {
 
-        gameDialogueTest.setNumOfPlayer(2);
+        gameDialogueTest.setNumOfPlayers(2);
         ByteArrayInputStream input = new ByteArrayInputStream("3\nJoeG\nCindy".getBytes());
         Scanner sc = new Scanner(input);
         gameDialogueTest.setUserInputScanner(sc);
@@ -112,7 +112,7 @@ public class GameDialogueTest {
         gameDialogueTest.setPlayerNames();
 
         Integer expectedNumOfPlayers = 2;
-        Integer actualNumOfPlayer = gameDialogueTest.getNumOfPlayer();
+        Integer actualNumOfPlayer = gameDialogueTest.getNumOfPlayers();
 
         assertEquals(expectedNumOfPlayers, actualNumOfPlayer);
 
@@ -121,7 +121,7 @@ public class GameDialogueTest {
     @Test
     public void _test_setPlayerNames_three_players() {
 
-        gameDialogueTest.setNumOfPlayer(3);
+        gameDialogueTest.setNumOfPlayers(3);
         ByteArrayInputStream input = new ByteArrayInputStream("3\nJoeG\nCindy\nJoeR".getBytes());
         Scanner sc = new Scanner(input);
         gameDialogueTest.setUserInputScanner(sc);
@@ -129,7 +129,7 @@ public class GameDialogueTest {
         gameDialogueTest.setPlayerNames();
 
         Integer expectedNumOfPlayers = 3;
-        Integer actualNumOfPlayer = gameDialogueTest.getNumOfPlayer();
+        Integer actualNumOfPlayer = gameDialogueTest.getNumOfPlayers();
 
         assertEquals(expectedNumOfPlayers, actualNumOfPlayer);
 

@@ -148,7 +148,7 @@ public class WOFAsciiArt {
         printWOFLogo();
     }
 
-    public static void printAsciiMessage(String message, String playerColor) throws InterruptedException {
+    public static void printAsciiMessage(String message, String playerColor){
 
         BufferedImage bufferedImage = new BufferedImage(
                 terminalWidth,
@@ -184,8 +184,6 @@ public class WOFAsciiArt {
         for (int i = 0; i < spaces; ++i) System.out.println();
     }
 
-
-    // refactor a mess
     public static void printOutBankruptMessage() {
 
         try {
@@ -194,33 +192,39 @@ public class WOFAsciiArt {
             e.printStackTrace();
         }
 
+        // i = 8 is the smallest font that is readable
+        // and 14 is the biggest
         for (int i = 8; i < 14; i++) {
             printSpaces(10);
             BufferedImage bufferedImage = new BufferedImage(
                     terminalWidth, terminalHeight,
                     BufferedImage.TYPE_INT_RGB);
 
-            Graphics bankruptMessage = bufferedImage.getGraphics();
-            bankruptMessage.setFont(new Font("TimesRoman", Font.PLAIN, i));
+            Graphics bankruptGraphics = bufferedImage.getGraphics();
+            bankruptGraphics.setFont(new Font("TimesRoman", Font.PLAIN, i));
 
-            Graphics2D bankruptMessage1
-                    = (Graphics2D) bankruptMessage;
-            bankruptMessage1.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-            bankruptMessage.drawString("B A N K R U P T!", 30 - i, 15);
+            Graphics2D bankruptBanner = (Graphics2D) bankruptGraphics;
+
+            bankruptBanner.setRenderingHint(
+                    RenderingHints.KEY_TEXT_ANTIALIASING,
+                    RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+
+            bankruptGraphics.drawString("B A N K R U P T!", 30 - i, 15);
 
             for (int y = 0; y < terminalHeight; y++) {
-                StringBuilder sb1 = new StringBuilder();
+                StringBuilder bankruptStringBuilder = new StringBuilder();
                 for (int x = 0; x < terminalWidth; x++) {
-                    sb1.append(bufferedImage.getRGB(x, y) == -16777216 ? " " : "$");
-
+                    bankruptStringBuilder.append(bufferedImage.getRGB(x, y) == -16777216 ? " " : "$");
                 }
-                if (sb1.toString().trim().isEmpty()) {
+                if (bankruptStringBuilder.toString().trim().isEmpty()) {
                     continue;
                 }
-
-                System.out.println(ANSI_RED + sb1 + ANSI_RESET);
+                System.out.println(ANSI_RED + bankruptStringBuilder + ANSI_RESET);
             }
 
+            // If the index is at 13 then stops clearing as
+            // we want bankrupt to stay at the end for
+            // a couple of seconds
             if (i != 13) {
                 try {
 
@@ -241,7 +245,6 @@ public class WOFAsciiArt {
         }
         printSpaces(10);
     }
-
 
     public static void printWOFBanner(String playerColor, int spaces) {
 
@@ -287,28 +290,28 @@ public class WOFAsciiArt {
         int spaceBetweenChars = 80;     // up decrease down decrease
         int length = 200; // down
         int width = 120; // width
-        String eachLineOfStars = "";
+        StringBuilder eachLineOfStars = new StringBuilder();
 
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < width; j++) {
                 int number = random.nextInt(spaceBetweenChars);
 //                System.out.println("Number: " + number);
                 if (number < 3) {
-                    eachLineOfStars = eachLineOfStars + "+";
+                    eachLineOfStars.append("+");
                 } else if (number == 3) {
-                    eachLineOfStars = eachLineOfStars + "`";
+                    eachLineOfStars.append("`");
                 } else if (number == 4) {
-                    eachLineOfStars = eachLineOfStars + ".";
+                    eachLineOfStars.append(".");
                 } else if (number == 5) {
-                    eachLineOfStars = eachLineOfStars + "*";
+                    eachLineOfStars.append("*");
                 } else {
-                    eachLineOfStars = eachLineOfStars + " ";
+                    eachLineOfStars.append(" ");
                 }
             }
 
             System.out.println(eachLineOfStars);
             // reset star line
-            eachLineOfStars = "";
+            eachLineOfStars = new StringBuilder();
 
             try {
                 Thread.sleep(10);
@@ -384,5 +387,6 @@ public class WOFAsciiArt {
         }
 
     }
+
 }
 

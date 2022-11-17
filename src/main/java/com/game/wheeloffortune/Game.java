@@ -56,13 +56,11 @@ public class Game {
                 .forEach(player -> player.setCurrentRoundMoney(0));
     }
 
-
     /*
      * Get a random puzzle from Puzzles then check to see if it is in usedPuzzles List
      * if it is then get another puzzle, if it isn't then send the puzzle and hint to gameBoard
      */
     private void setUpPuzzle() {
-
         boolean isAlreadyFound = false;
         while (!isAlreadyFound) {
             List<String> currentGamePuzzle = Puzzles.getRandomPuzzle();
