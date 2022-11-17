@@ -53,7 +53,7 @@ public class GameDialogue {
         }
 
         if (startGame) {
-            System.out.println("Starting Game...");
+            System.out.println(ANSI_GREEN + "Starting Game..." + ANSI_RESET);
             TimeUnit.SECONDS.sleep(3);
             clearGameScreen();
         }

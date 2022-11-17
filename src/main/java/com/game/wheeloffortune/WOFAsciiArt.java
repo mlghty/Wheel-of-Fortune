@@ -95,10 +95,10 @@ public class WOFAsciiArt {
         }
     }
 
-    public static void setTitle(final String title, String OS) {
+    public static void setTitle(final String windowTitle, String operatingSystem) {
         try {
-            new ProcessBuilder(String.format(OS,
-                    title.replaceAll("\"", "")).split(" ")).inheritIO().start().waitFor();
+            new ProcessBuilder(String.format(operatingSystem,
+                    windowTitle.replaceAll("\"", "")).split(" ")).inheritIO().start().waitFor();
             System.out.flush();
         } catch (Exception e) {
             System.out.println("Error: " + e);
@@ -148,7 +148,7 @@ public class WOFAsciiArt {
         printWOFLogo();
     }
 
-    public static void printAsciiMessage(String message, String playerColor){
+    public static void printAsciiMessage(String messageToPrint, String playerColor){
 
         BufferedImage bufferedImage = new BufferedImage(
                 terminalWidth,
@@ -163,7 +163,7 @@ public class WOFAsciiArt {
                 RenderingHints.KEY_TEXT_ANTIALIASING,
                 RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
-        asciiMessageGraphic.drawString(message, 2, 13);
+        asciiMessageGraphic.drawString(messageToPrint, 2, 13);
 
         for (int y = 0; y < terminalHeight; y++) {
 
@@ -180,8 +180,8 @@ public class WOFAsciiArt {
         }
     }
 
-    public static void printSpaces(int spaces) {
-        for (int i = 0; i < spaces; ++i) System.out.println();
+    public static void printSpaces(int spacesToPrint) {
+        for (int i = 0; i < spacesToPrint; ++i) System.out.println();
     }
 
     public static void printOutBankruptMessage() {
@@ -246,7 +246,7 @@ public class WOFAsciiArt {
         printSpaces(10);
     }
 
-    public static void printWOFBanner(String playerColor, int spaces) {
+    public static void printWOFBanner(String playerColor, int spacesToPrint) {
 
         BufferedImage bufferedImage = new BufferedImage(
                 terminalWidth,
@@ -280,7 +280,7 @@ public class WOFAsciiArt {
             }
             System.out.println(playerColor + bannerStringBuilder + ANSI_RESET);
         }
-        printSpaces(spaces);
+        printSpaces(spacesToPrint);
     }
 
     public static void printStarryNight() {

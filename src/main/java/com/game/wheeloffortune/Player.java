@@ -1,5 +1,7 @@
 package com.game.wheeloffortune;
 
+import java.util.Locale;
+
 public class Player {
 
     private String playerName;
@@ -26,9 +28,9 @@ public class Player {
         return playerName;
     }
 
-    public void setName(String name) {
-        if (name.length() > 0) {
-            this.playerName = name;
+    public void setName(String playerName) {
+        if (playerName.length() > 0) {
+            this.playerName = playerName.substring(0, 1).toUpperCase() + playerName.substring(1);
         } else {
             System.out.println("Player name length must be greater > 0!");
         }
