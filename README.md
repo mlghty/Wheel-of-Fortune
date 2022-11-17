@@ -62,7 +62,7 @@ Game class:
 4. The spinning wheel with prizes, bankrupt, and lose a turn.
 
 
-Wheel with cash prizes from $500 to $900.
+Wheel with cash prizes from $200 to $1250.
 We will need to include Bankrupt and Lose a Turn wedge.
 
 
