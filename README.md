@@ -80,6 +80,7 @@ Once we have incorporated the basics of the game and have a working prototype th
 ### Requirements
 + Java 11
 + Terminal window 120(Width) x 30(Height)
++ 1200x720 resolution for GUI Client
 
 
 ### User Stories
