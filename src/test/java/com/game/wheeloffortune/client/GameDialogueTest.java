@@ -1,6 +1,5 @@
-package com.game.wheeloffortune;
+package com.game.wheeloffortune.client;
 
-import com.game.wheeloffortune.client.GameDialogue;
 import org.junit.Before;
 import org.junit.Test;
 
