@@ -396,12 +396,14 @@ public class WOFAsciiArt {
         setWindowSizesManually();
 
         String[] clientOptions = null;
+        int fontSize = 0;
 
         if (operatingSystem.equals("win")) {
             clientOptions = new String[]{"PRESS", "1. FOR CONSOLE", "2. FOR GUI"};
-
+            fontSize = 11;
         } else if (operatingSystem.equals("mac")) {
             clientOptions = new String[]{"P R E S S", "1. F O R C O N S O L E", "2. F O R G U I"};
+            fontSize = 8;
         }
 
         for (int i = 0; i < clientOptions.length; i++) {
@@ -412,7 +414,7 @@ public class WOFAsciiArt {
 
             Graphics clientOptionsBanner = bufferedImage.getGraphics();
 
-            clientOptionsBanner.setFont(new Font("Arial", Font.PLAIN, 10));
+            clientOptionsBanner.setFont(new Font("Arial", Font.PLAIN, fontSize));
             Graphics2D clientOptionsGraphics = (Graphics2D) clientOptionsBanner;
             clientOptionsGraphics.setRenderingHint(
                     RenderingHints.KEY_TEXT_ANTIALIASING,
