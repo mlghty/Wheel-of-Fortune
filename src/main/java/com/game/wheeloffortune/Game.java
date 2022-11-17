@@ -74,11 +74,13 @@ public class Game {
         }
     }
 
+    // determineStartingPlayer() determines which player starts the round by random determination
     private void determineStartingPlayer() {
         numberOfPlayers = getPlayers().size();
         indexOfCurrentPlayer = (int) (Math.random() * numberOfPlayers);
         setCurrentPlayersTurn(players.get(indexOfCurrentPlayer));
     }
+
 
     public void getNextPlayer() {
         indexOfCurrentPlayer++;
@@ -220,7 +222,6 @@ public class Game {
     public Player getWinningPlayerObject() {
         try {
             if (!winningPlayer.getName().equals("temp")) {
-
                 return winningPlayer;
             } else {
                 return null;
