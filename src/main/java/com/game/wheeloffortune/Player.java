@@ -1,7 +1,5 @@
 package com.game.wheeloffortune;
 
-import java.util.Locale;
-
 public class Player {
 
     private String playerName;
@@ -17,13 +15,10 @@ public class Player {
         playerColor = playerWheel.getRandomUniquePlayerColor();
     }
 
-    // business
-
     public int spinWheel() {
         return Wheel.getRandomWedgeOfTheWheel();
     }
 
-    // accessors
     public String getName() {
         return playerName;
     }
@@ -66,7 +61,7 @@ public class Player {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + " name: " + playerName
+        return getClass().getSimpleName() + " name: " + getName()
                 + "\nTotal money: " + getTotalMoney()
                 + "\nRound money: " + getCurrentRoundMoney() + '\n';
     }

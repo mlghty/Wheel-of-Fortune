@@ -12,6 +12,7 @@ public class GameDialogue {
     private List<Player> players;
     private Game currentGame;
     private Boolean startGame;
+    private GameBoard currentGameBoard;
 
 
     public static final String ANSI_RESET = "\u001B[0m";
@@ -48,7 +49,7 @@ public class GameDialogue {
                 System.out.println("Error valid options are 'X' & 'Q'");
                 System.out.println("Press 'X' to Start Game: ");
                 System.out.println("Press 'Q' to Exit Game: ");
-                pressedKey = userInputScanner.nextLine();  // Read user input
+                pressedKey = userInputScanner.nextLine();
             }
         }
 
@@ -59,7 +60,7 @@ public class GameDialogue {
         }
     }
 
-    public void numberOfPlayers() {
+    public void setNumberOfPlayers() {
 
         WOFAsciiArt.printReadyPlayer();
         WOFAsciiArt.printStarryNight();
@@ -70,7 +71,7 @@ public class GameDialogue {
         Integer playerCount = Integer.parseInt(userInputScanner.nextLine());
 
         while (playerCount < 1 || playerCount > 3) {
-            System.out.println(ANSI_RED + "Error please select between 1-3 players..." + ANSI_RESET );
+            System.out.println(ANSI_RED + "Error please select between 1-3 players..." + ANSI_RESET);
             playerCount = Integer.parseInt(userInputScanner.nextLine());
 
         }
@@ -92,19 +93,16 @@ public class GameDialogue {
     }
 
     public void displayCurrentPuzzle() {
-//        for (int i = 0; i < 6; ++i) System.out.println();
-
-        GameBoard currentGameBoard = currentGame.getCurrentGameBoard();
+        currentGameBoard = currentGame.getCurrentGameBoard();
         String puzzleHint = currentGameBoard.getGameHint();
         String puzzle = currentGameBoard.getGamePuzzle();
+        String roundNumber = String.valueOf(currentGame.getCurrentRoundNumber());
 
-        System.out.println("Round #: " + currentGame.getCurrentRoundNumber());
+        System.out.println("Round #: " + roundNumber);
         System.out.println("Hint: " + puzzleHint);
         System.out.println("Puzzle: " + puzzle + "\n");
     }
 
-    // temp until game is run on independent terminal screen
-    // and not under intelli js
     public void clearGameScreen() throws InterruptedException {
         try {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
@@ -116,19 +114,16 @@ public class GameDialogue {
         for (int i = 0; i < 29; ++i) System.out.println();
     }
 
-    private void playerBuyConsonant() throws InterruptedException {
+    private void playerBuyConsonant(String playerColor) throws InterruptedException {
         String guessedLetter;
         boolean isValidConsonants = false;
         String playerName = currentGame.getCurrentPlayersTurn().getName();
-        String playerColor = currentGame.getCurrentPlayersTurn().getPlayerColor();
+        int wheelValue = currentGame.spinWheel();
 
 
         clearGameScreen();
         WOFAsciiArt.printWOFBanner(playerColor, 10);
 
-
-        int wheelValue = currentGame.spinWheel();
-//        System.out.println(" Spinning Wheel...");
         displayCurrentPuzzle();
         System.out.print(playerColor + playerName + ANSI_RESET);
         System.out.println(" is Spinning the Wheel...");
@@ -137,18 +132,25 @@ public class GameDialogue {
 
 
         if (wheelValue == 0) {
+
             System.out.println(ANSI_RED + "YOU LOSE A TURN! Next Players Turn: "
-                    + currentGame.getCurrentPlayersTurn().getName() + "\n" + ANSI_RESET);
+                    + currentGame.getCurrentPlayersTurn().getName()
+                    + "\n"
+                    + ANSI_RESET);
+
             TimeUnit.SECONDS.sleep(5);
 
             return;
         } else if (wheelValue == -1) {
             TimeUnit.SECONDS.sleep(3);
             WOFAsciiArt.printOutBankruptMessage();
-            System.out.println(ANSI_RED + "BANKRUPT! Next Players Turn: "
-                    + currentGame.getCurrentPlayersTurn().getName() + "\n" + ANSI_RESET);
-            TimeUnit.SECONDS.sleep(3);
 
+            System.out.println(ANSI_RED
+                    + "BANKRUPT! Next Players Turn: "
+                    + currentGame.getCurrentPlayersTurn().getName()
+                    + "\n" + ANSI_RESET);
+
+            TimeUnit.SECONDS.sleep(3);
             return;
         }
 
@@ -157,14 +159,12 @@ public class GameDialogue {
         guessedLetter = userInputScanner.nextLine();
 
         while (!isValidConsonants) {
-
             for (char consonant : currentGame.getConsonants()) {
                 if (guessedLetter.toUpperCase().charAt(0) == consonant) {
                     isValidConsonants = true;
                     break;
                 }
             }
-
             if (!isValidConsonants) {
                 System.out.println(ANSI_RED + "Error invalid consonant you lose a turn!!" + ANSI_RESET);
                 currentGame.getNextPlayer();
@@ -175,16 +175,14 @@ public class GameDialogue {
                 System.out.println("Letter " + guessedLetter + " appeared " + occurrences + " times!");
                 TimeUnit.SECONDS.sleep(3);
             }
-
         }
     }
 
-    private void playerBuyVowel() throws InterruptedException {
+    private void playerBuyVowel(String playerColor) throws InterruptedException {
         String vowelPurchase;
         boolean isValidVowel = false;
 
         clearGameScreen();
-        String playerColor = currentGame.getCurrentPlayersTurn().getPlayerColor();
         WOFAsciiArt.printWOFBanner(playerColor, 13);
 
         if (currentGame.getCurrentPlayersTurn().getCurrentRoundMoney() >= 250) {
@@ -205,28 +203,23 @@ public class GameDialogue {
                     currentGame.getNextPlayer();
                     TimeUnit.SECONDS.sleep(3);
                     break;
-
                 } else {
                     int occurrences = currentGame.buyAVowel(vowelPurchase.toUpperCase().charAt(0));
-                    System.out.println("Vowel occurrences: " + occurrences + "!!");
-//                    System.out.println(currentGame.getCurrentPlayersTurn());
+                    System.out.println("Vowel " + vowelPurchase + " appeared " + occurrences + " times!");
                     TimeUnit.SECONDS.sleep(3);
                 }
-
             }
-
         } else {
             System.out.println(ANSI_RED + "Sorry not enough money..." + ANSI_RESET);
             TimeUnit.SECONDS.sleep(2);
-
         }
     }
 
     private boolean playerAttemptSolve(boolean isSolved) throws InterruptedException {
         String solvePuzzleAttempt;
+        String playerColor = currentGame.getCurrentPlayersTurn().getPlayerColor();
 
         clearGameScreen();
-        String playerColor = currentGame.getCurrentPlayersTurn().getPlayerColor();
         WOFAsciiArt.printWOFBanner(playerColor, 13);
         displayCurrentPuzzle();
 
@@ -247,10 +240,10 @@ public class GameDialogue {
 
     public void gameLoop() throws InterruptedException {
 
-        // commented out for convenience for now
         startGame();
+
         if (startGame) {
-            numberOfPlayers();
+            setNumberOfPlayers();
             clearGameScreen();
             currentGame.startRound();
         }
@@ -258,17 +251,10 @@ public class GameDialogue {
         boolean correctOption = false;
         Integer intUserInput = 0;
         boolean isSolved = false;
-        String playerName;
-        String playerColor;
+        String playerName = null;
+        String playerColor = null;
 
         while (!isSolved) {
-
-
-//            playerName = String.valueOf(currentGame.getCurrentPlayersTurn());
-//            playerColor = currentGame.getCurrentPlayersTurn().getPlayerColor();
-//            WOFAsciiArt.printWOFBanner(playerColor,6);
-//            displayCurrentPuzzle();
-//            System.out.println(playerColor + playerName + "\n" + ANSI_RESET);
 
             while (!correctOption) {
 
@@ -298,10 +284,10 @@ public class GameDialogue {
 
             switch (intUserInput) {
                 case 1:
-                    playerBuyConsonant();
+                    playerBuyConsonant(playerColor);
                     break;
                 case 2:
-                    playerBuyVowel();
+                    playerBuyVowel(playerColor);
                     break;
                 case 3:
                     isSolved = playerAttemptSolve(false);
@@ -318,9 +304,8 @@ public class GameDialogue {
                 WOFAsciiArt.printAsciiMessage(
                         "$" +
                                 String.valueOf(currentGame.getWinningPlayerObject().getTotalMoney()),
-                                winningPlayerColor);
+                        winningPlayerColor);
                 currentGame.getWinningPlayer();
-
                 TimeUnit.SECONDS.sleep(100);
             } else {
                 clearGameScreen();
@@ -328,9 +313,7 @@ public class GameDialogue {
                 correctOption = false;
                 isSolved = false;
             }
-
         }
-
     }
 
     public void setUserInputScanner(Scanner userInputScanner) {
