@@ -41,7 +41,7 @@ public class GameDialogueTest {
         ByteArrayInputStream input = new ByteArrayInputStream("1\nJoe".getBytes());
         Scanner sc = new Scanner(input);
         gameDialogueTest.setUserInputScanner(sc);
-        gameDialogueTest.numberOfPlayers();
+        gameDialogueTest.setNumberOfPlayers();
 
 
         Integer actualNumOfPlayers = gameDialogueTest.getNumOfPlayers();
@@ -59,7 +59,7 @@ public class GameDialogueTest {
         ByteArrayInputStream input = new ByteArrayInputStream("2\nJoe\nCindy".getBytes());
         Scanner sc = new Scanner(input);
         gameDialogueTest.setUserInputScanner(sc);
-        gameDialogueTest.numberOfPlayers();
+        gameDialogueTest.setNumberOfPlayers();
 
 
         Integer actualNumOfPlayers = gameDialogueTest.getNumOfPlayers();
@@ -77,7 +77,7 @@ public class GameDialogueTest {
         ByteArrayInputStream input = new ByteArrayInputStream("3\nJoeG\nCindy\nJoeR".getBytes());
         Scanner sc = new Scanner(input);
         gameDialogueTest.setUserInputScanner(sc);
-        gameDialogueTest.numberOfPlayers();
+        gameDialogueTest.setNumberOfPlayers();
 
 
         Integer actualNumOfPlayers = gameDialogueTest.getNumOfPlayers();

@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Game {
 
-    public static final int NUMBER_OF_ROUNDS = 1;
+    public static final int NUMBER_OF_ROUNDS = 3;
     public static final int COST_OF_VOWEL = 250;
     private static final List<Character> CONSONANTS = new ArrayList<>(List.of(
             'B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N',
