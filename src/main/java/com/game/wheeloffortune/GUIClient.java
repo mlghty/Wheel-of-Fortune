@@ -238,11 +238,7 @@ public class GUIClient extends JFrame {
         JPanel buttonPanel = new JPanel(new FlowLayout());
         JButton spinWheel = new JButton();
         spinWheel.setText("Spin Wheel");
-        if(wheelSpun || vowelBought) {
-            spinWheel.setEnabled(false);
-        } else {
-            spinWheel.setEnabled(true);
-        }
+        spinWheel.setEnabled(!wheelSpun && !vowelBought);
         spinWheel.addActionListener(e -> {
             int i = game.spinWheel();
             if (i == 0) {
@@ -264,12 +260,8 @@ public class GUIClient extends JFrame {
         });
         JButton buyAVowel = new JButton();
         buyAVowel.setText("Buy a Vowel");
-        if(vowelBought || wheelSpun ||
-                game.getCurrentPlayersTurn().getCurrentRoundMoney() < Game.COST_OF_VOWEL) {
-            buyAVowel.setEnabled(false);
-        } else {
-            buyAVowel.setEnabled(true);
-        }
+        buyAVowel.setEnabled(!vowelBought && !wheelSpun &&
+                game.getCurrentPlayersTurn().getCurrentRoundMoney() >= Game.COST_OF_VOWEL);
         buyAVowel.addActionListener(e -> {
             vowelBought = true;
             updateWindow();
@@ -277,11 +269,7 @@ public class GUIClient extends JFrame {
 
         JButton solvePuzzle = new JButton();
         solvePuzzle.setText("Solve Puzzle");
-        if(wheelSpun || vowelBought) {
-            solvePuzzle.setEnabled(false);
-        } else {
-            solvePuzzle.setEnabled(true);
-        }
+        solvePuzzle.setEnabled(!wheelSpun && !vowelBought);
         solvePuzzle.addActionListener(e -> {
             int i = game.solvePuzzle(JOptionPane.showInputDialog("Solve Puzzle: "));
             if (i == 1) {
