@@ -10,14 +10,14 @@ public class GameBoard {
 
     List<Character> lettersAlreadyGuessed = new ArrayList<>();
 
-    // Constructor
+
     public GameBoard(String gamePuzzle, String gameHint) {
         setGamePuzzle(gamePuzzle.toUpperCase());
         setIsLetterRevealed(new boolean[gamePuzzle.length()]);
         setGameHint(gameHint.toUpperCase());
     }
 
-    // Business Methods
+
     public int guessLetter(char letterGuessed) {
         int numberOfTimesLetterAppears = 0;
         letterGuessed = Character.toUpperCase(letterGuessed);
@@ -36,13 +36,10 @@ public class GameBoard {
     }
 
     public boolean solvePuzzle(String puzzleGuess) {
-        if(puzzleGuess.toUpperCase().equals(this.gamePuzzle)) {
-            return true;
-        }
-        return false;
+        return puzzleGuess.toUpperCase().equals(this.gamePuzzle);
     }
 
-    // Accessors
+
     public String getGamePuzzle() {
         String returnValue = "";
         for (int i = 0; i < this.gamePuzzle.length(); i++) {
