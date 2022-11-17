@@ -1,32 +1,27 @@
 package com.game.wheeloffortune;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
-
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class GUIClient extends JFrame {
 
+    // Static Fields
     public static final char[] TOP_CHARS = {'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'};
     public static final char[] MID_CHARS = {'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'};
     public static final char[] BOT_CHARS = {'Z', 'X', 'C', 'V', 'B', 'N', 'M'};
+
+    // Fields
     JFrame mainWindow;
     Game game;
-
-    String filePath = new File("").getAbsolutePath();
-
     boolean wheelSpun = false;
     boolean vowelBought = false;
     private JPanel playerPanel;
-    private List<Player> players;
+    private final List<Player> players;
 
+    // Constructor
     GUIClient(List<Player> players) {
         this.players = players;
         game = new Game(players);
@@ -36,6 +31,9 @@ public class GUIClient extends JFrame {
         updateWindow();
     }
 
+    // Business Methods
+
+    // Create main Window that the game is viewed in
     private void setMainWindow() {
         ImageIcon icon = new ImageIcon("colorWheel.png");
         mainWindow.setIconImage(icon.getImage());
@@ -47,6 +45,7 @@ public class GUIClient extends JFrame {
         mainWindow.setVisible(true);
     }
 
+    // Used to refresh the contents of the window any time a change is made
     private void updateWindow() {
         mainWindow.getContentPane().removeAll();
         displayPuzzle();
@@ -91,15 +90,20 @@ public class GUIClient extends JFrame {
 
     // Main Window Center
     private void displayWheel() {
-        JPanel centerPanel = new JPanel(new BorderLayout());
+        JPanel centerPanel = new JPanel(new BorderLayout()); // This creates a panel within the center frame of the main window
 
-        JPanel roundNumber = new JPanel(new BorderLayout());
-        JLabel round = new JLabel();
+        JPanel roundNumber = new JPanel(new BorderLayout()); // A panel to hold the Round Numbers
+        JLabel round = new JLabel(); // A label to display the round numbers
+
+        // These 4 lines format the text in the label
         round.setText("Round Number: " + game.getCurrentRoundNumber());
         round.setFont(new Font("Courier", Font.BOLD, 24));
         round.setIconTextGap(-15);
         round.setHorizontalAlignment(JLabel.CENTER);
-        roundNumber.add(round, BorderLayout.NORTH);
+
+        roundNumber.add(round, BorderLayout.NORTH); // Adds the round number panel to the center panel in the main window
+
+        // If the spin wheel option was used, this will ensure the value of the wheel spin is displayed
         if (wheelSpun) {
             JLabel value = new JLabel();
             value.setText("Current Wheel Value: " + game.getValueOfWheelSpin());
@@ -109,17 +113,6 @@ public class GUIClient extends JFrame {
             roundNumber.add(value, BorderLayout.CENTER);
         }
         centerPanel.add(roundNumber, BorderLayout.NORTH);
-
-//        BufferedImage myPicture = null;
-//        System.out.println(filePath);
-//        try {
-//            myPicture = ImageIO.read(new File("colorWheel.png"));
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//        JLabel picLabel = new JLabel(new ImageIcon(myPicture));
-//        centerPanel.add(picLabel,BorderLayout.CENTER);
-
 
         mainWindow.add(centerPanel);
         mainWindow.revalidate();
@@ -138,7 +131,7 @@ public class GUIClient extends JFrame {
         p1Name.setFont(new Font("Courier", Font.BOLD, 24));
         p1Name.setIconTextGap(-15);
         if (game.getPlayers().get(0).equals(game.getCurrentPlayersTurn())) {
-            p1Name.setForeground(Color.YELLOW);
+            p1Name.setForeground(Color.MAGENTA);
         } else {
             p1Name.setForeground(Color.WHITE);
         }
@@ -170,7 +163,7 @@ public class GUIClient extends JFrame {
         p2Name.setFont(new Font("Courier", Font.BOLD, 24));
         p2Name.setIconTextGap(-15);
         if (game.getPlayers().get(1).equals(game.getCurrentPlayersTurn())) {
-            p2Name.setForeground(Color.YELLOW);
+            p2Name.setForeground(Color.MAGENTA);
         } else {
             p2Name.setForeground(Color.WHITE);
         }
@@ -201,7 +194,7 @@ public class GUIClient extends JFrame {
         p3Name.setFont(new Font("Courier", Font.BOLD, 24));
         p3Name.setIconTextGap(-15);
         if (game.getPlayers().get(2).equals(game.getCurrentPlayersTurn())) {
-            p3Name.setForeground(Color.YELLOW);
+            p3Name.setForeground(Color.MAGENTA);
         } else {
             p3Name.setForeground(Color.WHITE);
         }
@@ -245,6 +238,11 @@ public class GUIClient extends JFrame {
         JPanel buttonPanel = new JPanel(new FlowLayout());
         JButton spinWheel = new JButton();
         spinWheel.setText("Spin Wheel");
+        if(wheelSpun || vowelBought) {
+            spinWheel.setEnabled(false);
+        } else {
+            spinWheel.setEnabled(true);
+        }
         spinWheel.addActionListener(e -> {
             int i = game.spinWheel();
             if (i == 0) {
@@ -266,6 +264,12 @@ public class GUIClient extends JFrame {
         });
         JButton buyAVowel = new JButton();
         buyAVowel.setText("Buy a Vowel");
+        if(vowelBought || wheelSpun ||
+                game.getCurrentPlayersTurn().getCurrentRoundMoney() < Game.COST_OF_VOWEL) {
+            buyAVowel.setEnabled(false);
+        } else {
+            buyAVowel.setEnabled(true);
+        }
         buyAVowel.addActionListener(e -> {
             vowelBought = true;
             updateWindow();
@@ -273,6 +277,11 @@ public class GUIClient extends JFrame {
 
         JButton solvePuzzle = new JButton();
         solvePuzzle.setText("Solve Puzzle");
+        if(wheelSpun || vowelBought) {
+            solvePuzzle.setEnabled(false);
+        } else {
+            solvePuzzle.setEnabled(true);
+        }
         solvePuzzle.addActionListener(e -> {
             int i = game.solvePuzzle(JOptionPane.showInputDialog("Solve Puzzle: "));
             if (i == 1) {
@@ -301,6 +310,8 @@ public class GUIClient extends JFrame {
                         "Sorry that wasn't correct. Next Player's turn.",
                         "Incorrect", JOptionPane.WARNING_MESSAGE);
             }
+            vowelBought = false;
+            wheelSpun = false;
             updateWindow();
         });
 
@@ -310,53 +321,82 @@ public class GUIClient extends JFrame {
         for (char c : TOP_CHARS) {
             JButton button = new JButton();
             button.setText(String.valueOf(c));
+            button.setEnabled(false);
+            if(game.getConsonants().contains(c) && wheelSpun) {
+                button.setEnabled(true);
+            } else if(game.getVowels().contains(c) && vowelBought) {
+                button.setEnabled(true);
+            }
             button.addActionListener(e -> {
                 if (game.getConsonants().contains(c) && wheelSpun) {
                     int i = game.pickLetter(c);
+                    vowelBought = false;
+                    wheelSpun = false;
+                    updateWindow();
                     if (i == 0) {
                         JOptionPane.showMessageDialog(null,
                                 c + " was not in the Puzzle. Next Player's turn.",
                                 "Incorrect", JOptionPane.WARNING_MESSAGE);
+                        vowelBought = false;
+                        wheelSpun = false;
+                        updateWindow();
                     } else if (i == -1) {
                         JOptionPane.showMessageDialog(null,
                                 c + " was already chosen! Next Player's turn.",
                                 "Incorrect", JOptionPane.WARNING_MESSAGE);
+                        vowelBought = false;
+                        wheelSpun = false;
+                        updateWindow();
                     }
                 } else {
                     if (game.getConsonants().contains(c) && !wheelSpun) {
                         JOptionPane.showMessageDialog(null,
                                 "You must spin the wheel to pick a letter!",
                                 "No Wheel Spun", JOptionPane.WARNING_MESSAGE);
+                        updateWindow();
                     } else {
                         if (vowelBought) {
                             int i = 0;
                             try {
                                 i = game.buyAVowel(c);
+                                vowelBought = false;
+                                wheelSpun = false;
+                                updateWindow();
                             } catch (IllegalArgumentException ex) {
                                 JOptionPane.showMessageDialog(null,
                                         "You don't have enough money!",
                                         "No Money", JOptionPane.WARNING_MESSAGE);
+                                updateWindow();
                             }
                             if (i == 0) {
                                 JOptionPane.showMessageDialog(null,
                                         c + " was not in the Puzzle. Next Player's turn.",
                                         "Incorrect", JOptionPane.WARNING_MESSAGE);
+                                vowelBought = false;
+                                wheelSpun = false;
+                                updateWindow();
                             } else if (i == -1) {
                                 JOptionPane.showMessageDialog(null,
                                         c + " was already chosen! Next Player's turn.",
                                         "Incorrect", JOptionPane.WARNING_MESSAGE);
+                                vowelBought = false;
+                                wheelSpun = false;
+                                updateWindow();
                             }
                         } else {
                             JOptionPane.showMessageDialog(null,
                                     "That was not a valid input! Next Player's Turn",
                                     "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                            vowelBought = false;
+                            wheelSpun = false;
+                            updateWindow();
                         }
 
                     }
                 }
-                updateWindow();
                 vowelBought = false;
                 wheelSpun = false;
+                updateWindow();
             });
             topRow.add(button);
         }
@@ -366,53 +406,83 @@ public class GUIClient extends JFrame {
         for (char c : MID_CHARS) {
             JButton button = new JButton();
             button.setText(String.valueOf(c));
+            button.setEnabled(false);
+            if(game.getConsonants().contains(c) && wheelSpun) {
+                button.setEnabled(true);
+            } else if(game.getVowels().contains(c) && vowelBought) {
+                button.setEnabled(true);
+            }
             button.addActionListener(e -> {
                 if (game.getConsonants().contains(c) && wheelSpun) {
                     int i = game.pickLetter(c);
+                    updateWindow();
                     if (i == 0) {
                         JOptionPane.showMessageDialog(null,
                                 c + " was not in the Puzzle. Next Player's turn.",
                                 "Incorrect", JOptionPane.WARNING_MESSAGE);
+                        vowelBought = false;
+                        wheelSpun = false;
+                        updateWindow();
                     } else if (i == -1) {
                         JOptionPane.showMessageDialog(null,
                                 c + " was already chosen! Next Player's turn.",
                                 "Incorrect", JOptionPane.WARNING_MESSAGE);
+                        vowelBought = false;
+                        wheelSpun = false;
+                        updateWindow();
                     }
                 } else {
                     if (game.getConsonants().contains(c) && !wheelSpun) {
                         JOptionPane.showMessageDialog(null,
                                 "You must spin the wheel to pick a letter!",
                                 "No Wheel Spun", JOptionPane.WARNING_MESSAGE);
+                        vowelBought = false;
+                        wheelSpun = false;
+                        updateWindow();
                     } else {
                         if (vowelBought) {
                             int i = 0;
                             try {
                                 i = game.buyAVowel(c);
+                                vowelBought = false;
+                                wheelSpun = false;
+                                updateWindow();
                             } catch (IllegalArgumentException ex) {
                                 JOptionPane.showMessageDialog(null,
                                         "You don't have enough money!",
                                         "No Money", JOptionPane.WARNING_MESSAGE);
+                                updateWindow();
                             }
                             if (i == 0) {
                                 JOptionPane.showMessageDialog(null,
                                         c + " was not in the Puzzle. Next Player's turn.",
                                         "Incorrect", JOptionPane.WARNING_MESSAGE);
+                                vowelBought = false;
+                                wheelSpun = false;
+                                updateWindow();
                             } else if (i == -1) {
                                 JOptionPane.showMessageDialog(null,
                                         c + " was already chosen! Next Player's turn.",
                                         "Incorrect", JOptionPane.WARNING_MESSAGE);
+                                vowelBought = false;
+                                wheelSpun = false;
+                                updateWindow();
                             }
                         } else {
                             JOptionPane.showMessageDialog(null,
                                     "That was not a valid input! Next Player's Turn",
                                     "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                            vowelBought = false;
+                            wheelSpun = false;
+                            updateWindow();
                         }
 
                     }
                 }
-                updateWindow();
                 vowelBought = false;
                 wheelSpun = false;
+                updateWindow();
+
             });
             middleRow.add(button);
         }
@@ -422,23 +492,39 @@ public class GUIClient extends JFrame {
         for (char c : BOT_CHARS) {
             JButton button = new JButton();
             button.setText(String.valueOf(c));
+            button.setEnabled(false);
+            if(game.getConsonants().contains(c) && wheelSpun) {
+                button.setEnabled(true);
+            } else if(game.getVowels().contains(c) && vowelBought) {
+                button.setEnabled(true);
+            }
             button.addActionListener(e -> {
                 if (game.getConsonants().contains(c) && wheelSpun) {
                     int i = game.pickLetter(c);
+                    wheelSpun = false;
+                    vowelBought = false;
+                    updateWindow();
                     if (i == 0) {
                         JOptionPane.showMessageDialog(null,
                                 c + " was not in the Puzzle. Next Player's turn.",
                                 "Incorrect", JOptionPane.WARNING_MESSAGE);
+                        wheelSpun = false;
+                        vowelBought = false;
+                        updateWindow();
                     } else if (i == -1) {
                         JOptionPane.showMessageDialog(null,
                                 c + " was already chosen! Next Player's turn.",
                                 "Incorrect", JOptionPane.WARNING_MESSAGE);
+                        wheelSpun = false;
+                        vowelBought = false;
+                        updateWindow();
                     }
                 } else {
                     if (game.getConsonants().contains(c) && !wheelSpun) {
                         JOptionPane.showMessageDialog(null,
                                 "You must spin the wheel to pick a letter!",
                                 "No Wheel Spun", JOptionPane.WARNING_MESSAGE);
+                        updateWindow();
                     } else {
                         if (vowelBought) {
                             int i = 0;
@@ -448,27 +534,39 @@ public class GUIClient extends JFrame {
                                 JOptionPane.showMessageDialog(null,
                                         "You don't have enough money!",
                                         "No Money", JOptionPane.WARNING_MESSAGE);
+                                wheelSpun = false;
+                                vowelBought = false;
+                                updateWindow();
                             }
                             if (i == 0) {
                                 JOptionPane.showMessageDialog(null,
                                         c + " was not in the Puzzle. Next Player's turn.",
                                         "Incorrect", JOptionPane.WARNING_MESSAGE);
+                                wheelSpun = false;
+                                vowelBought = false;
+                                updateWindow();
                             } else if (i == -1) {
                                 JOptionPane.showMessageDialog(null,
                                         c + " was already chosen! Next Player's turn.",
                                         "Incorrect", JOptionPane.WARNING_MESSAGE);
+                                wheelSpun = false;
+                                vowelBought = false;
+                                updateWindow();
                             }
                         } else {
                             JOptionPane.showMessageDialog(null,
                                     "That was not a valid input! Next Player's Turn",
                                     "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                            wheelSpun = false;
+                            vowelBought = false;
+                            updateWindow();
                         }
 
                     }
                 }
-                updateWindow();
                 vowelBought = false;
                 wheelSpun = false;
+                updateWindow();
             });
             bottomRow.add(button);
         }
@@ -482,7 +580,8 @@ public class GUIClient extends JFrame {
         mainWindow.revalidate();
     }
 
-    public static void main() {
+
+    public static void runClient() {
 
         List<Player> players = new ArrayList<>();
         for(int i = 1; i < 4; i++) {
@@ -490,9 +589,6 @@ public class GUIClient extends JFrame {
                     "Input Player " + i + "'s Name: ","Player Name Input", JOptionPane.PLAIN_MESSAGE);
             players.add(new Player(pName));
         }
-//        players.add(new Player("Joe"));
-//        players.add(new Player("John"));
-//        players.add(new Player("James"));
         new GUIClient(players);
     }
 }

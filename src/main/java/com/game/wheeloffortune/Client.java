@@ -13,7 +13,7 @@ public class Client {
             GameDialogue gameDialogue = new GameDialogue();
             gameDialogue.gameLoop();
         } else if (selection == 2){
-            GUIClient.main();
+            GUIClient.runClient();
         }
     }
 }
