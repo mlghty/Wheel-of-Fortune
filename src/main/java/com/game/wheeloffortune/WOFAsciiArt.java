@@ -388,5 +388,13 @@ public class WOFAsciiArt {
 
     }
 
+    public static void setWindowSizesManually(){
+        terminalWidth = 120;
+        terminalHeight = 30;
+        fontSize = 11;
+        x_offset = 10;
+        y_offset = 20;
+    }
+
 }
 

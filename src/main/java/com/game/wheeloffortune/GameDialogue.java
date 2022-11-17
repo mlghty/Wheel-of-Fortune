@@ -124,7 +124,7 @@ public class GameDialogue {
 
 
         clearGameScreen();
-        WOFAsciiArt.printWOFBanner(playerColor, 13);
+        WOFAsciiArt.printWOFBanner(playerColor, 10);
 
 
         int wheelValue = currentGame.spinWheel();
@@ -185,7 +185,7 @@ public class GameDialogue {
 
         clearGameScreen();
         String playerColor = currentGame.getCurrentPlayersTurn().getPlayerColor();
-        WOFAsciiArt.printWOFBanner(playerColor, 18);
+        WOFAsciiArt.printWOFBanner(playerColor, 13);
 
         if (currentGame.getCurrentPlayersTurn().getCurrentRoundMoney() >= 250) {
             displayCurrentPuzzle();
@@ -227,7 +227,8 @@ public class GameDialogue {
 
         clearGameScreen();
         String playerColor = currentGame.getCurrentPlayersTurn().getPlayerColor();
-        WOFAsciiArt.printWOFBanner(playerColor, 17);
+        WOFAsciiArt.printWOFBanner(playerColor, 13);
+        displayCurrentPuzzle();
 
         System.out.println("Enter Your Guess to Solve the Puzzle: ");
         solvePuzzleAttempt = userInputScanner.nextLine();

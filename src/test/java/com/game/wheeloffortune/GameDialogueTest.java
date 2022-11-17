@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;
 
+import static com.game.wheeloffortune.WOFAsciiArt.setWindowSizesManually;
 import static org.junit.Assert.*;
 
 public class GameDialogueTest {
@@ -14,7 +15,7 @@ public class GameDialogueTest {
 
     @Before
     public void setUp() {
-        System.out.println("Before");
+        setWindowSizesManually();
         gameDialogueTest = new GameDialogue();
     }
 
@@ -32,7 +33,7 @@ public class GameDialogueTest {
     }
 
     @Test
-    public void _test_numberOfPlayers_one_player() {
+    public void _test_numberOfPlayers_one_player_both_getter_setters() {
 
 
         Integer expectedNumOfPlayers = 1;
@@ -50,7 +51,7 @@ public class GameDialogueTest {
     }
 
     @Test
-    public void _test_numberOfPlayers_two_players() {
+    public void _test_numberOfPlayers_two_players_both_getter_setters() {
 
 
         Integer expectedNumOfPlayers = 2;
@@ -68,7 +69,7 @@ public class GameDialogueTest {
     }
 
     @Test
-    public void _test_numberOfPlayers_three_players() {
+    public void _test_numberOfPlayers_three_players_both_getter_setters() {
 
 
         Integer expectedNumOfPlayers = 3;
@@ -82,56 +83,6 @@ public class GameDialogueTest {
         Integer actualNumOfPlayers = gameDialogueTest.getNumOfPlayers();
 
         assertEquals(expectedNumOfPlayers, actualNumOfPlayers);
-
-    }
-
-    @Test
-    public void _test_setPlayerNames_one_player() {
-
-        gameDialogueTest.setNumOfPlayers(1);
-        ByteArrayInputStream input = new ByteArrayInputStream("3\nJoeG".getBytes());
-        Scanner sc = new Scanner(input);
-        gameDialogueTest.setUserInputScanner(sc);
-
-        gameDialogueTest.setPlayerNames();
-
-        Integer expectedNumOfPlayers = 1;
-        Integer actualNumOfPlayer = gameDialogueTest.getNumOfPlayers();
-
-        assertEquals(expectedNumOfPlayers, actualNumOfPlayer);
-    }
-
-    @Test
-    public void _test_setPlayerNames_two_players() {
-
-        gameDialogueTest.setNumOfPlayers(2);
-        ByteArrayInputStream input = new ByteArrayInputStream("3\nJoeG\nCindy".getBytes());
-        Scanner sc = new Scanner(input);
-        gameDialogueTest.setUserInputScanner(sc);
-
-        gameDialogueTest.setPlayerNames();
-
-        Integer expectedNumOfPlayers = 2;
-        Integer actualNumOfPlayer = gameDialogueTest.getNumOfPlayers();
-
-        assertEquals(expectedNumOfPlayers, actualNumOfPlayer);
-
-    }
-
-    @Test
-    public void _test_setPlayerNames_three_players() {
-
-        gameDialogueTest.setNumOfPlayers(3);
-        ByteArrayInputStream input = new ByteArrayInputStream("3\nJoeG\nCindy\nJoeR".getBytes());
-        Scanner sc = new Scanner(input);
-        gameDialogueTest.setUserInputScanner(sc);
-
-        gameDialogueTest.setPlayerNames();
-
-        Integer expectedNumOfPlayers = 3;
-        Integer actualNumOfPlayer = gameDialogueTest.getNumOfPlayers();
-
-        assertEquals(expectedNumOfPlayers, actualNumOfPlayer);
 
     }
 
