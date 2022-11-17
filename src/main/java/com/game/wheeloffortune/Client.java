@@ -2,10 +2,13 @@ package com.game.wheeloffortune;
 
 import java.util.Scanner;
 
+import static com.game.wheeloffortune.WOFAsciiArt.printClientOptions;
+
 public class Client {
     public static void main(String[] args) throws InterruptedException {
         int selection = 0;
         Scanner scanner = new Scanner(System.in);
+        printClientOptions();
         System.out.println("Welcome to our Wheel of Fortune project!\nPlease Select 1 for the ASCII Art Console Client\n" +
                 "Or Select 2 for the Java Swing GUI Client");
         selection = scanner.nextInt();
@@ -16,4 +19,6 @@ public class Client {
             GUIClient.runClient();
         }
     }
+
+
 }

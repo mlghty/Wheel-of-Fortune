@@ -1,5 +1,7 @@
 package com.game.wheeloffortune;
 
+import com.google.inject.internal.util.Strings;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
@@ -148,7 +150,7 @@ public class WOFAsciiArt {
         printWOFLogo();
     }
 
-    public static void printAsciiMessage(String messageToPrint, String playerColor){
+    public static void printAsciiMessage(String messageToPrint, String playerColor) {
 
         BufferedImage bufferedImage = new BufferedImage(
                 terminalWidth,
@@ -388,7 +390,44 @@ public class WOFAsciiArt {
 
     }
 
-    public static void setWindowSizesManually(){
+    public static void printClientOptions() {
+
+        setWindowSizesManually();
+
+        String[] clientOptions = {"PRESS", "1. FOR CONSOLE", "2. FOR GUI"};
+        Integer[] miscFonts = {1, 2, 3};
+        for (int i = 0; i < clientOptions.length; i++) {
+            BufferedImage bufferedImage = new BufferedImage(
+                    terminalWidth,
+                    terminalHeight,
+                    BufferedImage.TYPE_INT_RGB);
+
+            Graphics readyBanner = bufferedImage.getGraphics();
+
+            readyBanner.setFont(new Font("Arial", Font.BOLD, 10));
+            Graphics2D readyGraphic = (Graphics2D) readyBanner;
+            readyGraphic.setRenderingHint(
+                    RenderingHints.KEY_TEXT_ANTIALIASING,
+                    RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+
+            readyBanner.drawString(clientOptions[i], 2, 15);
+
+            for (int y = 0; y < terminalHeight; y++) {
+                StringBuilder readyStringBuilder = new StringBuilder();
+                for (int x = 0; x < terminalWidth; x++) {
+                    readyStringBuilder.append(bufferedImage.getRGB(x, y) == -16777216 ? " " : "$");
+                }
+                if (readyStringBuilder.toString().trim().isEmpty()) {
+                    continue;
+                }
+                System.out.println(ANSI_GREEN + readyStringBuilder + ANSI_RESET);
+
+            }
+            System.out.println();
+        }
+    }
+
+    public static void setWindowSizesManually() {
         terminalWidth = 120;
         terminalHeight = 30;
         fontSize = 11;
