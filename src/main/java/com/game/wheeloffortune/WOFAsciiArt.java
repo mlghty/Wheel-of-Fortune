@@ -27,7 +27,7 @@ public class WOFAsciiArt {
                 BufferedImage.TYPE_INT_RGB);
 
         Graphics logoGraphics = bufferedImage.getGraphics();
-        logoGraphics.setFont(new Font("Arial", Font.BOLD, fontSize));
+        logoGraphics.setFont(new Font("Arial", Font.PLAIN, fontSize));
 
         Graphics2D logo = (Graphics2D) logoGraphics;
         logo.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
@@ -119,7 +119,7 @@ public class WOFAsciiArt {
 
             logoBlinkGraphic.setFont(new Font(
                     "Arial",
-                    Font.BOLD,
+                    Font.PLAIN,
                     fontSize));
 
             Graphics2D logoBlink = (Graphics2D) logoBlinkGraphic;
@@ -331,7 +331,7 @@ public class WOFAsciiArt {
 
         Graphics readyBanner = bufferedImage.getGraphics();
 
-        readyBanner.setFont(new Font("Arial", Font.BOLD, 8));
+        readyBanner.setFont(new Font("Arial", Font.PLAIN, 8));
         Graphics2D readyGraphic = (Graphics2D) readyBanner;
         readyGraphic.setRenderingHint(
                 RenderingHints.KEY_TEXT_ANTIALIASING,
@@ -360,7 +360,7 @@ public class WOFAsciiArt {
                 BufferedImage.TYPE_INT_RGB);
 
         Graphics playerBanner = bufferedImage.getGraphics();
-        playerBanner.setFont(new Font("Arial", Font.BOLD, 10));
+        playerBanner.setFont(new Font("Arial", Font.PLAIN, 10));
         Graphics2D playerGraphic = (Graphics2D) playerBanner;
 
         playerGraphic.setRenderingHint(
