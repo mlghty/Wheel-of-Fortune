@@ -14,6 +14,7 @@ public class WOFAsciiArt {
     private static int fontSize;
     private static int x_offset;
     private static int y_offset;
+    private static String operatingSystem;
 
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_GREEN = "\u001B[32m";
@@ -66,14 +67,14 @@ public class WOFAsciiArt {
             x_offset = 10; // move logo left or right
             y_offset = 20; // move logo up or down
 
-            System.out.println("Windows Detected");
-
-            System.out.println("Font Size: " + fontSize);
-            System.out.println("Terminal Width: " + terminalWidth);
-            System.out.println("Terminal Height: " + terminalHeight);
-            System.out.println("x Offset: " + terminalWidth);
-            System.out.println("y Offset: " + terminalHeight);
-
+//            System.out.println("Windows Detected");
+//
+//            System.out.println("Font Size: " + fontSize);
+//            System.out.println("Terminal Width: " + terminalWidth);
+//            System.out.println("Terminal Height: " + terminalHeight);
+//            System.out.println("x Offset: " + terminalWidth);
+//            System.out.println("y Offset: " + terminalHeight);
+//
             setTitle("Wheel of Fortune", STRING_WINDOWS_SET_TITLE);
 
         } else if (os.contains("mac")) {
@@ -86,14 +87,14 @@ public class WOFAsciiArt {
             x_offset = 10; // move logo left or right
             y_offset = 20; // move logo up or down
 
-            System.out.println("OSX Detected");
-            System.out.println("Font Size: " + fontSize);
-            System.out.println("Terminal Width: " + terminalWidth);
-            System.out.println("Terminal Height: " + terminalHeight);
-            System.out.println("x Offset: " + terminalWidth);
-            System.out.println("y Offset: " + terminalHeight);
-
-            setTitle("Wheel of Fortune", STRING_LINUX_SET_TITLE);
+//            System.out.println("OSX Detected");
+//            System.out.println("Font Size: " + fontSize);
+//            System.out.println("Terminal Width: " + terminalWidth);
+//            System.out.println("Terminal Height: " + terminalHeight);
+//            System.out.println("x Offset: " + terminalWidth);
+//            System.out.println("y Offset: " + terminalHeight);
+//
+//            setTitle("Wheel of Fortune", STRING_LINUX_SET_TITLE);
         }
     }
 
@@ -394,23 +395,30 @@ public class WOFAsciiArt {
 
         setWindowSizesManually();
 
-        String[] clientOptions = {"PRESS", "1. FOR CONSOLE", "2. FOR GUI"};
-        Integer[] miscFonts = {1, 2, 3};
+        String[] clientOptions = null;
+
+        if (operatingSystem.equals("win")) {
+            clientOptions = new String[]{"PRESS", "1. FOR CONSOLE", "2. FOR GUI"};
+
+        } else if (operatingSystem.equals("mac")) {
+            clientOptions = new String[]{"P R E S S", "1. F O R C O N S O L E", "2. F O R G U I"};
+        }
+
         for (int i = 0; i < clientOptions.length; i++) {
             BufferedImage bufferedImage = new BufferedImage(
                     terminalWidth,
                     terminalHeight,
                     BufferedImage.TYPE_INT_RGB);
 
-            Graphics readyBanner = bufferedImage.getGraphics();
+            Graphics clientOptionsBanner = bufferedImage.getGraphics();
 
-            readyBanner.setFont(new Font("Arial", Font.BOLD, 10));
-            Graphics2D readyGraphic = (Graphics2D) readyBanner;
-            readyGraphic.setRenderingHint(
+            clientOptionsBanner.setFont(new Font("Arial", Font.PLAIN, 10));
+            Graphics2D clientOptionsGraphics = (Graphics2D) clientOptionsBanner;
+            clientOptionsGraphics.setRenderingHint(
                     RenderingHints.KEY_TEXT_ANTIALIASING,
                     RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
-            readyBanner.drawString(clientOptions[i], 2, 15);
+            clientOptionsBanner.drawString(clientOptions[i], 2, 15);
 
             for (int y = 0; y < terminalHeight; y++) {
                 StringBuilder readyStringBuilder = new StringBuilder();
@@ -428,11 +436,58 @@ public class WOFAsciiArt {
     }
 
     public static void setWindowSizesManually() {
-        terminalWidth = 120;
-        terminalHeight = 30;
-        fontSize = 11;
-        x_offset = 10;
-        y_offset = 20;
+
+        String os = System.getProperty("os.name").toLowerCase();
+
+        if (os.contains("win")) {
+            terminalWidth = 120;
+            terminalHeight = 30;
+            fontSize = 11;
+            x_offset = 10; // move logo left or right
+            y_offset = 20; // move logo up or down
+            operatingSystem = "win";
+//            System.out.println("Windows Detected");
+//
+//            System.out.println("Font Size: " + fontSize);
+//            System.out.println("Terminal Width: " + terminalWidth);
+//            System.out.println("Terminal Height: " + terminalHeight);
+//            System.out.println("x Offset: " + terminalWidth);
+//            System.out.println("y Offset: " + terminalHeight);
+//
+//            setTitle("Wheel of Fortune", STRING_WINDOWS_SET_TITLE);
+
+        } else if (os.contains("mac")) {
+            // 80 x 24 default
+            // for mac
+
+            terminalWidth = 120;
+            terminalHeight = 30;
+            fontSize = 11;
+            x_offset = 10; // move logo left or right
+            y_offset = 20; // move logo up or down
+            operatingSystem = "mac";
+
+//            System.out.println("OSX Detected");
+//            System.out.println("Font Size: " + fontSize);
+//            System.out.println("Terminal Width: " + terminalWidth);
+//            System.out.println("Terminal Height: " + terminalHeight);
+//            System.out.println("x Offset: " + terminalWidth);
+//            System.out.println("y Offset: " + terminalHeight);
+//
+//            setTitle("Wheel of Fortune", STRING_LINUX_SET_TITLE);
+        }
+
+    }
+
+    public String setSpacesForWinOrMac(String AsciiMessage) {
+        if (operatingSystem.equals("win")) {
+            return AsciiMessage;
+
+        } else if (operatingSystem.equals("mac")) {
+            return "";
+        }
+
+        return "";
     }
 
 }
