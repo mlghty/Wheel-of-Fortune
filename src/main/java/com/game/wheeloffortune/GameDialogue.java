@@ -129,6 +129,7 @@ public class GameDialogue {
 
         int wheelValue = currentGame.spinWheel();
 //        System.out.println(" Spinning Wheel...");
+        displayCurrentPuzzle();
         System.out.print(playerColor + playerName + ANSI_RESET);
         System.out.println(" is Spinning the Wheel...");
 
@@ -187,6 +188,7 @@ public class GameDialogue {
         WOFAsciiArt.printWOFBanner(playerColor, 18);
 
         if (currentGame.getCurrentPlayersTurn().getCurrentRoundMoney() >= 250) {
+            displayCurrentPuzzle();
             System.out.println("Buying a vowel cost $250...");
             System.out.println("Enter Vowel...");
             vowelPurchase = userInputScanner.nextLine();
