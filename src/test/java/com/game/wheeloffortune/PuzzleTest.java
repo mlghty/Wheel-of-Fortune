@@ -1,5 +1,6 @@
 package com.game.wheeloffortune;
 
+import com.game.wheeloffortune.utilities.Puzzles;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

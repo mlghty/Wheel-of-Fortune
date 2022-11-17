@@ -1,12 +1,13 @@
 package com.game.wheeloffortune;
 
+import com.game.wheeloffortune.client.GameDialogue;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;
 
-import static com.game.wheeloffortune.WOFAsciiArt.setWindowSizesManually;
+import static com.game.wheeloffortune.utilities.WOFAsciiArt.setWindowSizesManually;
 import static org.junit.Assert.*;
 
 public class GameDialogueTest {

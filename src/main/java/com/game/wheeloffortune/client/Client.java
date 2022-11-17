@@ -1,8 +1,8 @@
-package com.game.wheeloffortune;
+package com.game.wheeloffortune.client;
 
 import java.util.Scanner;
 
-import static com.game.wheeloffortune.WOFAsciiArt.printClientOptions;
+import static com.game.wheeloffortune.utilities.WOFAsciiArt.printClientOptions;
 
 public class Client {
     public static void main(String[] args) throws InterruptedException {

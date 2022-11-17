@@ -1,6 +1,4 @@
-package com.game.wheeloffortune;
-
-import com.google.inject.internal.util.Strings;
+package com.game.wheeloffortune.utilities;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

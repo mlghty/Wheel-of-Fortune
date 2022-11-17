@@ -1,5 +1,7 @@
 package com.game.wheeloffortune;
 
+import com.game.wheeloffortune.utilities.Puzzles;
+
 import java.util.*;
 
 public class Game {

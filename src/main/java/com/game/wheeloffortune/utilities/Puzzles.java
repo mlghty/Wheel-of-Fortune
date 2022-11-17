@@ -1,4 +1,4 @@
-package com.game.wheeloffortune;
+package com.game.wheeloffortune.utilities;
 
 import java.util.*;
 

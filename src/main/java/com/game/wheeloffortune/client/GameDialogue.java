@@ -1,4 +1,9 @@
-package com.game.wheeloffortune;
+package com.game.wheeloffortune.client;
+
+import com.game.wheeloffortune.Game;
+import com.game.wheeloffortune.GameBoard;
+import com.game.wheeloffortune.Player;
+import com.game.wheeloffortune.utilities.WOFAsciiArt;
 
 import java.util.ArrayList;
 import java.util.List;

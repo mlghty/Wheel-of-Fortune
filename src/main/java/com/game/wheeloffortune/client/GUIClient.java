@@ -1,4 +1,7 @@
-package com.game.wheeloffortune;
+package com.game.wheeloffortune.client;
+
+import com.game.wheeloffortune.Game;
+import com.game.wheeloffortune.Player;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
