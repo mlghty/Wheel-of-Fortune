@@ -19,7 +19,7 @@ public class Game {
     private int valueOfWheelSpin;
     private Player winningPlayer;
 
-    private List<String> usedPuzzles = new ArrayList<>();
+    private final List<String> usedPuzzles = new ArrayList<>();
 
 
     // constructors
@@ -64,9 +64,7 @@ public class Game {
         boolean isAlreadyFound = false;
         while (!isAlreadyFound) {
             List<String> currentGamePuzzle = Puzzles.getRandomPuzzle();
-            if (usedPuzzles.contains(currentGamePuzzle.get(0))) {
-                continue;
-            } else {
+            if (!usedPuzzles.contains(currentGamePuzzle.get(0))) {
                 String currentRoundPuzzle = currentGamePuzzle.get(0);
                 String currentRoundCategory = currentGamePuzzle.get(1);
                 usedPuzzles.add(currentRoundPuzzle);
