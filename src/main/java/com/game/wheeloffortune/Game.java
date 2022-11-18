@@ -131,7 +131,7 @@ public class Game {
             currentPlayersTurn.setCurrentRoundMoney(
                     currentPlayersTurn.getCurrentRoundMoney() - COST_OF_VOWEL
             );
-            if (occurrenceOfLetter < 0) {
+            if (occurrenceOfLetter <= 0) {
                 getNextPlayer();
             }
             return occurrenceOfLetter;
