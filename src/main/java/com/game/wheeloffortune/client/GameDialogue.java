@@ -5,9 +5,11 @@ import com.game.wheeloffortune.GameBoard;
 import com.game.wheeloffortune.Player;
 import com.game.wheeloffortune.utilities.WOFAsciiArt;
 
+import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.SortedMap;
 import java.util.concurrent.TimeUnit;
 
 public class GameDialogue {
@@ -177,7 +179,11 @@ public class GameDialogue {
                 break;
             } else {
                 int occurrences = currentGame.pickLetter(guessedLetter.toUpperCase().charAt(0));
-                System.out.println("Letter " + guessedLetter + " appeared " + occurrences + " times!");
+                if (occurrences >= 0){
+                    System.out.println("Letter " + guessedLetter + " appeared " + occurrences + " times!");
+                }else{
+                    System.out.println("Letter: " + guessedLetter + " was already guessed!");
+                }
                 TimeUnit.SECONDS.sleep(3);
             }
         }
@@ -210,7 +216,11 @@ public class GameDialogue {
                     break;
                 } else {
                     int occurrences = currentGame.buyAVowel(vowelPurchase.toUpperCase().charAt(0));
-                    System.out.println("Vowel " + vowelPurchase + " appeared " + occurrences + " times!");
+                    if (occurrences >= 0){
+                        System.out.println("Vowel " + vowelPurchase + " appeared " + occurrences + " times!");
+                    }else{
+                        System.out.println("Vowel: " + vowelPurchase + " was already guessed!");
+                    }
                     TimeUnit.SECONDS.sleep(3);
                 }
             }
